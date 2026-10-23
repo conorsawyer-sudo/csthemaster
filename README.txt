@@ -11,7 +11,7 @@ Files
 
 Netlify environment variables (Project configuration > Environment variables)
   STRIPE_SECRET_KEY    required. sk_test_... to test, sk_live_... to take real payments
-  SHIPPING_GBP         optional. UK delivery charge. Default 4.99
+  SHIPPING_GBP         optional. UK delivery charge. Default 3.99
   FREE_SHIPPING_OVER   optional. Free delivery at/above this basket total. Default 200. 0 = never free
 
 To change a price or mark something sold out: edit its row in "var P" in index.html
