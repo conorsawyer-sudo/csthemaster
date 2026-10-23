@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sell to us · International TCG</title>
+<meta name="description" content="Sell your Pokémon cards and sealed product to International TCG. Fair offers, paid within 2 to 3 working days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/pages.css">
+</head>
+<body>
+<header class="nav"><div class="wrap"><a class="logo" href="/">International <em>TCG</em></a><a class="back" href="/#shop">Back to shop</a></div></header>
+<main><div class="wrap">
+<div class="eyebrow">Sell to us</div>
+<h1>Turn your cards <em style="color:var(--gold)">into cash.</em></h1>
+<p>Tell us what you have and we will come back with a fair offer, usually within 24 hours on business days. No minimum, from a handful of cards to a full collection.</p>
+
+<div class="box">
+<h3 style="margin-top:0">How it works</h3>
+<ol style="margin:0">
+<li><strong>Send a request</strong> with what you have, quantities and condition. Photos help: attach a few below or email them to <a href="mailto:int.tcg@gmail.com">int.tcg@gmail.com</a>.</li>
+<li><strong>Get a quote</strong> for the lot.</li>
+<li><strong>Accept and post</strong> your items to us. We check them on arrival.</li>
+<li><strong>Get paid</strong> within 2 to 3 working days of receipt.</li>
+</ol>
+</div>
+<h2>What we buy</h2>
+<ul>
+<li>Bulk common and uncommon cards</li>
+<li>Bulk rare and holographic cards</li>
+<li>Sealed booster packs, Elite Trainer Boxes and booster boxes</li>
+<li>Sealed tins, collections and special sets</li>
+<li>English and Japanese Pokémon TCG</li>
+</ul>
+
+<h2 id="request">Start a sell request</h2>
+<form id="sellform" name="sell-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+<input type="hidden" name="form-name" value="sell-request">
+<p hidden><label>Leave this empty<input name="bot-field"></label></p>
+<div class="row2">
+<label for="sname">Name<input id="sname" name="name" type="text" autocomplete="name" required></label>
+<label for="semail">Email<input id="semail" name="email" type="email" autocomplete="email" required></label>
+</div>
+<div class="row2">
+<label for="sphone">Phone (optional)<input id="sphone" name="phone" type="tel" autocomplete="tel"></label>
+<label for="stype">What are you selling?<select id="stype" name="type">
+<option>Bulk cards</option><option>Rare / holo cards</option><option>Sealed product</option><option>Graded cards</option><option>Full collection</option><option>A mix</option>
+</select></label>
+</div>
+<label for="sdetails">Details: sets, quantities, condition, language<textarea id="sdetails" name="details" required placeholder="e.g. around 2,000 bulk commons, 150 reverse holos from Scarlet &amp; Violet sets, 3 sealed 151 booster packs"></textarea></label>
+<label for="sphotos">Photos (optional, up to 8MB in total)<input id="sphotos" name="photos" type="file" accept="image/*" multiple></label>
+<button class="btn" type="submit">Send sell request</button>
+<div class="ok" id="sok" aria-live="polite"></div>
+</form>
+<script>
+(function () {
+  var f = document.getElementById('sellform'), out = document.getElementById('sok');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!f.checkValidity()) { f.reportValidity(); return; }
+    var files = document.getElementById('sphotos').files, size = 0;
+    for (var i = 0; i < files.length; i++) size += files[i].size;
+    if (size > 8 * 1024 * 1024) { out.textContent = 'Those photos are over 8MB in total. Send fewer here and email the rest to int.tcg@gmail.com.'; return; }
+    var b = f.querySelector('button'); b.disabled = true; out.textContent = 'Sending…';
+    fetch('/', { method: 'POST', body: new FormData(f) })
+      .then(function (r) { if (!r.ok) throw new Error(); f.reset(); out.textContent = 'Thanks, your request has been sent. We will email you a quote, usually within 24 hours on business days.'; })
+      .catch(function () { out.textContent = 'That did not send. Please email your details to int.tcg@gmail.com.'; })
+      .then(function () { b.disabled = false; });
+  });
+})();
+</script>
+
+</div></main>
+<footer><div class="wrap">
+<a href="/#shop">Shop</a><a href="/sell.html">Sell to us</a><a href="/delivery-returns.html">Delivery &amp; returns</a><a href="/terms.html">Terms of sale</a><a href="/privacy.html">Privacy policy</a><a href="mailto:int.tcg@gmail.com">int.tcg@gmail.com</a>
+<span>© 2026 International TCG</span>
+</div></footer>
+</body>
+</html>
