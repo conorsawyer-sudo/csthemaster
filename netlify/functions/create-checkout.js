@@ -2,7 +2,7 @@
 // Prices come from products.json (built from index.html), never from the browser.
 // Netlify environment variables:
 //   STRIPE_SECRET_KEY   required  sk_test_... while testing, sk_live_... when you go live
-//   SHIPPING_GBP        optional  UK delivery charge, default 4.99
+//   SHIPPING_GBP        optional  UK delivery charge, default 3.99
 //   FREE_SHIPPING_OVER  optional  basket total for free delivery, default 200 (set 0 to turn off)
 const products = require('./products.json');
 
@@ -34,7 +34,7 @@ exports.handler = async (event) => {
   }
 
   const site = process.env.URL || 'https://int-tcg.com';
-  const ship = process.env.SHIPPING_GBP !== undefined ? Number(process.env.SHIPPING_GBP) : 4.99;
+  const ship = process.env.SHIPPING_GBP !== undefined ? Number(process.env.SHIPPING_GBP) : 3.99;
   const freeOver = process.env.FREE_SHIPPING_OVER !== undefined ? Number(process.env.FREE_SHIPPING_OVER) : 200;
   const shipPence = freeOver > 0 && subtotal >= freeOver ? 0 : pence(ship);
 
