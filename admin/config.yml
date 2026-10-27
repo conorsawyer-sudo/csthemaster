@@ -1,0 +1,59 @@
+# Shop admin for int-tcg.com (Decap CMS). Log in with a GitHub account that has access to the repo.
+backend:
+  name: github
+  repo: conorsawyer-sudo/csthemaster
+  branch: main
+  commit_messages:
+    update: "Shop admin: update products"
+    uploadMedia: "Shop admin: upload photo {{path}}"
+    deleteMedia: "Shop admin: delete photo {{path}}"
+
+site_url: https://int-tcg.com
+display_url: https://int-tcg.com
+locale: en
+
+media_folder: img
+public_folder: /img
+media_library:
+  name: default
+  config:
+    max_file_size: 8000000
+
+collections:
+  - name: shop
+    label: Shop
+    editor:
+      preview: false
+    files:
+      - name: products
+        label: Products
+        file: data/products.json
+        format: json
+        fields:
+          - name: products
+            label: Products
+            label_singular: product
+            widget: list
+            add_to_top: true
+            collapsed: true
+            summary: "{{fields.title}} · £{{fields.price}}"
+            hint: "Newest products go at the top. Drag to change the order they appear in the shop."
+            fields:
+              - { name: title, label: Product name, widget: string, hint: "e.g. Pokémon TCG Surging Sparks Booster Box. Include 'Japanese' or 'English' and 'Near Mint' to show those tags." }
+              - { name: price, label: Price (£), widget: number, value_type: float, min: 0.01, step: 0.01 }
+              - { name: in_stock, label: In stock, widget: boolean, default: true, hint: "Turn off to show it as Sold out." }
+              - name: category
+                label: Category
+                widget: select
+                default: s
+                options:
+                  - { label: "Sealed box / ETB / case", value: s }
+                  - { label: "Booster pack", value: p }
+                  - { label: "Single card", value: c }
+                  - { label: "Graded card", value: g }
+                  - { label: "Bundle / tin", value: b }
+                  - { label: "Mystery pack", value: m }
+                  - { label: "Accessory", value: a }
+              - { name: japanese, label: Japanese product, widget: boolean, default: false }
+              - { name: preorder, label: Pre-order, widget: boolean, default: false, hint: "Shows it in the Pre-order section. Customers pay now; you ship when stock arrives." }
+              - { name: image, label: Photo, widget: image, required: false, choose_url: false, hint: "Square or portrait photo on a plain background works best. Under 8MB." }
