@@ -25,7 +25,9 @@ exports.handler = async (event) => {
   const lines = [];
   let subtotal = 0;
   for (const it of items) {
-    const p = products[Number(it && it.i)];
+    // match by title so a cart opened before a product update still charges the right item
+    let p = products[Number(it && it.i)];
+    if (it && it.t && (!p || p.title !== it.t)) p = products.find(x => x.title === it.t);
     const q = Math.floor(Number(it && it.q));
     if (!p || !(q >= 1 && q <= 20)) return json(400, { error: 'Something in your cart is no longer available.' });
     if (!p.inStock) return json(409, { error: p.title + ' is sold out.' });
