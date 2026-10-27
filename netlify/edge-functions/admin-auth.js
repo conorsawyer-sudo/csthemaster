@@ -1,13 +1,16 @@
 // Password gate for int-tcg.com/admin. Runs before the admin page loads.
-// Logins live in the Netlify environment variable ADMIN_LOGINS, e.g.
-//   conor:a-long-password,adam:another-long-password
-// If ADMIN_LOGINS is not set, nobody can open /admin.
+// Logins: set ADMIN_PASSWORD in Netlify (shared password for usernames conor and adam),
+// and/or ADMIN_LOGINS for separate passwords, e.g. conor:pass-one,adam:pass-two
+// If neither is set, nobody can open /admin.
 export default async (request, context) => {
   const raw = Netlify.env.get('ADMIN_LOGINS') || '';
   const logins = raw.trim().replace(/^["']|["']$/g, '').split(',').map(s => s.trim()).filter(Boolean).map(s => {
     const i = s.indexOf(':');
     return i > 0 ? [s.slice(0, i).trim().toLowerCase(), s.slice(i + 1).trim()] : null;
   }).filter(Boolean);
+  // Simpler option: one shared password in ADMIN_PASSWORD for the usernames conor and adam
+  const shared = (Netlify.env.get('ADMIN_PASSWORD') || '').trim();
+  if (shared) ['conor', 'adam'].forEach(u => logins.push([u, shared]));
   let why = '';
 
   const header = request.headers.get('authorization') || '';
