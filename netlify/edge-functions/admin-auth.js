@@ -4,10 +4,11 @@
 // If ADMIN_LOGINS is not set, nobody can open /admin.
 export default async (request, context) => {
   const raw = Netlify.env.get('ADMIN_LOGINS') || '';
-  const logins = raw.split(',').map(s => s.trim()).filter(Boolean).map(s => {
+  const logins = raw.trim().replace(/^["']|["']$/g, '').split(',').map(s => s.trim()).filter(Boolean).map(s => {
     const i = s.indexOf(':');
-    return i > 0 ? [s.slice(0, i).trim().toLowerCase(), s.slice(i + 1)] : null;
+    return i > 0 ? [s.slice(0, i).trim().toLowerCase(), s.slice(i + 1).trim()] : null;
   }).filter(Boolean);
+  let why = '';
 
   const header = request.headers.get('authorization') || '';
   if (logins.length && header.startsWith('Basic ')) {
@@ -18,6 +19,9 @@ export default async (request, context) => {
       user = decoded.slice(0, i).trim().toLowerCase();
       pass = decoded.slice(i + 1);
     } catch (e) {}
+    const known = logins.filter(([u]) => u === user);
+    why = !known.length ? 'That username was not recognised. Use conor or adam (lower case).'
+      : 'That password was not accepted. Check for typos, capitals or spaces.';
     if (logins.some(([u, p]) => u === user && same(p, pass))) {
       const res = await context.next();
       res.headers.set('Cache-Control', 'no-store');
@@ -25,7 +29,7 @@ export default async (request, context) => {
       return res;
     }
   }
-  return new Response(logins.length ? 'Login required.' : 'Admin logins are not set up yet.', {
+  return new Response(logins.length ? 'Login required.' + (why ? '\n' + why : '') : 'Admin logins are not set up yet.', {
     status: 401,
     headers: { 'WWW-Authenticate': 'Basic realm="International TCG admin", charset="UTF-8"', 'Cache-Control': 'no-store', 'Content-Type': 'text/plain; charset=utf-8' },
   });
