@@ -14,11 +14,6 @@ locale: en
 
 media_folder: img
 public_folder: /img
-media_library:
-  name: default
-  config:
-    max_file_size: 8000000
-
 collections:
   - name: shop
     label: Shop
