@@ -542,125 +542,126 @@ footer h3 { font-size: 28px; margin-bottom: 14px; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   function hue(s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360; return h; }
 
-  /* ---- product list: [title, price GBP, in stock 1/0, type, japanese 1/0, pre-order 1/0] ---- */
+  /* ---- product list: [title, price GBP, in stock 1/0, type, japanese 1/0, pre-order 1/0] ----
+     Generated from data/products.json on every deploy. Edit products at int-tcg.com/admin, not here. */
   var P = [
-    ["Pokémon TCG Mega Symphonia Japanese Booster Box", 45.68, 1, "s", 1, 0],
-    ["Pokémon TCG 30th Celebration Japanese Booster Box", 145.99, 1, "s", 1, 0],
-    ["Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)", 76.99, 1, "b", 0, 0],
-    ["Pokémon Chaos Rising Booster Pack (English)", 5.60, 1, "p", 0, 0],
-    ["Pokémon Perfect Order Booster Pack (English)", 5.60, 1, "p", 0, 0],
-    ["Mint Keeper Standard Soft Card Sleeves – Pack of 100", 2.50, 1, "a", 0, 0],
-    ["Pokémon TCG Eiscue 044/172 – English Brilliant Stars – Near Mint", 1.89, 1, "c", 0, 0],
-    ["Pokémon TCG Snorunt 034/172 – English Brilliant Stars – Near Mint", 1.50, 1, "c", 0, 0],
-    ["Pokémon TCG Crawdaunt 033/172 – English Brilliant Stars – Near Mint", 1.65, 1, "c", 0, 0],
-    ["Pokémon TCG Corphish 032/172 – English Brilliant Stars – Near Mint", 1.40, 1, "c", 0, 0],
-    ["Pokémon TCG Exeggcute 001/172 – English Brilliant Stars – Near Mint", 1.30, 1, "c", 0, 0],
-    ["Pokémon TCG Moltres 146/165 Holo Rare – English 151 (MEW) – Near Mint", 1.67, 1, "c", 0, 0],
-    ["Pokémon TCG Kabutops 141/165 Holo Rare – English 151 (MEW) – Near Mint", 1.35, 1, "c", 0, 0],
-    ["Pokémon TCG Omastar 139/165 Holo Rare – English 151 (MEW) – Near Mint", 1.35, 1, "c", 0, 0],
-    ["Pokémon TCG Gyarados 130/165 Holo Rare – English 151 (MEW) – Near Mint", 1.60, 1, "c", 0, 0],
-    ["Pokémon TCG Mr. Mime 122/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.20, 1, "c", 0, 0],
-    ["Pokémon TCG Lickitung 108/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.10, 1, "c", 0, 0],
-    ["Pokémon TCG Marowak 105/165 Holo Rare – English 151 (MEW) – Near Mint", 1.45, 1, "c", 0, 0],
-    ["Pokémon TCG Krabby 098/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.00, 1, "c", 0, 0],
-    ["Pokémon TCG Grimer 088/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.00, 1, "c", 0, 0],
-    ["Pokémon TCG Magneton 082/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.20, 1, "c", 0, 0],
-    ["Pokémon TCG Graveler 075/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.10, 1, "c", 0, 0],
-    ["Pokémon TCG Machoke 067/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.10, 1, "c", 0, 0],
-    ["Pokémon TCG Machop 066/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.00, 1, "c", 0, 0],
-    ["Pokémon TCG Growlithe 058/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.25, 1, "c", 0, 0],
-    ["Pokémon TCG Mankey 056/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.00, 1, "c", 0, 0],
-    ["Pokémon TCG Meowth 052/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.20, 1, "c", 0, 0],
-    ["Pokémon TCG Oddish 043/165 Reverse Holo – English 151 (MEW) – Near Mint", 1.10, 1, "c", 0, 0],
-    ["Pokémon TCG Nidoqueen 031/165 Holo Rare – English 151 (MEW) – Near Mint", 1.40, 1, "c", 0, 0],
-    ["Pokémon TCG Wigglytuff ex 141/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint", 1.45, 1, "c", 1, 0],
-    ["Pokémon TCG Alakazam ex 075/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint", 2.00, 1, "c", 1, 0],
-    ["Pokémon TCG Revavroom ex 085/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint", 1.10, 1, "c", 1, 0],
-    ["Pokémon TCG Kangaskhan ex 115/165 Double Rare – Japanese sv2a 151 – Near Mint", 1.45, 1, "c", 1, 0],
-    ["Pokémon TCG Alakazam ex 065/165 Double Rare – Japanese sv2a 151 – Near Mint", 1.99, 1, "c", 1, 0],
-    ["Pokémon TCG Ninetales ex 038/165 Double Rare – Japanese sv2a 151 – Near Mint", 1.45, 1, "c", 1, 0],
-    ["Pokémon TCG Venusaur ex 003/165 Double Rare – Japanese sv2a 151 – Near Mint", 3.25, 1, "c", 1, 0],
-    ["Pokémon TCG: Abyss Eye M5 Japanese Booster Box (30 Packs) – Mega Darkrai ex", 74.99, 1, "s", 1, 0],
-    ["Pokémon TCG: Mega Evolution — Pitch Black Sealed Case (6 Booster Boxes / 216 Packs)", 1020.94, 1, "s", 0, 0],
-    ["Pokémon TCG Charizard ex 066/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint", 3.99, 1, "c", 1, 0],
-    ["Pokémon TCG Mew ex 151/165 Double Rare – Japanese sv2a 151 – Near Mint", 4.99, 1, "c", 1, 0],
-    ["PRE-ORDER — Pokémon TCG: Scarlet & Violet — Destined Rivals Elite Trainer Box — Sealed Case (10 ETBs)", 1700.00, 1, "s", 0, 1],
-    ["Pokémon TCG: Mega Evolution — Pitch Black Booster Box (36 Packs)", 169.99, 1, "s", 0, 0],
-    ["Chaos Rising Pokémon ETB", 63.00, 0, "s", 0, 0],
-    ["Pokémon Center Ascended Heroes ETB", 299.99, 1, "s", 0, 0],
-    ["Pokémon Center Chaos Rising ETB", 74.99, 1, "s", 0, 0],
-    ["Pokémon Center Pitch Black ETB", 74.99, 0, "s", 0, 0],
-    ["Pitch Black Pokémon ETB", 59.99, 0, "s", 0, 0],
-    ["Japanese EX Cards Bundle – 100 Pokémon", 34.99, 1, "b", 1, 0],
-    ["Japanese EX Cards Bundle – 50 Pokémon", 19.99, 1, "b", 1, 0],
-    ["Japanese EX Cards Bundle – 25 Pokémon (Mystery Pull)", 9.99, 1, "b", 1, 0],
-    ["Destined Rival Booster Pack – 10 Cards (Sealed) – MUST-HAVE", 7.89, 1, "p", 0, 0],
-    ["Random Japanese PSA Slab – Graded Pokémon Card", 33.00, 1, "g", 1, 0],
-    ["Ninja Spinner Booster Pack – 5 Cards (Sealed) – FLASH SALE", 3.00, 1, "p", 0, 0],
-    ["Mini Tin Bundle – 50 Cards + Collectible Tin – GIFT READY", 11.99, 1, "b", 0, 0],
-    ["Holo Mystery Pack – 25 Holo Cards (No Duplicates) – DISPLAY READY", 7.99, 1, "m", 0, 0],
-    ["Mega Holo Mystery Pack – 40 Holo Cards + Rare EX/V – TOP RATED", 12.99, 1, "m", 0, 0],
-    ["Pokémon Mystery Pack – 50 Cards (40 Common, 10 Holo) – BESTSELLER", 7.49, 1, "m", 0, 0]
+    ["Pokémon TCG Mega Symphonia Japanese Booster Box",45.68,1,"s",1,0],
+    ["Pokémon TCG 30th Celebration Japanese Booster Box",145.99,1,"s",1,0],
+    ["Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)",76.99,1,"b",0,0],
+    ["Pokémon Chaos Rising Booster Pack (English)",5.6,1,"p",0,0],
+    ["Pokémon Perfect Order Booster Pack (English)",5.6,1,"p",0,0],
+    ["Mint Keeper Standard Soft Card Sleeves – Pack of 100",2.5,1,"a",0,0],
+    ["Pokémon TCG Eiscue 044/172 – English Brilliant Stars – Near Mint",1.89,1,"c",0,0],
+    ["Pokémon TCG Snorunt 034/172 – English Brilliant Stars – Near Mint",1.5,1,"c",0,0],
+    ["Pokémon TCG Crawdaunt 033/172 – English Brilliant Stars – Near Mint",1.65,1,"c",0,0],
+    ["Pokémon TCG Corphish 032/172 – English Brilliant Stars – Near Mint",1.4,1,"c",0,0],
+    ["Pokémon TCG Exeggcute 001/172 – English Brilliant Stars – Near Mint",1.3,1,"c",0,0],
+    ["Pokémon TCG Moltres 146/165 Holo Rare – English 151 (MEW) – Near Mint",1.67,1,"c",0,0],
+    ["Pokémon TCG Kabutops 141/165 Holo Rare – English 151 (MEW) – Near Mint",1.35,1,"c",0,0],
+    ["Pokémon TCG Omastar 139/165 Holo Rare – English 151 (MEW) – Near Mint",1.35,1,"c",0,0],
+    ["Pokémon TCG Gyarados 130/165 Holo Rare – English 151 (MEW) – Near Mint",1.6,1,"c",0,0],
+    ["Pokémon TCG Mr. Mime 122/165 Reverse Holo – English 151 (MEW) – Near Mint",1.2,1,"c",0,0],
+    ["Pokémon TCG Lickitung 108/165 Reverse Holo – English 151 (MEW) – Near Mint",1.1,1,"c",0,0],
+    ["Pokémon TCG Marowak 105/165 Holo Rare – English 151 (MEW) – Near Mint",1.45,1,"c",0,0],
+    ["Pokémon TCG Krabby 098/165 Reverse Holo – English 151 (MEW) – Near Mint",1,1,"c",0,0],
+    ["Pokémon TCG Grimer 088/165 Reverse Holo – English 151 (MEW) – Near Mint",1,1,"c",0,0],
+    ["Pokémon TCG Magneton 082/165 Reverse Holo – English 151 (MEW) – Near Mint",1.2,1,"c",0,0],
+    ["Pokémon TCG Graveler 075/165 Reverse Holo – English 151 (MEW) – Near Mint",1.1,1,"c",0,0],
+    ["Pokémon TCG Machoke 067/165 Reverse Holo – English 151 (MEW) – Near Mint",1.1,1,"c",0,0],
+    ["Pokémon TCG Machop 066/165 Reverse Holo – English 151 (MEW) – Near Mint",1,1,"c",0,0],
+    ["Pokémon TCG Growlithe 058/165 Reverse Holo – English 151 (MEW) – Near Mint",1.25,1,"c",0,0],
+    ["Pokémon TCG Mankey 056/165 Reverse Holo – English 151 (MEW) – Near Mint",1,1,"c",0,0],
+    ["Pokémon TCG Meowth 052/165 Reverse Holo – English 151 (MEW) – Near Mint",1.2,1,"c",0,0],
+    ["Pokémon TCG Oddish 043/165 Reverse Holo – English 151 (MEW) – Near Mint",1.1,1,"c",0,0],
+    ["Pokémon TCG Nidoqueen 031/165 Holo Rare – English 151 (MEW) – Near Mint",1.4,1,"c",0,0],
+    ["Pokémon TCG Wigglytuff ex 141/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint",1.45,1,"c",1,0],
+    ["Pokémon TCG Alakazam ex 075/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint",2,1,"c",1,0],
+    ["Pokémon TCG Revavroom ex 085/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint",1.1,1,"c",1,0],
+    ["Pokémon TCG Kangaskhan ex 115/165 Double Rare – Japanese sv2a 151 – Near Mint",1.45,1,"c",1,0],
+    ["Pokémon TCG Alakazam ex 065/165 Double Rare – Japanese sv2a 151 – Near Mint",1.99,1,"c",1,0],
+    ["Pokémon TCG Ninetales ex 038/165 Double Rare – Japanese sv2a 151 – Near Mint",1.45,1,"c",1,0],
+    ["Pokémon TCG Venusaur ex 003/165 Double Rare – Japanese sv2a 151 – Near Mint",3.25,1,"c",1,0],
+    ["Pokémon TCG: Abyss Eye M5 Japanese Booster Box (30 Packs) – Mega Darkrai ex",74.99,1,"s",1,0],
+    ["Pokémon TCG: Mega Evolution — Pitch Black Sealed Case (6 Booster Boxes / 216 Packs)",1020.94,1,"s",0,0],
+    ["Pokémon TCG Charizard ex 066/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint",3.99,1,"c",1,0],
+    ["Pokémon TCG Mew ex 151/165 Double Rare – Japanese sv2a 151 – Near Mint",4.99,1,"c",1,0],
+    ["PRE-ORDER — Pokémon TCG: Scarlet & Violet — Destined Rivals Elite Trainer Box — Sealed Case (10 ETBs)",1700,1,"s",0,1],
+    ["Pokémon TCG: Mega Evolution — Pitch Black Booster Box (36 Packs)",169.99,1,"s",0,0],
+    ["Chaos Rising Pokémon ETB",63,0,"s",0,0],
+    ["Pokémon Center Ascended Heroes ETB",299.99,1,"s",0,0],
+    ["Pokémon Center Chaos Rising ETB",74.99,1,"s",0,0],
+    ["Pokémon Center Pitch Black ETB",74.99,0,"s",0,0],
+    ["Pitch Black Pokémon ETB",59.99,0,"s",0,0],
+    ["Japanese EX Cards Bundle – 100 Pokémon",34.99,1,"b",1,0],
+    ["Japanese EX Cards Bundle – 50 Pokémon",19.99,1,"b",1,0],
+    ["Japanese EX Cards Bundle – 25 Pokémon (Mystery Pull)",9.99,1,"b",1,0],
+    ["Destined Rival Booster Pack – 10 Cards (Sealed) – MUST-HAVE",7.89,1,"p",0,0],
+    ["Random Japanese PSA Slab – Graded Pokémon Card",33,1,"g",1,0],
+    ["Ninja Spinner Booster Pack – 5 Cards (Sealed) – FLASH SALE",3,1,"p",0,0],
+    ["Mini Tin Bundle – 50 Cards + Collectible Tin – GIFT READY",11.99,1,"b",0,0],
+    ["Holo Mystery Pack – 25 Holo Cards (No Duplicates) – DISPLAY READY",7.99,1,"m",0,0],
+    ["Mega Holo Mystery Pack – 40 Holo Cards + Rare EX/V – TOP RATED",12.99,1,"m",0,0],
+    ["Pokémon Mystery Pack – 50 Cards (40 Common, 10 Holo) – BESTSELLER",7.49,1,"m",0,0]
   ];
   /* photos supplied for these product indexes */
   var IMG = {
-    0: "img/mega-symphonia.webp",
-    1: "img/30th-celebration.webp",
-    2: "img/pok-mon-tcg-30th-anniversary-english-booster-pack-bundle-5-p.webp",
-    3: "img/pok-mon-chaos-rising-booster-pack-english.webp",
-    4: "img/pok-mon-perfect-order-booster-pack-english.webp",
-    5: "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp",
-    6: "img/pok-mon-tcg-eiscue-044-172-english-brilliant-stars-near-mint.webp",
-    7: "img/pok-mon-tcg-snorunt-034-172-english-brilliant-stars-near-min.webp",
-    8: "img/pok-mon-tcg-crawdaunt-033-172-english-brilliant-stars-near-m.webp",
-    9: "img/pok-mon-tcg-corphish-032-172-english-brilliant-stars-near-mi.webp",
-    10: "img/pok-mon-tcg-exeggcute-001-172-english-brilliant-stars-near-m.webp",
-    11: "img/pok-mon-tcg-moltres-146-165-holo-rare-english-151-mew-near-m.webp",
-    12: "img/pok-mon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-.webp",
-    13: "img/pok-mon-tcg-omastar-139-165-holo-rare-english-151-mew-near-m.webp",
-    14: "img/pok-mon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-.webp",
-    15: "img/pok-mon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-nea.webp",
-    16: "img/pok-mon-tcg-lickitung-108-165-reverse-holo-english-151-mew-n.webp",
-    17: "img/pok-mon-tcg-marowak-105-165-holo-rare-english-151-mew-near-m.webp",
-    18: "img/pok-mon-tcg-krabby-098-165-reverse-holo-english-151-mew-near.webp",
-    19: "img/pok-mon-tcg-grimer-088-165-reverse-holo-english-151-mew-near.webp",
-    20: "img/pok-mon-tcg-magneton-082-165-reverse-holo-english-151-mew-ne.webp",
-    21: "img/pok-mon-tcg-graveler-075-165-reverse-holo-english-151-mew-ne.webp",
-    22: "img/pok-mon-tcg-machoke-067-165-reverse-holo-english-151-mew-nea.webp",
-    23: "img/pok-mon-tcg-machop-066-165-reverse-holo-english-151-mew-near.webp",
-    24: "img/pok-mon-tcg-growlithe-058-165-reverse-holo-english-151-mew-n.webp",
-    25: "img/pok-mon-tcg-mankey-056-165-reverse-holo-english-151-mew-near.webp",
-    26: "img/pok-mon-tcg-meowth-052-165-reverse-holo-english-151-mew-near.webp",
-    27: "img/pok-mon-tcg-oddish-043-165-reverse-holo-english-151-mew-near.webp",
-    28: "img/pok-mon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near.webp",
-    29: "img/pok-mon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-.webp",
-    30: "img/pok-mon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-sh.webp",
-    31: "img/pok-mon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ru.webp",
-    32: "img/pok-mon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-.webp",
-    33: "img/pok-mon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-15.webp",
-    34: "img/pok-mon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-1.webp",
-    35: "img/pok-mon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-15.webp",
-    36: "img/abyss-eye.webp",
-    37: "img/pitch-black-case.webp",
-    38: "img/pok-mon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ru.webp",
-    39: "img/pok-mon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-nea.webp",
-    40: "img/destined-rivals-case.webp",
-    41: "img/pitch-black-booster-box.webp",
-    42: "img/chaos-rising-etb.webp",
-    43: "img/ascended-heroes-pc-etb.webp",
-    44: "img/chaos-rising-pc-etb.webp",
-    45: "img/pitch-black-pc-etb.webp",
-    46: "img/pitch-black-etb.webp",
-    47: "img/japanese-ex-cards-bundle-100-pok-mon.webp",
-    48: "img/japanese-ex-cards-bundle-50-pok-mon.webp",
-    49: "img/japanese-ex-cards-bundle-25-pok-mon-mystery-pull.webp",
-    50: "img/destined-rival-booster-pack-10-cards-sealed-must-have.webp",
-    51: "img/random-japanese-psa-slab-graded-pok-mon-card.webp",
-    52: "img/ninja-spinner-booster-pack-5-cards-sealed-flash-sale.webp",
-    53: "img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp",
-    54: "img/holo-mystery-pack-25-holo-cards-no-duplicates-display-ready.webp",
-    55: "img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp",
-    56: "img/pok-mon-mystery-pack-50-cards-40-common-10-holo-bestseller.webp"
+    "0": "img/mega-symphonia.webp",
+    "1": "img/30th-celebration.webp",
+    "2": "img/pok-mon-tcg-30th-anniversary-english-booster-pack-bundle-5-p.webp",
+    "3": "img/pok-mon-chaos-rising-booster-pack-english.webp",
+    "4": "img/pok-mon-perfect-order-booster-pack-english.webp",
+    "5": "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp",
+    "6": "img/pok-mon-tcg-eiscue-044-172-english-brilliant-stars-near-mint.webp",
+    "7": "img/pok-mon-tcg-snorunt-034-172-english-brilliant-stars-near-min.webp",
+    "8": "img/pok-mon-tcg-crawdaunt-033-172-english-brilliant-stars-near-m.webp",
+    "9": "img/pok-mon-tcg-corphish-032-172-english-brilliant-stars-near-mi.webp",
+    "10": "img/pok-mon-tcg-exeggcute-001-172-english-brilliant-stars-near-m.webp",
+    "11": "img/pok-mon-tcg-moltres-146-165-holo-rare-english-151-mew-near-m.webp",
+    "12": "img/pok-mon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-.webp",
+    "13": "img/pok-mon-tcg-omastar-139-165-holo-rare-english-151-mew-near-m.webp",
+    "14": "img/pok-mon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-.webp",
+    "15": "img/pok-mon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-nea.webp",
+    "16": "img/pok-mon-tcg-lickitung-108-165-reverse-holo-english-151-mew-n.webp",
+    "17": "img/pok-mon-tcg-marowak-105-165-holo-rare-english-151-mew-near-m.webp",
+    "18": "img/pok-mon-tcg-krabby-098-165-reverse-holo-english-151-mew-near.webp",
+    "19": "img/pok-mon-tcg-grimer-088-165-reverse-holo-english-151-mew-near.webp",
+    "20": "img/pok-mon-tcg-magneton-082-165-reverse-holo-english-151-mew-ne.webp",
+    "21": "img/pok-mon-tcg-graveler-075-165-reverse-holo-english-151-mew-ne.webp",
+    "22": "img/pok-mon-tcg-machoke-067-165-reverse-holo-english-151-mew-nea.webp",
+    "23": "img/pok-mon-tcg-machop-066-165-reverse-holo-english-151-mew-near.webp",
+    "24": "img/pok-mon-tcg-growlithe-058-165-reverse-holo-english-151-mew-n.webp",
+    "25": "img/pok-mon-tcg-mankey-056-165-reverse-holo-english-151-mew-near.webp",
+    "26": "img/pok-mon-tcg-meowth-052-165-reverse-holo-english-151-mew-near.webp",
+    "27": "img/pok-mon-tcg-oddish-043-165-reverse-holo-english-151-mew-near.webp",
+    "28": "img/pok-mon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near.webp",
+    "29": "img/pok-mon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-.webp",
+    "30": "img/pok-mon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-sh.webp",
+    "31": "img/pok-mon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ru.webp",
+    "32": "img/pok-mon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-.webp",
+    "33": "img/pok-mon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-15.webp",
+    "34": "img/pok-mon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-1.webp",
+    "35": "img/pok-mon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-15.webp",
+    "36": "img/abyss-eye.webp",
+    "37": "img/pitch-black-case.webp",
+    "38": "img/pok-mon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ru.webp",
+    "39": "img/pok-mon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-nea.webp",
+    "40": "img/destined-rivals-case.webp",
+    "41": "img/pitch-black-booster-box.webp",
+    "42": "img/chaos-rising-etb.webp",
+    "43": "img/ascended-heroes-pc-etb.webp",
+    "44": "img/chaos-rising-pc-etb.webp",
+    "45": "img/pitch-black-pc-etb.webp",
+    "46": "img/pitch-black-etb.webp",
+    "47": "img/japanese-ex-cards-bundle-100-pok-mon.webp",
+    "48": "img/japanese-ex-cards-bundle-50-pok-mon.webp",
+    "49": "img/japanese-ex-cards-bundle-25-pok-mon-mystery-pull.webp",
+    "50": "img/destined-rival-booster-pack-10-cards-sealed-must-have.webp",
+    "51": "img/random-japanese-psa-slab-graded-pok-mon-card.webp",
+    "52": "img/ninja-spinner-booster-pack-5-cards-sealed-flash-sale.webp",
+    "53": "img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp",
+    "54": "img/holo-mystery-pack-25-holo-cards-no-duplicates-display-ready.webp",
+    "55": "img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp",
+    "56": "img/pok-mon-mystery-pack-50-cards-40-common-10-holo-bestseller.webp"
   };
   /* collections: [name, description, (unused), filter code, photo] */
   var C = [
@@ -686,7 +687,7 @@ footer h3 { font-size: 28px; margin-bottom: 14px; }
     $('lines').innerHTML = keys.length ? html : '<li class="empty">Your cart is empty.</li>';
     $('total').textContent = money(tot);
     $('count').textContent = cartCount();
-    try { localStorage.setItem('intcg_cart', JSON.stringify(cart)); } catch (e) {}
+    try { var byTitle = {}; for (var ck in cart) byTitle[P[ck][0]] = cart[ck]; localStorage.setItem('intcg_cart', JSON.stringify(byTitle)); } catch (e) {}
   }
   function openCart(open) {
     $('drawer').classList.toggle('open', open); $('veil').classList.toggle('open', open);
@@ -697,7 +698,7 @@ footer h3 { font-size: 28px; margin-bottom: 14px; }
   $('veil').addEventListener('click', function () { openCart(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') openCart(false); });
   $('checkout').addEventListener('click', function () {
-    var btn = $('checkout'), items = Object.keys(cart).map(function (k) { return { i: parseInt(k, 10), q: cart[k] }; });
+    var btn = $('checkout'), items = Object.keys(cart).map(function (k) { return { i: parseInt(k, 10), t: P[k][0], q: cart[k] }; });
     if (!items.length) { $('cnote').textContent = 'Your cart is empty.'; return; }
     btn.disabled = true; btn.textContent = 'Opening checkout…'; $('cnote').textContent = '';
     fetch('/.netlify/functions/create-checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: items }) })
@@ -709,7 +710,7 @@ footer h3 { font-size: 28px; margin-bottom: 14px; }
       .catch(function (err) { $('cnote').textContent = err.message + ' Please try again or email int.tcg@gmail.com.'; btn.disabled = false; btn.textContent = 'Checkout securely'; });
   });
   /* restore cart if the customer came back from checkout without paying */
-  try { var saved = JSON.parse(localStorage.getItem('intcg_cart') || 'null'); if (saved) { for (var sk in saved) if (P[sk] && P[sk][2]) cart[sk] = saved[sk]; } } catch (e) {}
+  try { var saved = JSON.parse(localStorage.getItem('intcg_cart') || 'null'); if (saved) { P.forEach(function (sp, si) { if (sp[2] && saved[sp[0]] > 0) cart[si] = saved[sp[0]]; }); } } catch (e) {}
   if (/[?&]cancelled=1/.test(location.search)) { setTimeout(function () { openCart(true); $('cnote').textContent = 'Checkout cancelled. Your cart is still here.'; }, 300); }
   $('lines').addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
@@ -728,7 +729,10 @@ footer h3 { font-size: 28px; margin-bottom: 14px; }
 
   /* ---- catalogue ---- */
   function art(p, i) {
-    if (IMG[i]) return '<img class="photo" src="' + IMG[i] + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy" decoding="async">';
+    if (IMG[i]) {
+      var src = '/' + IMG[i].replace(/^\//, ''), cdn = location.hostname === 'localhost' ? src : '/.netlify/images?url=' + encodeURIComponent(src) + '&w=640&fm=webp';
+      return '<img class="photo" src="' + cdn + '" onerror="if(this.src.indexOf(\'/.netlify/images\')>-1)this.src=\'' + src + '\'" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy" decoding="async">';
+    }
     var h = hue(p[0]), t = p[3];
     if (t === 's') return '<div class="box wide"><b>' + (/Case/.test(p[0]) ? 'Case' : /ETB/.test(p[0]) ? 'ETB' : 'Box') + '</b></div>';
     if (t === 'p') return '<div class="pack" style="--h:' + h + '"><i></i><b>Pack</b></div>';

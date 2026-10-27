@@ -1,12 +1,14 @@
 International TCG - int-tcg.com (Netlify + Stripe Checkout)
 
 Files
-  index.html                          the site (product list is "var P = [...]" inside it)
+  index.html                          the site
+  data/products.json                  THE PRODUCT LIST (edit it at int-tcg.com/admin)
+  admin/                              the shop admin page (Decap CMS)
   thanks.html                         page customers land on after paying
   sell.html                           sell-to-us page with request form (photos allowed)
   terms.html, privacy.html, delivery-returns.html   legal pages (pages.css styles them)
   netlify/functions/create-checkout.js  creates the Stripe payment page from the cart
-  scripts/sync-products.js            copies prices from index.html for the function (runs on each deploy)
+  scripts/sync-products.js            on each deploy, copies data/products.json into index.html and the checkout
   netlify.toml                        tells Netlify how to build
 
 Netlify environment variables (Project configuration > Environment variables)
@@ -14,8 +16,8 @@ Netlify environment variables (Project configuration > Environment variables)
   SHIPPING_GBP         optional. UK delivery charge. Default 3.99
   FREE_SHIPPING_OVER   optional. Free delivery at/above this basket total. Default 200. 0 = never free
 
-To change a price or mark something sold out: edit its row in "var P" in index.html
-([title, price, in stock 1/0, type, japanese 1/0, pre-order 1/0]) and redeploy.
+To add a product, change a price or mark something sold out: go to int-tcg.com/admin,
+log in with GitHub, edit Shop > Products, click Publish. The site updates in about a minute.
 Note: deploy from GitHub (or Netlify CLI). Drag-and-drop uploads do not run the checkout function.
 Contact email: int.tcg@gmail.com
 
