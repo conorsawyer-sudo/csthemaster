@@ -1,0 +1,517 @@
+{
+  "products": [
+    {
+      "title": "Pokémon TCG Mega Symphonia Japanese Booster Box",
+      "price": 45.68,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/mega-symphonia.webp"
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Japanese Booster Box",
+      "price": 145.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/30th-celebration.webp"
+    },
+    {
+      "title": "Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)",
+      "price": 76.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-30th-anniversary-english-booster-pack-bundle-5-p.webp"
+    },
+    {
+      "title": "Pokémon Chaos Rising Booster Pack (English)",
+      "price": 5.6,
+      "in_stock": true,
+      "category": "p",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-chaos-rising-booster-pack-english.webp"
+    },
+    {
+      "title": "Pokémon Perfect Order Booster Pack (English)",
+      "price": 5.6,
+      "in_stock": true,
+      "category": "p",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-perfect-order-booster-pack-english.webp"
+    },
+    {
+      "title": "Mint Keeper Standard Soft Card Sleeves – Pack of 100",
+      "price": 2.5,
+      "in_stock": true,
+      "category": "a",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp"
+    },
+    {
+      "title": "Pokémon TCG Eiscue 044/172 – English Brilliant Stars – Near Mint",
+      "price": 1.89,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-eiscue-044-172-english-brilliant-stars-near-mint.webp"
+    },
+    {
+      "title": "Pokémon TCG Snorunt 034/172 – English Brilliant Stars – Near Mint",
+      "price": 1.5,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-snorunt-034-172-english-brilliant-stars-near-min.webp"
+    },
+    {
+      "title": "Pokémon TCG Crawdaunt 033/172 – English Brilliant Stars – Near Mint",
+      "price": 1.65,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-crawdaunt-033-172-english-brilliant-stars-near-m.webp"
+    },
+    {
+      "title": "Pokémon TCG Corphish 032/172 – English Brilliant Stars – Near Mint",
+      "price": 1.4,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-corphish-032-172-english-brilliant-stars-near-mi.webp"
+    },
+    {
+      "title": "Pokémon TCG Exeggcute 001/172 – English Brilliant Stars – Near Mint",
+      "price": 1.3,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-exeggcute-001-172-english-brilliant-stars-near-m.webp"
+    },
+    {
+      "title": "Pokémon TCG Moltres 146/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.67,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-moltres-146-165-holo-rare-english-151-mew-near-m.webp"
+    },
+    {
+      "title": "Pokémon TCG Kabutops 141/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.35,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-.webp"
+    },
+    {
+      "title": "Pokémon TCG Omastar 139/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.35,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-omastar-139-165-holo-rare-english-151-mew-near-m.webp"
+    },
+    {
+      "title": "Pokémon TCG Gyarados 130/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.6,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-.webp"
+    },
+    {
+      "title": "Pokémon TCG Mr. Mime 122/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.2,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-nea.webp"
+    },
+    {
+      "title": "Pokémon TCG Lickitung 108/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-lickitung-108-165-reverse-holo-english-151-mew-n.webp"
+    },
+    {
+      "title": "Pokémon TCG Marowak 105/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.45,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-marowak-105-165-holo-rare-english-151-mew-near-m.webp"
+    },
+    {
+      "title": "Pokémon TCG Krabby 098/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-krabby-098-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Grimer 088/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-grimer-088-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Magneton 082/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.2,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-magneton-082-165-reverse-holo-english-151-mew-ne.webp"
+    },
+    {
+      "title": "Pokémon TCG Graveler 075/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-graveler-075-165-reverse-holo-english-151-mew-ne.webp"
+    },
+    {
+      "title": "Pokémon TCG Machoke 067/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-machoke-067-165-reverse-holo-english-151-mew-nea.webp"
+    },
+    {
+      "title": "Pokémon TCG Machop 066/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-machop-066-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Growlithe 058/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.25,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-growlithe-058-165-reverse-holo-english-151-mew-n.webp"
+    },
+    {
+      "title": "Pokémon TCG Mankey 056/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-mankey-056-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Meowth 052/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.2,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-meowth-052-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Oddish 043/165 Reverse Holo – English 151 (MEW) – Near Mint",
+      "price": 1.1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-oddish-043-165-reverse-holo-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Nidoqueen 031/165 Holo Rare – English 151 (MEW) – Near Mint",
+      "price": 1.4,
+      "in_stock": true,
+      "category": "c",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near.webp"
+    },
+    {
+      "title": "Pokémon TCG Wigglytuff ex 141/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint",
+      "price": 1.45,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-.webp"
+    },
+    {
+      "title": "Pokémon TCG Alakazam ex 075/190 Double Rare – Japanese sv4a Shiny Treasure ex – Near Mint",
+      "price": 2,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-sh.webp"
+    },
+    {
+      "title": "Pokémon TCG Revavroom ex 085/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint",
+      "price": 1.1,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ru.webp"
+    },
+    {
+      "title": "Pokémon TCG Kangaskhan ex 115/165 Double Rare – Japanese sv2a 151 – Near Mint",
+      "price": 1.45,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-.webp"
+    },
+    {
+      "title": "Pokémon TCG Alakazam ex 065/165 Double Rare – Japanese sv2a 151 – Near Mint",
+      "price": 1.99,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-15.webp"
+    },
+    {
+      "title": "Pokémon TCG Ninetales ex 038/165 Double Rare – Japanese sv2a 151 – Near Mint",
+      "price": 1.45,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-1.webp"
+    },
+    {
+      "title": "Pokémon TCG Venusaur ex 003/165 Double Rare – Japanese sv2a 151 – Near Mint",
+      "price": 3.25,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-15.webp"
+    },
+    {
+      "title": "Pokémon TCG: Abyss Eye M5 Japanese Booster Box (30 Packs) – Mega Darkrai ex",
+      "price": 74.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/abyss-eye.webp"
+    },
+    {
+      "title": "Pokémon TCG: Mega Evolution — Pitch Black Sealed Case (6 Booster Boxes / 216 Packs)",
+      "price": 1020.94,
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pitch-black-case.webp"
+    },
+    {
+      "title": "Pokémon TCG Charizard ex 066/108 Double Rare – Japanese sv3 Ruler of the Black Flame – Near Mint",
+      "price": 3.99,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ru.webp"
+    },
+    {
+      "title": "Pokémon TCG Mew ex 151/165 Double Rare – Japanese sv2a 151 – Near Mint",
+      "price": 4.99,
+      "in_stock": true,
+      "category": "c",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/pok-mon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-nea.webp"
+    },
+    {
+      "title": "PRE-ORDER — Pokémon TCG: Scarlet & Violet — Destined Rivals Elite Trainer Box — Sealed Case (10 ETBs)",
+      "price": 1700,
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": true,
+      "image": "/img/destined-rivals-case.webp"
+    },
+    {
+      "title": "Pokémon TCG: Mega Evolution — Pitch Black Booster Box (36 Packs)",
+      "price": 169.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pitch-black-booster-box.webp"
+    },
+    {
+      "title": "Chaos Rising Pokémon ETB",
+      "price": 63,
+      "in_stock": false,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/chaos-rising-etb.webp"
+    },
+    {
+      "title": "Pokémon Center Ascended Heroes ETB",
+      "price": 299.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/ascended-heroes-pc-etb.webp"
+    },
+    {
+      "title": "Pokémon Center Chaos Rising ETB",
+      "price": 74.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/chaos-rising-pc-etb.webp"
+    },
+    {
+      "title": "Pokémon Center Pitch Black ETB",
+      "price": 74.99,
+      "in_stock": false,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pitch-black-pc-etb.webp"
+    },
+    {
+      "title": "Pitch Black Pokémon ETB",
+      "price": 59.99,
+      "in_stock": false,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pitch-black-etb.webp"
+    },
+    {
+      "title": "Japanese EX Cards Bundle – 100 Pokémon",
+      "price": 34.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/japanese-ex-cards-bundle-100-pok-mon.webp"
+    },
+    {
+      "title": "Japanese EX Cards Bundle – 50 Pokémon",
+      "price": 19.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/japanese-ex-cards-bundle-50-pok-mon.webp"
+    },
+    {
+      "title": "Japanese EX Cards Bundle – 25 Pokémon (Mystery Pull)",
+      "price": 9.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/japanese-ex-cards-bundle-25-pok-mon-mystery-pull.webp"
+    },
+    {
+      "title": "Destined Rival Booster Pack – 10 Cards (Sealed) – MUST-HAVE",
+      "price": 7.89,
+      "in_stock": true,
+      "category": "p",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/destined-rival-booster-pack-10-cards-sealed-must-have.webp"
+    },
+    {
+      "title": "Random Japanese PSA Slab – Graded Pokémon Card",
+      "price": 33,
+      "in_stock": true,
+      "category": "g",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/random-japanese-psa-slab-graded-pok-mon-card.webp"
+    },
+    {
+      "title": "Ninja Spinner Booster Pack – 5 Cards (Sealed) – FLASH SALE",
+      "price": 3,
+      "in_stock": true,
+      "category": "p",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/ninja-spinner-booster-pack-5-cards-sealed-flash-sale.webp"
+    },
+    {
+      "title": "Mini Tin Bundle – 50 Cards + Collectible Tin – GIFT READY",
+      "price": 11.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp"
+    },
+    {
+      "title": "Holo Mystery Pack – 25 Holo Cards (No Duplicates) – DISPLAY READY",
+      "price": 7.99,
+      "in_stock": true,
+      "category": "m",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/holo-mystery-pack-25-holo-cards-no-duplicates-display-ready.webp"
+    },
+    {
+      "title": "Mega Holo Mystery Pack – 40 Holo Cards + Rare EX/V – TOP RATED",
+      "price": 12.99,
+      "in_stock": true,
+      "category": "m",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp"
+    },
+    {
+      "title": "Pokémon Mystery Pack – 50 Cards (40 Common, 10 Holo) – BESTSELLER",
+      "price": 7.49,
+      "in_stock": true,
+      "category": "m",
+      "japanese": false,
+      "preorder": false,
+      "image": "/img/pok-mon-mystery-pack-50-cards-40-common-10-holo-bestseller.webp"
+    }
+  ]
+}
