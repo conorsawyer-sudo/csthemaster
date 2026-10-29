@@ -47,6 +47,9 @@ exports.handler = async (event) => {
   f.append('cancel_url', site + '/?cancelled=1#shop');
   f.append('shipping_address_collection[allowed_countries][0]', 'GB');
   f.append('phone_number_collection[enabled]', 'true');
+  f.append('locale', 'en-GB');
+  f.append('custom_text[submit][message]', 'Every order is checked, packed with care and sent tracked.');
+  f.append('custom_text[shipping_address][message]', 'We ship across the UK. Tracking is emailed as soon as your order is on its way.');
   f.append('billing_address_collection', 'auto');
   f.append('shipping_options[0][shipping_rate_data][type]', 'fixed_amount');
   f.append('shipping_options[0][shipping_rate_data][display_name]', shipPence === 0 ? 'Free UK delivery' : 'UK delivery');
@@ -59,6 +62,10 @@ exports.handler = async (event) => {
     f.append(`line_items[${n}][price_data][unit_amount]`, String(pence(p.price)));
     f.append(`line_items[${n}][price_data][product_data][name]`, name.slice(0, 250));
     f.append(`line_items[${n}][price_data][product_data][metadata][site_index]`, String(p.i));
+    // product photo on the Stripe page (served as a JPG through Netlify's image CDN)
+    if (p.image && /^https:/.test(site)) {
+      f.append(`line_items[${n}][price_data][product_data][images][0]`, site + '/.netlify/images?url=' + encodeURIComponent('/' + String(p.image).replace(/^\//, '')) + '&w=600&fm=jpg');
+    }
   });
   f.append('metadata[source]', 'int-tcg.com');
 
