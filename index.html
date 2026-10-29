@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <style>
 /* Layout concept: a dark showroom. One full-bleed WebGL hero (a sealed display box circled by holo-foil cards),
    then a quiet gallery of collections and products that tilt in CSS 3D. Gold is the single accent. */
@@ -533,7 +533,22 @@ body::after { content: ""; position: fixed; inset: -60%; z-index: 9000; pointer-
 .qv .qbox { width: min(980px, 100%); max-height: 94vh; overflow: auto; display: grid; grid-template-columns: 1.1fr 1fr; border: 1px solid rgba(201,164,92,.35); background: linear-gradient(180deg, #17121d, #0c0a10); box-shadow: 0 60px 120px -30px #000, 0 0 100px -40px rgba(201,164,92,.6); transform: translateY(30px) scale(.97); transition: transform .55s cubic-bezier(.2,.8,.2,1); position: relative; }
 .qv.in .qbox { transform: none; }
 .qv .qst { position: relative; min-height: 340px; display: grid; place-items: center; padding: 28px; perspective: 1000px; background: radial-gradient(60% 60% at 50% 50%, #2a2033, transparent 75%); overflow: hidden; }
-.qv .qst img { max-width: 100%; max-height: 62vh; object-fit: contain; transform: rotateX(var(--qx, 0deg)) rotateY(var(--qy, 0deg)); transition: transform .15s ease-out; filter: drop-shadow(0 34px 40px rgba(0,0,0,.85)); position: relative; }
+.qv .qst { cursor: zoom-in; touch-action: pan-y; }
+.qv .qst.zoom { cursor: zoom-out; } .qv .qst.noimg { cursor: default; }
+.qv #qimg { display: grid; place-items: center; animation: qfloat 7s ease-in-out infinite; }
+.qv .qst.zoom #qimg, .qv .qst:hover #qimg { animation-play-state: paused; }
+@keyframes qfloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.qv .qcard { position: relative; display: inline-block; max-width: 100%; transform: rotateX(var(--qx, 0deg)) rotateY(var(--qy, 0deg)); transition: transform .18s ease-out; transform-origin: 50% 50%; filter: drop-shadow(0 34px 40px rgba(0,0,0,.85)); will-change: transform; }
+.qv .qst.zoom .qcard { transform-origin: var(--qmx, 50%) var(--qmy, 50%); transform: scale(1.8); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.qv .qst img { display: block; max-width: 100%; max-height: 62vh; object-fit: contain; border-radius: 3.5%; }
+.qv .qfoil, .qv .qglare { position: absolute; inset: 0; border-radius: 3.5%; pointer-events: none; }
+.qv .qfoil { mix-blend-mode: color-dodge; opacity: .5; background: linear-gradient(115deg, transparent 10%, rgba(255,60,200,.55) 30%, rgba(60,220,255,.55) 45%, rgba(255,240,80,.5) 60%, rgba(120,255,160,.45) 72%, transparent 90%); background-size: 260% 260%; background-position: var(--qmx, 50%) var(--qmy, 50%); transition: opacity .3s; }
+.qv .qglare { mix-blend-mode: soft-light; background: radial-gradient(circle at var(--qmx, 50%) var(--qmy, 40%), rgba(255,255,255,.65), transparent 55%); }
+.qv .qst:not(:hover) .qfoil { opacity: .22; }
+.qv .qhint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); font: 500 10px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--fg-dim); pointer-events: none; opacity: .85; transition: opacity .3s; white-space: nowrap; }
+.qv .qst.zoom .qhint { opacity: 0; } .qv .qst.noimg .qhint { display: none; }
+@media (prefers-reduced-motion: reduce) { .qv #qimg { animation: none; } .qv .qcard, .qv .qst.zoom .qcard { transition: none; } }
+@media (max-width: 760px) { .qv .qst.zoom .qcard { transform: scale(1.9); } }
 .qv .qst .qsh { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; background: radial-gradient(260px circle at var(--qmx, 50%) var(--qmy, 40%), rgba(255,255,255,.35), rgba(110,200,255,.14) 40%, transparent 70%); }
 .qv .qi { padding: clamp(24px, 3.4vw, 44px); display: flex; flex-direction: column; gap: 16px; justify-content: center; }
 .qv .qi h3 { font: 400 clamp(24px, 3vw, 36px)/1.15 var(--display); }
@@ -642,6 +657,38 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
 @media (prefers-reduced-motion: reduce) { .vseal .vst { animation: none; } .w > span { transform: none; transition: none; } }
 @media (max-width: 760px) { main section .head::before { display: none; } }
 
+
+/* ===== world globe hero ===== */
+.hero-track { height: auto !important; }
+#hero.gh { position: relative !important; top: 0 !important; height: max(600px, calc(100vh - var(--nav-h) - 44px)); height: max(600px, calc(100svh - var(--nav-h) - 44px)); overflow: hidden; background: radial-gradient(60% 70% at 72% 50%, rgba(201,164,92,.13), transparent 70%), radial-gradient(50% 50% at 8% 0%, rgba(90,60,140,.2), transparent 70%), var(--bg); }
+#globe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.gh-copy { position: absolute; inset: 0; display: flex; align-items: center; z-index: 2; pointer-events: none; }
+.gh-copy .in { max-width: 540px; }
+.gh-copy .btns { pointer-events: auto; }
+.gh h1 { font: 400 clamp(46px, 6.8vw, 104px)/.94 var(--display); letter-spacing: -.012em; margin: 18px 0 22px; text-wrap: balance; }
+.gh h1 em { font-style: italic; background: linear-gradient(100deg, #9c7a34, #fff0c4 35%, #c9a45c 55%, #fff2c2 70%, #9c7a34); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: ghShine 6s linear infinite; }
+@keyframes ghShine { to { background-position: -250% 0; } }
+.gh p { color: var(--fg-dim); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; max-width: 44ch; margin: 0 0 28px; }
+.gh-log { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; min-height: 76px; }
+.gh-log li { font: 500 11px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--fg-dim); display: flex; gap: 10px; align-items: center; animation: ghIn .6s ease both; }
+.gh-log li:before { content: "\2713"; color: var(--gold); }
+.gh-log li:nth-child(2) { opacity: .6; } .gh-log li:nth-child(3) { opacity: .3; }
+@keyframes ghIn { from { opacity: 0; transform: translateY(8px); } }
+.gh-now { position: absolute; right: clamp(16px, 3vw, 44px); bottom: 22px; z-index: 3; display: flex; align-items: center; gap: 10px; font: 500 10.5px/1 var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--fg-dim); pointer-events: none; }
+.gh-now i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: ghPulse 1.6s ease-in-out infinite; }
+@keyframes ghPulse { 50% { opacity: .3; } }
+@media (max-width: 860px) { #hero.gh { height: auto; min-height: max(760px, calc(100svh - var(--nav-h))); } .gh-copy { align-items: flex-start; padding-top: 28px; } .gh-log { display: none; } .gh p { max-width: none; } }
+@media (prefers-reduced-motion: reduce) { .gh h1 em, .gh-now i { animation: none; } }
+
+/* intro: plane crosses the screen and drops a parcel on the welcome line */
+.pm-fly { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+.pm-plane { position: absolute; left: -8vw; top: 62%; width: 56px; height: 56px; filter: drop-shadow(0 0 14px rgba(255,240,196,.8)); animation: pmFly 2.4s linear forwards; }
+.pm-trail { position: absolute; right: 52px; top: 27px; width: 48vw; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,240,196,.8)); }
+@keyframes pmFly { from { transform: translate(0, 6vh) rotate(-6deg); } to { transform: translate(122vw, -30vh) rotate(-12deg); } }
+.pm-parcel { position: absolute; left: calc(50vw - 42px); top: calc(62% - 8vh); opacity: 0; animation: pmDrop 1.9s cubic-bezier(.3,.1,.5,1) 1.15s forwards; filter: drop-shadow(0 0 16px rgba(255,240,196,.5)) drop-shadow(0 6px 14px rgba(0,0,0,.6)); }
+@keyframes pmDrop { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 10% { opacity: 1; } 35% { transform: translate(-16px, 7vh) scale(1) rotate(-5deg); } 65% { transform: translate(14px, 13vh) rotate(4deg); } 90% { opacity: 1; } 100% { opacity: 0; transform: translate(0, 18vh) scale(.9); } }
+@media (prefers-reduced-motion: reduce) { .pm-plane, .pm-parcel { animation: none; opacity: 0; } }
+
 </style>
 
 <header class="nav">
@@ -662,49 +709,24 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
 <main id="top">
   <div class="ticker topbanner" aria-label="Live store updates"><span class="lv">Live</span><div class="tkwrap"><div class="tk" id="tk"></div></div></div>
   <div class="hero-track" id="track">
-    <div class="pin" id="hero">
-      <canvas id="scene" role="img" aria-label="A sealed booster display box opens, a booster pack rises out and tears open, and holographic cards fan out"></canvas>
-      <div class="steps">
-        <div class="wrap">
-          <div class="stepbtns" role="group" aria-label="Jump to a stage">
-            <button type="button" data-p="0" class="on"><span>01</span>Sealed</button>
-            <button type="button" data-p="0.3"><span>02</span>Open</button>
-            <button type="button" data-p="0.62"><span>03</span>Pulled</button>
-            <button type="button" data-p="0.92"><span>04</span>Collected</button>
-          </div>
-          <div class="bar"><i id="bar"></i></div>
-        </div>
-      </div>
-      <div class="hint" id="hint">Scroll to open</div>
-      <div class="hero-copy">
+    <div class="pin gh" id="hero">
+      <canvas id="scene" aria-hidden="true" style="display:none"></canvas>
+      <canvas id="globe" role="img" aria-label="A globe where a plane flies from city to city, dropping a parcel by parachute at each stop"></canvas>
+      <div class="gh-copy">
         <div class="wrap">
           <div class="in">
             <div class="eyebrow">International TCG · Pokémon · UK</div>
-            <div class="caps" aria-live="polite">
-              <div class="cap on">
-                <h1>Sealed.</h1>
-                <p>Booster boxes, ETBs, bundles and tins. Sealed Pokémon product, delivered swiftly across the UK.</p>
-              </div>
-              <div class="cap">
-                <h2>Open<em>.</em></h2>
-                <p>Every box holds packs. Shop booster packs one at a time, or buy by the box.</p>
-              </div>
-              <div class="cap">
-                <h2>Pulled<em>.</em></h2>
-                <p>Rip it. Mystery packs and Japanese imports for the moment the foil tears.</p>
-              </div>
-              <div class="cap">
-                <h2>Collected<em>.</em></h2>
-                <p>Rare singles in English and Japanese. Keep the hits, or sell us the rest.</p>
-              </div>
-            </div>
+            <h1>Pokémon, <em>delivered.</em></h1>
+            <p>Booster boxes, ETBs, packs and rare singles. Sourced worldwide, sent tracked and delivered swiftly across the UK.</p>
             <div class="btns">
               <a class="btn fill" href="#collections">Shop the collection</a>
               <a class="btn ghost" href="#sell">Sell to us</a>
             </div>
+            <ul class="gh-log" id="gh-log" aria-hidden="true"></ul>
           </div>
         </div>
       </div>
+      <div class="gh-now" id="gh-now" aria-hidden="true"><i></i><span id="gh-now-t">In the air</span></div>
     </div>
   </div>
 
@@ -1479,12 +1501,13 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     }
     /* quick view */
     var qv = document.createElement('div'); qv.className = 'qv'; qv.setAttribute('role', 'dialog'); qv.setAttribute('aria-modal', 'true'); qv.setAttribute('aria-label', 'Product view');
-    qv.innerHTML = '<div class="qbox"><button class="qx" type="button">Close</button><div class="qst"><button class="qa qp2" type="button" aria-label="Previous product">&larr;</button><button class="qa qn2" type="button" aria-label="Next product">&rarr;</button><div id="qimg"></div><div class="qsh"></div></div><div class="qi"><div class="eyebrow" id="qt"></div><h3 id="qn"></h3><div class="tags" id="qtags" style="display:flex;gap:6px;flex-wrap:wrap"></div><div class="qp" id="qp"></div><button class="btn fill" id="qadd" type="button">Add to cart</button><div class="qn">UK delivery £3.99 · Free over £200<br>Secure checkout with Stripe</div></div></div>';
+    qv.innerHTML = '<div class="qbox"><button class="qx" type="button">Close</button><div class="qst"><button class="qa qp2" type="button" aria-label="Previous product">&larr;</button><button class="qa qn2" type="button" aria-label="Next product">&rarr;</button><div id="qimg"></div><div class="qsh"></div><div class="qhint" aria-hidden="true">Click to zoom</div></div><div class="qi"><div class="eyebrow" id="qt"></div><h3 id="qn"></h3><div class="tags" id="qtags" style="display:flex;gap:6px;flex-wrap:wrap"></div><div class="qp" id="qp"></div><button class="btn fill" id="qadd" type="button">Add to cart</button><div class="qn">UK delivery £3.99 · Free over £200<br>Secure checkout with Stripe</div></div></div>';
     document.body.appendChild(qv);
     var qi = -1, qclose, qlist = [];
     function openQV(i, list) {
       var p = P[i]; qi = i; if (list) qlist = list; var s = imgSrc(i);
-      $('qimg').innerHTML = s ? '<img src="' + s + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '">' : art(p, i);
+      $('qimg').innerHTML = s ? '<div class="qcard"><img src="' + s + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '">' + (p[3] === 'c' || p[3] === 'g' ? '<i class="qfoil"></i><i class="qglare"></i>' : '') + '</div>' : art(p, i);
+      var st = qv.querySelector('.qst'); st.classList.remove('zoom'); st.classList.toggle('noimg', !s); st.style.setProperty('--qy', '0deg'); st.style.setProperty('--qx', '0deg');
       $('qt').textContent = TYPE[p[3]] || 'Product'; $('qn').textContent = p[0]; $('qtags').innerHTML = tagsFor(p); $('qp').textContent = money(p[1]);
       var b = $('qadd'); b.disabled = !p[2]; b.textContent = p[2] ? 'Add to cart' : 'Sold out';
       lxOpen(); qv.classList.add('show'); void qv.offsetWidth; qv.classList.add('in'); de.style.overflow = 'hidden'; clearTimeout(qclose); requestAnimationFrame(function () { document.dispatchEvent(new Event('lux-reset')); });
@@ -1495,6 +1518,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     document.addEventListener('keydown', function (e) { if (!qv.classList.contains('in')) return; if (e.key === 'ArrowRight') stepQV(1); else if (e.key === 'ArrowLeft') stepQV(-1); });
     $('qadd').addEventListener('click', function () { if (qi > -1 && P[qi][2]) addToCart(qi, $('qadd')); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && qv.classList.contains('in')) closeQV(); });
+    qv.querySelector('.qst').addEventListener('click', function (e) { if (e.target.closest('.qa') || this.classList.contains('noimg')) return; this.classList.toggle('zoom'); });
     qv.querySelector('.qst').addEventListener('pointermove', function (e) {
       var r = this.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
       this.style.setProperty('--qy', ((x - .5) * 24) + 'deg'); this.style.setProperty('--qx', (-(y - .5) * 18) + 'deg'); this.style.setProperty('--qmx', (x * 100) + '%'); this.style.setProperty('--qmy', (y * 100) + '%');
@@ -1688,6 +1712,113 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     }, { passive: true });
   })();
 
+
+  /* ===== world globe hero: a plane flies city to city and parachutes a parcel into each ===== */
+  (function () {
+    var cv = document.getElementById('globe'); if (!cv || !cv.getContext) return;
+    var hero = document.getElementById('hero'), ctx = cv.getContext('2d'), rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var bin = atob('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kwAPAZMAJQGTADoBkwBQAZMAZgGTAHwBkwCRAZMAvQGTANIBkwDoAZMA7AKTAAIDkwAYA5MA2wOTAPADkwAGBJMAHASTADEEkwC0BKgAGfyoAC/8qABF/KgAW/yoAHH8qACH/KgAW/+oAHH/qACH/6gAnf+oALP/qADJ/6gA3/+oAPX/qAALAKgAIQCoADcAqABNAKgAYwCoAHkAqACPAKgApQCoALsAqADRAKgA5gCoAPwAqAASAagAKAGoAD4BqABUAagAagGoAIABqACsAagAwgGoANgBqADuAagABAKoAN8CqAD1AqgACwOoACEDqAC7A6gA0QOoAOcDqAD9A6gAEwSoACkEqADCBL0A9/u9AA38vQAj/L0AOfy9AHz8vQCS/L0ALv29AET9vQBw/70Ahv+9AJz/vQCy/70AyP+9AN//vQD1/70ACwC9ACEAvQA4AL0ATgC9AGQAvQB6AL0AkAC9AKcAvQC9AL0A0wC9AOkAvQAAAb0AFgG9ACwBvQBCAb0AWAG9AG8BvQCxAb0AyAG9AN4BvQD0Ab0ACgK9ACACvQA3Ar0A6AK9AP8CvQAVA70AKwO9AEEDvQCwA70AxwO9AN0DvQDzA70ACQS9ACAEvQBMBNIA6vvSAAD80gAX/NIALfzSAIf80gD4/NIAV//SAG7/0gCE/9IAm//SALH/0gDI/9IA3v/SAPX/0gALANIAIgDSADgA0gBPANIAZQDSAHwA0gCSANIAqQDSAL8A0gDWANIA7ADSAAMB0gAZAdIAMAHSAEYB0gBdAdIAcwHSAIoB0gCgAdIAtwHSAM0B0gDkAdIA+gHSABEC0gAnAtIAPgLSAMUC0gDbAtIA8gLSAAgD0gAfA9IANQPSAEwD0gBiA9IApgPSALwD0gDTA9IA6QPSAAAE0gAWBNIALQTnAN375wDz++cACvznACH85wDX/OcAbP/nAIP/5wCZ/+cAsP/nAMf/5wDe/+cA9f/nAAsA5wAiAOcAOQDnAFAA5wBnAOcAfQDnAJQA5wCrAOcAwgDnANgA5wDvAOcABgHnAB0B5wA0AecASgHnAGEB5wCPAecApgHnALwB5wDTAecA6gHnAAEC5wAXAucALgLnAEUC5wC3AucAzgLnAOUC5wD7AucAEgPnACkD5wBAA+cAVgPnAG0D5wCEA+cAmwPnALID5wDIA+cA3wPnAPYD5wANBOcAIwTnADoE5wBRBOcAaATnAH8E/ACl+/wA1Pv8AOv7/AAC/PwAGfz8ADH8/AB1//wAjP/8AKP//AC6//wA0v/8AOn//AAAAPwAFwD8AC4A/ABGAPwAXQD8AHQA/ACLAPwAowD8ALoA/ADRAPwA6AD8AP8A/AAXAfwALgH8AEUB/AB0AfwAiwH8AKIB/AC5AfwA0QH8AOgB/AD/AfwALQL8AHMC/ACiAvwAuQL8ANAC/ADnAvwA/gL8ABYD/AAtA/wARAP8AFsD/ABzA/wAigP8AKED/AC4A/wAzwP8AOcD/AD+A/wAFQT8ACwE/ABEBPwAWwT8AHIE/ACJBPwAoQQRAZv7EQGz+xEByvsRAeL7EQH6+xEBEfwRASn8EQHP/BEBfv8RAZX/EQGt/xEBxf8RAdz/EQH0/xEBDAARASQAEQE7ABEBUwARAWsAEQGCABEBmgARAbIAEQHJABEB4QARAfkAEQEQAREBKAERAUABEQFvAREBhwERAZ4BEQG2AREBzgERAeYBEQEVAhEBLQIRAUQCEQFcAhEBdAIRAYsCEQGjAhEBuwIRAdICEQHqAhEBAgMRARkDEQExAxEBSQMRAWADEQF4AxEBkAMRAagDEQG/AxEB1wMRAe8DEQEGBBEBHgQRATYEEQFNBBEBZQQRAX0EEQGUBBEBrAQmAan7JgHB+yYB2fsmAfH7JgEJ/CYBIfwmATr8JgGC/CYBy/wmAZ//JgG4/yYB0P8mAej/JgEAACYBGAAmATAAJgFIACYBYQAmAXkAJgGRACYBqQAmAcEAJgHZACYB8gAmAQoBJgEiASYBOgEmAVIBJgFqASYBgwEmAZsBJgGzASYBywEmAfsBJgEUAiYBLAImAUQCJgFcAiYBdAImAYwCJgGlAiYBvQImAdUCJgHtAiYBBQMmAR0DJgE1AyYBTgMmAWYDJgF+AyYBlgMmAa4DJgHGAyYB3wMmAfcDJgEPBCYBJwQmAT8EJgFXBCYBcAQmAYgEJgGgBCYBuAQ7AZ77OwG3+zsBz/s7Aej7OwEB/DsBGfw7ATL8OwFL/DsBY/w7AXz8OwGV/DsBrfw7Acb8OwGq/zsBwv87Adv/OwH0/zsBDAA7ASUAOwE+ADsBVgA7AW8AOwGIADsB0gA7AeoAOwEDATsBNAE7AWYBOwF+ATsBlwE7AbABOwHIATsB4QE7AfkB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'), buf = new Uint8Array(bin.length); for (var q = 0; q < bin.length; q++) buf[q] = bin.charCodeAt(q);
+    var raw = new Int16Array(buf.buffer), N = raw.length / 2, D2R = Math.PI / 180;
+    var dots = new Float32Array(N * 3); // unit vectors
+    for (var i = 0; i < N; i++) { var la = raw[i * 2] / 10 * D2R, lo = raw[i * 2 + 1] / 10 * D2R; dots[i * 3] = Math.cos(la) * Math.sin(lo); dots[i * 3 + 1] = Math.sin(la); dots[i * 3 + 2] = Math.cos(la) * Math.cos(lo); }
+    var CITIES = [['London', 51.5, -0.1], ['New York', 40.7, -74], ['Los Angeles', 34.05, -118.2], ['Tokyo', 35.7, 139.7], ['Sydney', -33.9, 151.2], ['Dubai', 25.2, 55.3], ['Cape Town', -33.9, 18.4], ['São Paulo', -23.5, -46.6]];
+    function vec(la, lo) { la *= D2R; lo *= D2R; return [Math.cos(la) * Math.sin(lo), Math.sin(la), Math.cos(la) * Math.cos(lo)]; }
+    CITIES.forEach(function (c) { c.v = vec(c[1], c[2]); });
+    function dot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+    function slerp(a, b, t) { var d = Math.max(-1, Math.min(1, dot(a, b))), om = Math.acos(d), s = Math.sin(om); if (s < 1e-5) return a.slice(); var k1 = Math.sin((1 - t) * om) / s, k2 = Math.sin(t * om) / s; return [a[0] * k1 + b[0] * k2, a[1] * k1 + b[1] * k2, a[2] * k1 + b[2] * k2]; }
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    var W = 0, H = 0, dpr = 1, cx = 0, cy = 0, R = 0, mobile = false;
+    function size() {
+      var r = hero.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height); dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); mobile = W < 860;
+      if (mobile) { R = Math.min(W * .46, H * .34); cx = W / 2; cy = H - R * 1.05; } else { R = Math.min(H * .43, W * .3); cx = W * .69; cy = H * .5; }
+    }
+    // camera: yaw (centre longitude, radians) and pitch (centre latitude)
+    var yaw = 0, pit = .45, st = { leg: 0, t: 0, phase: 'fly', drop: 0, from: CITIES[0].v, to: CITIES[1].v }, FLY = 5200, DROP = 2400, trail = [], log = [], pulse = {}, visited = {};
+    function proj(v, lift) { // rotate by yaw then pitch; returns [x, y, depth]
+      var cY = Math.cos(yaw), sY = Math.sin(yaw), x1 = v[0] * cY - v[2] * sY, z1 = v[0] * sY + v[2] * cY, cP = Math.cos(pit), sP = Math.sin(pit), y2 = v[1] * cP - z1 * sP, z2 = v[1] * sP + z1 * cP;
+      var k = R * (1 + (lift || 0)); return [cx + x1 * k, cy - y2 * k, z2];
+    }
+    function planePos() { var t = ease(st.t); return slerp(st.from, st.to, t); }
+    function lift(t) { return Math.sin(Math.PI * Math.min(1, Math.max(0, t))) * .0; }
+    var logEl = document.getElementById('gh-log'), nowT = document.getElementById('gh-now-t');
+    function addLog(n) { if (!logEl) return; log.unshift(n); log = log.slice(0, 3); logEl.innerHTML = log.map(function (c) { return '<li>Delivered · ' + c + '</li>'; }).join(''); }
+    function setNow(t) { if (nowT && nowT.textContent !== t) nowT.textContent = t; }
+    function draw(ts) {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      // atmosphere + ocean
+      var g = ctx.createRadialGradient(cx, cy, R * .96, cx, cy, R * 1.28); g.addColorStop(0, 'rgba(201,164,92,.28)'); g.addColorStop(1, 'rgba(201,164,92,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.28, 0, 7); ctx.fill();
+      var o = ctx.createRadialGradient(cx - R * .35, cy - R * .4, R * .1, cx, cy, R); o.addColorStop(0, '#2a2142'); o.addColorStop(.6, '#150f26'); o.addColorStop(1, '#07050f'); ctx.fillStyle = o; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+      ctx.strokeStyle = 'rgba(227,201,143,.45)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.stroke();
+      // graticule
+      ctx.strokeStyle = 'rgba(227,201,143,.07)'; ctx.lineWidth = .6;
+      for (var la = -60; la <= 60; la += 30) { ctx.beginPath(); var open = false; for (var lo = -180; lo <= 180; lo += 6) { var p = proj(vec(la, lo)); if (p[2] > 0) { if (!open) { ctx.moveTo(p[0], p[1]); open = true; } else ctx.lineTo(p[0], p[1]); } else open = false; } ctx.stroke(); }
+      for (var lo2 = -180; lo2 < 180; lo2 += 30) { ctx.beginPath(); open = false; for (var la2 = -90; la2 <= 90; la2 += 6) { var p2 = proj(vec(la2, lo2)); if (p2[2] > 0) { if (!open) { ctx.moveTo(p2[0], p2[1]); open = true; } else ctx.lineTo(p2[0], p2[1]); } else open = false; } ctx.stroke(); }
+      // land
+      var cY = Math.cos(yaw), sY = Math.sin(yaw), cP = Math.cos(pit), sP = Math.sin(pit), ds = Math.max(1.5, R / 150);
+      for (var n = 0; n < N; n++) {
+        var vx = dots[n * 3], vy = dots[n * 3 + 1], vz = dots[n * 3 + 2], x1 = vx * cY - vz * sY, z1 = vx * sY + vz * cY, y2 = vy * cP - z1 * sP, z2 = vy * sP + z1 * cP;
+        if (z2 <= 0) continue; ctx.fillStyle = 'rgba(227,201,143,' + (.2 + z2 * .75).toFixed(2) + ')'; ctx.fillRect(cx + x1 * R - ds / 2, cy - y2 * R - ds / 2, ds, ds);
+      }
+      // cities
+      CITIES.forEach(function (c, k) { var p = proj(c.v); if (p[2] <= 0) return; var vis = visited[k], a = vis ? 1 : .4; ctx.fillStyle = 'rgba(255,240,196,' + a + ')'; ctx.beginPath(); ctx.arc(p[0], p[1], vis ? 3 : 2, 0, 7); ctx.fill(); if (vis) { ctx.fillStyle = 'rgba(255,240,196,.16)'; ctx.beginPath(); ctx.arc(p[0], p[1], 8, 0, 7); ctx.fill(); }
+        var pu = pulse[k]; if (pu !== undefined) { var q = (ts - pu) / 1400; if (q > 1) delete pulse[k]; else if (q >= 0) { ctx.strokeStyle = 'rgba(255,240,196,' + (1 - q).toFixed(2) + ')'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(p[0], p[1], 4 + q * 34, 0, 7); ctx.stroke(); } } });
+      // trail (route flown on this leg)
+      if (trail.length > 1) { ctx.setLineDash([3, 5]); ctx.lineWidth = 1.2; for (var s = 1; s < trail.length; s++) { var A = proj(trail[s - 1], .0), B = proj(trail[s], .0); if (A[2] <= 0 || B[2] <= 0) continue; ctx.strokeStyle = 'rgba(255,240,196,' + (.55 * s / trail.length).toFixed(2) + ')'; ctx.beginPath(); ctx.moveTo(A[0], A[1] - ALT(s / trail.length)); ctx.lineTo(B[0], B[1] - ALT((s + 1) / trail.length)); ctx.stroke(); } ctx.setLineDash([]); }
+      // plane
+      var pv = st.phase === 'fly' ? planePos() : st.to, pp = proj(pv), tt = st.phase === 'fly' ? ease(st.t) : 1;
+      if (pp[2] > 0) {
+        var ay = ALT(st.phase === 'fly' ? tt : 1), px = pp[0], py = pp[1] - ay;
+        var ahead = proj(slerp(st.from, st.to, Math.min(1, ease(Math.min(1, st.t + .02)) + .002))), ang = Math.atan2((ahead[1] - ALT(Math.min(1, tt + .02))) - py, ahead[0] - px);
+        if (st.phase === 'drop') ang = st.ang;
+        st.ang = ang;
+        ctx.save(); ctx.translate(px, py); ctx.rotate(ang + Math.PI / 2); var sc = Math.max(1.1, R / 250);
+        ctx.scale(sc, sc); ctx.fillStyle = '#fff0c4'; ctx.strokeStyle = '#7a5a1c'; ctx.lineWidth = .8; ctx.shadowColor = 'rgba(255,240,196,.7)'; ctx.shadowBlur = 12;
+        ctx.beginPath(); ctx.moveTo(0, -11); ctx.lineTo(2.4, -3); ctx.lineTo(12, 3); ctx.lineTo(12, 5.5); ctx.lineTo(2.4, 2.5); ctx.lineTo(1.6, 8.5); ctx.lineTo(5.5, 11); ctx.lineTo(5.5, 12.8); ctx.lineTo(0, 11.5); ctx.lineTo(-5.5, 12.8); ctx.lineTo(-5.5, 11); ctx.lineTo(-1.6, 8.5); ctx.lineTo(-2.4, 2.5); ctx.lineTo(-12, 5.5); ctx.lineTo(-12, 3); ctx.lineTo(-2.4, -3); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
+        st.px = px; st.py = py;
+      }
+      // parcel drop
+      if (st.phase === 'drop' || st.dropT > 0) {
+        var k2 = Math.min(1, st.drop / 1700), dest = proj(st.to), gy = dest[1], fy = st.py0 + (gy - st.py0) * (1 - Math.pow(1 - k2, 2)), fx = dest[0] + Math.sin(k2 * 7) * 7 * (1 - k2) + (st.px0 - dest[0]) * (1 - k2) * .3;
+        var a2 = st.drop > 1700 + 500 ? Math.max(0, 1 - (st.drop - 2200) / 300) : 1;
+        if (dest[2] > 0 && a2 > 0) { ctx.save(); ctx.globalAlpha = a2; ctx.translate(fx, fy); var s2 = Math.max(1.2, R / 260) * (k2 < 1 ? 1 : .9);
+          ctx.scale(s2, s2); ctx.strokeStyle = 'rgba(255,240,196,.8)'; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(-11, -14); ctx.lineTo(-3, -1); ctx.moveTo(11, -14); ctx.lineTo(3, -1); ctx.moveTo(0, -17); ctx.lineTo(0, -1); ctx.stroke();
+          ctx.fillStyle = '#c9a45c'; ctx.beginPath(); ctx.moveTo(-12, -14); ctx.quadraticCurveTo(0, -30, 12, -14); ctx.quadraticCurveTo(0, -17, -12, -14); ctx.fill();
+          ctx.fillStyle = '#fff0c4'; ctx.strokeStyle = '#7a5a1c'; ctx.fillRect(-4.5, -1, 9, 7); ctx.strokeRect(-4.5, -1, 9, 7); ctx.beginPath(); ctx.moveTo(-4.5, 2.5); ctx.lineTo(4.5, 2.5); ctx.stroke(); ctx.restore(); }
+        if (st.drop > 1500) { var c = CITIES[st.idx], pc = proj(c.v); if (pc[2] > 0) { var la3 = Math.min(1, (st.drop - 1500) / 400); ctx.globalAlpha = la3; ctx.font = '500 ' + Math.round(Math.max(10, R / 38)) + 'px ' + 'ui-monospace,Menlo,monospace'; ctx.fillStyle = '#fff0c4'; var lw = ctx.measureText(c[0].toUpperCase()).width; ctx.fillText(c[0].toUpperCase(), pc[0] - lw / 2, pc[1] + 24); ctx.globalAlpha = 1; } }
+      }
+      // soft vignette on the limb
+      var v = ctx.createRadialGradient(cx, cy, R * .55, cx, cy, R); v.addColorStop(0, 'rgba(7,5,15,0)'); v.addColorStop(1, 'rgba(7,5,15,.55)'); ctx.fillStyle = v; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+    }
+    function ALT(t) { return Math.sin(Math.PI * Math.min(1, Math.max(0, t))) * R * .08 + R * .1; }
+    function cameraTarget(v) { return [Math.atan2(v[0], v[2]), Math.asin(Math.max(-1, Math.min(1, v[1])))]; }
+    var last = 0, running = true, raf = 0;
+    st.idx = 1; st.px = 0; st.py = 0; st.px0 = 0; st.py0 = 0; st.ang = 0; st.dropT = 0; visited[0] = true;
+    function step(ts) {
+      raf = 0; if (!running) return; var dt = Math.min(60, ts - (last || ts)); last = ts;
+      if (st.phase === 'fly') {
+        st.t += dt / (FLY * (.7 + .3 * Math.min(1, dist(st.from, st.to) / 2)));
+        if (!trail.length || dist(trail[trail.length - 1], planePos()) > .05) { trail.push(planePos()); if (trail.length > 40) trail.shift(); }
+        setNow('In the air'); if (st.t >= 1) { st.t = 1; st.phase = 'drop'; st.drop = 0; st.px0 = st.px; st.py0 = st.py; visited[st.idx] = true; pulse[st.idx] = ts; st.dropT = 1; setNow('Dropping off · ' + CITIES[st.idx][0]); }
+      } else {
+        st.drop += dt; if (st.drop > 1700 && !st.logged) { st.logged = true; addLog(CITIES[st.idx][0]); pulse[st.idx] = ts; }
+        if (st.drop >= DROP) { st.logged = false; st.dropT = 0; var from = st.idx, nxt = (from + 1) % CITIES.length; if (nxt === 0) visited = { 0: true }; st.from = CITIES[from].v; st.idx = nxt; st.to = CITIES[nxt].v; st.t = 0; st.phase = 'fly'; trail = []; }
+      }
+      // camera follows the plane, leaning towards where it is heading
+      var focus = st.phase === 'fly' ? slerp(st.from, st.to, Math.min(1, ease(st.t) + .06)) : st.to, tg = cameraTarget(focus), tgYaw = tg[0] - (mobile ? 0 : -.0), tgPit = Math.max(-.2, Math.min(.65, tg[1] * .7 + .12));
+      var dy = tgYaw - yaw; while (dy > Math.PI) dy -= 2 * Math.PI; while (dy < -Math.PI) dy += 2 * Math.PI;
+      var kk = 1 - Math.pow(.0016, dt / 1000); yaw += dy * kk; pit += (tgPit - pit) * kk;
+      draw(ts); raf = requestAnimationFrame(step);
+    }
+    function dist(a, b) { return Math.acos(Math.max(-1, Math.min(1, dot(a, b)))); }
+    function start() { if (!raf && running) { last = 0; raf = requestAnimationFrame(step); } }
+    size(); if (window.ResizeObserver) new ResizeObserver(function () { size(); if (rm) staticFrame(); }).observe(hero); else window.addEventListener('resize', size);
+    function staticFrame() { for (var k = 0; k < CITIES.length; k++) visited[k] = true; yaw = 0; pit = .5; st.phase = 'fly'; st.from = CITIES[0].v; st.to = CITIES[1].v; st.t = .5; trail = []; for (var s = 0; s <= 20; s++) trail.push(slerp(CITIES[0].v, CITIES[1].v, s / 40)); yaw = cameraTarget(slerp(CITIES[0].v, CITIES[1].v, .5))[0]; draw(1); setNow('Delivered worldwide'); }
+    if (rm) { staticFrame(); return; }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { running = es[0].isIntersecting && !document.hidden; if (running) start(); }).observe(hero);
+    document.addEventListener('visibilitychange', function () { running = !document.hidden; if (running) start(); });
+    start();
+  })();
   /* intro "The Premiere": plays once per visit, skippable, sound if the browser allows it */
   (function () {
     var pm = $('pm'), seen = false;
@@ -1698,10 +1829,10 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     function T(fn, ms) { timers.push(setTimeout(fn, ms)); }
     function imgFor(key) { for (var i = 0; i < P.length; i++) if (P[i][0].indexOf(key) > -1 && IMG[i]) return IMG[i]; return null; }
     function list(s) { return s.split('|').map(imgFor).filter(Boolean); }
-    var boxes = list('Pitch Black Booster Box|30th Celebration Japanese|Mega Symphonia'),
-        cards = list('Ninetales ex 038|Venusaur ex 003|Charizard ex|Mew ex|Alakazam ex 065'),
+    var boxes = list('Chaos Rising ETB|Pitch Black Booster Box|30th Anniversary English Booster Pack Bundle'),
+        cards = list('Gyarados 130/165|Moltres 146/165|Kabutops 141/165|Omastar 139/165|Nidoqueen 031/165'),
         pack = imgFor('Chaos Rising Booster Pack') || imgFor('Booster Pack') || boxes[0],
-        pulls = list('Charizard ex|Mew ex|Venusaur ex|Alakazam ex 065|Alakazam ex 075|Ninetales ex 038|Wigglytuff ex|Kangaskhan ex'),
+        pulls = list('Gyarados 130/165|Moltres 146/165|Kabutops 141/165|Omastar 139/165|Nidoqueen 031/165|Marowak 105/165'),
         pull = pulls.length ? pulls[Math.floor(Math.random() * pulls.length)] : (cards[0] || boxes[0]);
     /* sound */
     function lab() { if (!$('pm-mute')) return; var on = AC && AC.state === 'running' && !muted; $('pm-mute').textContent = on ? 'Sound on' : 'Sound off'; }
@@ -1764,12 +1895,12 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     function im(a) { return a.map(function (s) { return '<div class="pm-it"><img src="' + s + '" alt=""></div>'; }).join(''); }
     function fan(a) { return a.map(function (s, k) { return '<img src="' + s + '" alt="" style="--k:' + (k - (a.length - 1) / 2) + ';--i:' + k + '">'; }).join(''); }
     function play() {
-      var t0 = performance.now(), TOTAL = 13600;
+      var t0 = performance.now(), TOTAL = 16200;
       dust(); startAudio();
       (function bar() { if (ended) return; $('pm-progi').style.width = Math.min(100, (performance.now() - t0) / TOTAL * 100) + '%'; raf = requestAnimationFrame(bar); })();
       stage.innerHTML = '<div class="pm-rays"></div><div class="pm-flare"></div><div class="pm-col pm-c-a"><div class="pm-ln"></div><div class="pm-ti">' + 'iNTCG'.split('').map(function (ch, i) { return '<span style="--i:' + i + '">' + ch + '</span>'; }).join('') + '</div><div class="pm-sm pm-su">International TCG · Pokémon specialists · United Kingdom</div><div class="pm-ln"></div></div>';
       T(function () { cut(); whoosh(); stage.innerHTML = '<div class="pm-c-b"><div class="pm-rays"></div><div class="pm-spot"></div><div class="pm-stack"><div class="pm-parade">' + im(boxes) + '</div><div class="pm-cap">Sealed<em>.</em></div><div class="pm-lt3">Booster boxes · ETBs · Packs</div></div></div>'; }, 3000);
-      T(function () { cut(); whoosh(); stage.innerHTML = '<div class="pm-c-c"><div class="pm-rays"></div><div class="pm-spot"></div><div class="pm-stack"><div class="pm-fan5">' + fan(cards) + '</div><div class="pm-cap">Rare<em>.</em></div><div class="pm-lt3">Japanese &amp; English singles</div></div></div>'; }, 6500);
+      T(function () { cut(); whoosh(); stage.innerHTML = '<div class="pm-c-c"><div class="pm-rays"></div><div class="pm-spot"></div><div class="pm-stack"><div class="pm-fan5">' + fan(cards) + '</div><div class="pm-cap">Rare<em>.</em></div><div class="pm-lt3">English singles &amp; Japanese imports</div></div></div>'; }, 6500);
       T(function () { cut(); thud(); stage.innerHTML = '<div class="pm-rays"></div><div class="pm-stack"><div class="pm-dp" id="pm-dp"><img src="' + pack + '" alt=""></div><div class="pm-note">Opening night</div></div>'; }, 9800);
       T(function () { var d = $('pm-dp'); if (d) d.classList.add('pm-shake'); thud(); }, 10900);
       T(function () {
@@ -1778,7 +1909,13 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
         var h = $('pm-hl'), a = 0; h.style.setProperty('--mx', '50%');
         (function sh() { a += 0.03; if (ended || !$('pm-hl')) return; h.style.setProperty('--mx', (50 + Math.sin(a * 6) * 50) + '%'); h.style.setProperty('--ry', (Math.sin(a * 4) * 10) + 'deg'); requestAnimationFrame(sh); })();
       }, 11250);
-      T(function () { end(false); }, 13000);
+      T(function () {
+        whoosh();
+        var fl = document.createElement('div'); fl.className = 'pm-fly'; fl.innerHTML = '<div class="pm-plane"><i class="pm-trail"></i><svg viewBox="-14 -14 28 28" width="56" height="56" aria-hidden="true"><path transform="rotate(90)" d="M0 -11 L2.4 -3 L12 3 L12 5.5 L2.4 2.5 L1.6 8.5 L5.5 11 L5.5 12.8 L0 11.5 L-5.5 12.8 L-5.5 11 L-1.6 8.5 L-2.4 2.5 L-12 5.5 L-12 3 L-2.4 -3 Z" fill="#fff0c4" stroke="#7a5a1c" stroke-width=".7"/></svg></div><div class="pm-parcel"><svg viewBox="-14 -26 28 38" width="84" height="114" aria-hidden="true"><path d="M-12 -14 Q0 -30 12 -14 Q0 -17 -12 -14Z" fill="#c9a45c"/><path d="M-11 -14 L-3 -1 M11 -14 L3 -1 M0 -18 L0 -1" stroke="#fff0c4" stroke-width=".8" fill="none"/><rect x="-5" y="-1" width="10" height="8" fill="#fff0c4" stroke="#7a5a1c" stroke-width=".8"/><path d="M-5 2.6 H5" stroke="#7a5a1c" stroke-width=".8"/></svg></div>';
+        stage.appendChild(fl);
+      }, 12600);
+      T(function () { if (ctxBurst) ctxBurst(); thud(); }, 14200);
+      T(function () { end(false); }, 15600);
     }
     $('pm-skip').addEventListener('click', function () { end(true); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') end(true); });
