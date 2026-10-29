@@ -27,6 +27,6 @@ html = html.replace(pRe, () => 'var P = [\n' + P.map(r => '    ' + JSON.stringif
 html = html.replace(iRe, () => 'var IMG = ' + JSON.stringify(IMG, null, 4).replace(/\n}/, '\n  }') + ';');
 fs.writeFileSync(file, html);
 
-const out = P.map((p, i) => ({ i, title: p[0], price: p[1], inStock: !!p[2], preorder: !!p[5] }));
+const out = P.map((p, i) => ({ i, title: p[0], price: p[1], inStock: !!p[2], preorder: !!p[5], image: IMG[i] || null }));
 fs.writeFileSync(path.join(root, 'netlify', 'functions', 'products.json'), JSON.stringify(out, null, 1));
 console.log('Built ' + P.length + ' products (' + Object.keys(IMG).length + ' with photos)');
