@@ -3,8 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>International TCG</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>International TCG | Pokémon Booster Boxes, ETBs & Singles — UK</title>
+<meta name="description" content="Genuine, sealed Pokémon TCG booster boxes, ETBs, Japanese sets and rare singles. Sourced worldwide, shipped tracked from the UK. Sell your cards to us too.">
+<link rel="canonical" href="https://int-tcg.com/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="International TCG">
+<meta property="og:title" content="International TCG | Pokémon Booster Boxes, ETBs & Singles">
+<meta property="og:description" content="Genuine, sealed Pokémon TCG booster boxes, ETBs, Japanese sets and rare singles. Shipped tracked from the UK.">
+<meta property="og:image" content="https://int-tcg.com/og-image.png">
+<meta property="og:url" content="https://int-tcg.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="International TCG | Pokémon Booster Boxes, ETBs & Singles">
+<meta name="twitter:description" content="Genuine, sealed Pokémon TCG booster boxes, ETBs, Japanese sets and rare singles. Shipped tracked from the UK.">
+<meta name="twitter:image" content="https://int-tcg.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "International TCG",
+  "url": "https://int-tcg.com/",
+  "email": "int.tcg@gmail.com",
+  "address": {"@type": "PostalAddress", "addressRegion": "Kent", "addressCountry": "GB"},
+  "description": "Genuine, sealed Pokémon TCG booster boxes, ETBs, Japanese sets and rare singles, shipped tracked from the UK."
+}
+</script><meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
@@ -49,8 +74,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap
 .links a:hover { color: var(--fg); }
 .cartbtn { font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; background: none; color: var(--fg); border: 1px solid var(--line); padding: 10px 14px; cursor: pointer; border-radius: 2px; }
 .cartbtn:hover { border-color: var(--gold); }
-@media (max-width: 760px) { .links { display: none; } }
-
+.navtoggle { display: none; width: 40px; height: 40px; background: none; border: 1px solid var(--line); border-radius: 2px; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+   .navtoggle span { display: block; width: 18px; height: 1px; background: var(--fg); }
+   @media (max-width: 760px) { .navtoggle { display: flex; } .links { position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-raise); border-bottom: 1px solid var(--line); flex-direction: column; gap: 0; padding: 8px 0; display: none; } .links.open { display: flex; } .links a { padding: 14px 20px; border-bottom: 1px solid var(--line); } }
 /* hero: pinned scroll story, box -> open -> pull -> collect */
 .hero-track { position: relative; height: 480vh; height: 480svh; }
 .pin { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--nav-h)); height: max(520px, calc(100vh - var(--nav-h) - env(safe-area-inset-top, 0px))); height: max(520px, calc(100svh - var(--nav-h) - env(safe-area-inset-top, 0px)));
@@ -702,7 +728,8 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="cartbtn" id="cart" type="button" aria-label="Cart">Cart <span id="count">0</span></button>
+        <button class="navtoggle" id="navtoggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+          <button class="cartbtn" id="cart" type="button" aria-label="Cart">Cart <span id="count">0</span></button>
   </div>
 </header>
 
@@ -2403,4 +2430,23 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
 })();
 </script>
 
+<script>
+   (function(){
+        var btn = document.getElementById('navtoggle');
+        var nav = document.querySelector('.links');
+        if (!btn || !nav) return;
+        btn.addEventListener('click', function(){
+               var open = nav.classList.toggle('open');
+               btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function(a){
+               a.addEventListener('click', function(){
+                        nav.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+               });
+        });
+   })();
+</script>
+
+   
 </html>
