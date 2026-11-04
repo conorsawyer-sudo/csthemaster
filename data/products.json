@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": true,
+      "title": "Storm Emerald Japanese Booster Box",
+      "price": 55,
+      "image": "/img/unknown.jpeg"
+    },
+    {
       "title": "Pokémon TCG Mega Symphonia Japanese Booster Box",
       "price": 45.68,
       "in_stock": true,
