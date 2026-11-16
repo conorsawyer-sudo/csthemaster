@@ -9,6 +9,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .nav .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 64px; max-width: 1240px; }
 .logo { font: 400 22px/1 var(--display); color: var(--fg); text-decoration: none; }
 .logo em { color: var(--gold); }
+.logo img { height: 40px; width: auto; display: block; }
 .back { font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--fg); text-decoration: none; border: 1px solid var(--line); padding: 10px 14px; border-radius: 2px; }
 .back:hover { border-color: var(--gold); }
 main { padding: clamp(40px, 7vw, 88px) 0; }
