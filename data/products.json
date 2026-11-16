@@ -3,11 +3,20 @@
     {
       "in_stock": true,
       "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "title": " Ninja Spinner Japanese Booster box - 30 packs ",
+      "price": 47.99,
+      "image": "/img/whatsapp-image-2026-11-16-at-15.40.16.jpeg"
+    },
+    {
+      "in_stock": true,
+      "category": "s",
       "japanese": false,
       "preorder": false,
       "title": "Ascended Heroes Booster Bundle (6 pack)",
       "price": 59.99,
-      "image": "/img/image-13-11-2026-at-13.42.png"
+      "image": "/img/screenshot-2026-11-16-at-16.52.13.png"
     },
     {
       "in_stock": true,
@@ -25,16 +34,16 @@
       "category": "s",
       "japanese": true,
       "preorder": false,
-      "image": "/img/mega-symphonia.webp"
+      "image": "/img/screenshot-2026-11-16-at-16.53.04.png"
     },
     {
       "title": "Pokémon TCG 30th Celebration Japanese Booster Box",
-      "price": 145.99,
+      "price": 129.96,
       "in_stock": true,
       "category": "s",
       "japanese": true,
       "preorder": false,
-      "image": "/img/30th-celebration.webp"
+      "image": "/img/screenshot-2026-11-16-at-16.53.57.png"
     },
     {
       "title": "Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)",
@@ -47,7 +56,7 @@
     },
     {
       "title": "Pokémon Chaos Rising Booster Pack (English)",
-      "price": 5.6,
+      "price": 5.29,
       "in_stock": true,
       "category": "p",
       "japanese": false,
@@ -56,7 +65,7 @@
     },
     {
       "title": "Pokémon Perfect Order Booster Pack (English)",
-      "price": 5.6,
+      "price": 5.29,
       "in_stock": true,
       "category": "p",
       "japanese": false,
