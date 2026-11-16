@@ -176,7 +176,7 @@ function page(i) {
 <link rel="stylesheet" href="/products/product.css">
 </head>
 <body>
-<header class="nav"><div class="wrap"><a class="logo" href="/">International <em>TCG</em></a><a class="back" href="/?cart=1#shop" id="cartlink">Cart</a></div></header>
+<header class="nav"><div class="wrap"><a class="logo" href="/" aria-label="INT TCG, home"><img src="/img/logo.svg" alt="INT TCG" width="740" height="450"></a><a class="back" href="/?cart=1#shop" id="cartlink">Cart</a></div></header>
 <main><div class="wrap" style="max-width:1100px">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Shop</a> / <a href="/#shop">${esc(CAT_PLURAL[p[3]])}</a> / ${esc(p[0])}</nav>
 <div class="pd">
