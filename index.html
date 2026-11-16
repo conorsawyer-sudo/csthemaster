@@ -208,6 +208,8 @@ section, .block { padding-block: clamp(56px, 9vw, 110px); }
 .card .viz { position: relative; overflow: hidden; } .card .viz .tilt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; } .card .viz .photo { width: 84%; height: 84%; object-fit: contain; }
 .card .meta { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card h3 { font: 600 14px/1.4 var(--body); text-wrap: pretty; }
+.card h3 a.plink { color: inherit; text-decoration: none; } .card h3 a.plink:hover { color: var(--gold-soft); text-decoration: underline; text-underline-offset: 3px; }
+.qv .qmore { display: inline-block; margin-top: 12px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
 .card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-soft); border: 1px solid rgba(201,164,92,.4); padding: 5px 7px; border-radius: 2px; }
 .tag.warn { color: #f0b0a0; border-color: rgba(240,176,160,.4); }
@@ -1090,6 +1092,8 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   /* ---- product list: [title, price GBP, in stock 1/0, type, japanese 1/0, pre-order 1/0] ----
      Generated from data/products.json on every deploy. Edit products at int-tcg.com/admin, not here. */
   var P = [
+    ["Ascended Heroes Booster Bundle (6 pack)",59.99,1,"s",0,0],
+    ["Storm Emerald Japanese Booster Box",55,1,"s",1,1],
     ["Pokémon TCG Mega Symphonia Japanese Booster Box",45.68,1,"s",1,0],
     ["Pokémon TCG 30th Celebration Japanese Booster Box",145.99,1,"s",1,0],
     ["Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)",76.99,1,"b",0,0],
@@ -1150,64 +1154,68 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   ];
   /* photos supplied for these product indexes */
   var IMG = {
-    "0": "img/mega-symphonia.webp",
-    "1": "img/30th-celebration.webp",
-    "2": "img/pok-mon-tcg-30th-anniversary-english-booster-pack-bundle-5-p.webp",
-    "3": "img/pok-mon-chaos-rising-booster-pack-english.webp",
-    "4": "img/pok-mon-perfect-order-booster-pack-english.webp",
-    "5": "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp",
-    "6": "img/pok-mon-tcg-eiscue-044-172-english-brilliant-stars-near-mint.webp",
-    "7": "img/pok-mon-tcg-snorunt-034-172-english-brilliant-stars-near-min.webp",
-    "8": "img/pok-mon-tcg-crawdaunt-033-172-english-brilliant-stars-near-m.webp",
-    "9": "img/pok-mon-tcg-corphish-032-172-english-brilliant-stars-near-mi.webp",
-    "10": "img/pok-mon-tcg-exeggcute-001-172-english-brilliant-stars-near-m.webp",
-    "11": "img/pok-mon-tcg-moltres-146-165-holo-rare-english-151-mew-near-m.webp",
-    "12": "img/pok-mon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-.webp",
-    "13": "img/pok-mon-tcg-omastar-139-165-holo-rare-english-151-mew-near-m.webp",
-    "14": "img/pok-mon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-.webp",
-    "15": "img/pok-mon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-nea.webp",
-    "16": "img/pok-mon-tcg-lickitung-108-165-reverse-holo-english-151-mew-n.webp",
-    "17": "img/pok-mon-tcg-marowak-105-165-holo-rare-english-151-mew-near-m.webp",
-    "18": "img/pok-mon-tcg-krabby-098-165-reverse-holo-english-151-mew-near.webp",
-    "19": "img/pok-mon-tcg-grimer-088-165-reverse-holo-english-151-mew-near.webp",
-    "20": "img/pok-mon-tcg-magneton-082-165-reverse-holo-english-151-mew-ne.webp",
-    "21": "img/pok-mon-tcg-graveler-075-165-reverse-holo-english-151-mew-ne.webp",
-    "22": "img/pok-mon-tcg-machoke-067-165-reverse-holo-english-151-mew-nea.webp",
-    "23": "img/pok-mon-tcg-machop-066-165-reverse-holo-english-151-mew-near.webp",
-    "24": "img/pok-mon-tcg-growlithe-058-165-reverse-holo-english-151-mew-n.webp",
-    "25": "img/pok-mon-tcg-mankey-056-165-reverse-holo-english-151-mew-near.webp",
-    "26": "img/pok-mon-tcg-meowth-052-165-reverse-holo-english-151-mew-near.webp",
-    "27": "img/pok-mon-tcg-oddish-043-165-reverse-holo-english-151-mew-near.webp",
-    "28": "img/pok-mon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near.webp",
-    "29": "img/pok-mon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-.webp",
-    "30": "img/pok-mon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-sh.webp",
-    "31": "img/pok-mon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ru.webp",
-    "32": "img/pok-mon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-.webp",
-    "33": "img/pok-mon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-15.webp",
-    "34": "img/pok-mon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-1.webp",
-    "35": "img/pok-mon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-15.webp",
-    "36": "img/abyss-eye.webp",
-    "37": "img/pitch-black-case.webp",
-    "38": "img/pok-mon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ru.webp",
-    "39": "img/pok-mon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-nea.webp",
-    "40": "img/destined-rivals-case.webp",
-    "41": "img/pitch-black-booster-box.webp",
-    "42": "img/chaos-rising-etb.webp",
-    "43": "img/ascended-heroes-pc-etb.webp",
-    "44": "img/chaos-rising-pc-etb.webp",
-    "45": "img/pitch-black-pc-etb.webp",
-    "46": "img/pitch-black-etb.webp",
-    "47": "img/japanese-ex-cards-bundle-100-pok-mon.webp",
-    "48": "img/japanese-ex-cards-bundle-50-pok-mon.webp",
-    "49": "img/japanese-ex-cards-bundle-25-pok-mon-mystery-pull.webp",
-    "50": "img/destined-rival-booster-pack-10-cards-sealed-must-have.webp",
-    "51": "img/random-japanese-psa-slab-graded-pok-mon-card.webp",
-    "52": "img/ninja-spinner-booster-pack-5-cards-sealed-flash-sale.webp",
-    "53": "img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp",
-    "54": "img/holo-mystery-pack-25-holo-cards-no-duplicates-display-ready.webp",
-    "55": "img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp",
-    "56": "img/pok-mon-mystery-pack-50-cards-40-common-10-holo-bestseller.webp"
+    "0": "img/image-13-11-2026-at-13.42.png",
+    "1": "img/unknown.jpeg",
+    "2": "img/mega-symphonia.webp",
+    "3": "img/30th-celebration.webp",
+    "4": "img/pok-mon-tcg-30th-anniversary-english-booster-pack-bundle-5-p.webp",
+    "5": "img/pok-mon-chaos-rising-booster-pack-english.webp",
+    "6": "img/pok-mon-perfect-order-booster-pack-english.webp",
+    "7": "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp",
+    "8": "img/pok-mon-tcg-eiscue-044-172-english-brilliant-stars-near-mint.webp",
+    "9": "img/pok-mon-tcg-snorunt-034-172-english-brilliant-stars-near-min.webp",
+    "10": "img/pok-mon-tcg-crawdaunt-033-172-english-brilliant-stars-near-m.webp",
+    "11": "img/pok-mon-tcg-corphish-032-172-english-brilliant-stars-near-mi.webp",
+    "12": "img/pok-mon-tcg-exeggcute-001-172-english-brilliant-stars-near-m.webp",
+    "13": "img/pok-mon-tcg-moltres-146-165-holo-rare-english-151-mew-near-m.webp",
+    "14": "img/pok-mon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-.webp",
+    "15": "img/pok-mon-tcg-omastar-139-165-holo-rare-english-151-mew-near-m.webp",
+    "16": "img/pok-mon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-.webp",
+    "17": "img/pok-mon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-nea.webp",
+    "18": "img/pok-mon-tcg-lickitung-108-165-reverse-holo-english-151-mew-n.webp",
+    "19": "img/pok-mon-tcg-marowak-105-165-holo-rare-english-151-mew-near-m.webp",
+    "20": "img/pok-mon-tcg-krabby-098-165-reverse-holo-english-151-mew-near.webp",
+    "21": "img/pok-mon-tcg-grimer-088-165-reverse-holo-english-151-mew-near.webp",
+    "22": "img/pok-mon-tcg-magneton-082-165-reverse-holo-english-151-mew-ne.webp",
+    "23": "img/pok-mon-tcg-graveler-075-165-reverse-holo-english-151-mew-ne.webp",
+    "24": "img/pok-mon-tcg-machoke-067-165-reverse-holo-english-151-mew-nea.webp",
+    "25": "img/pok-mon-tcg-machop-066-165-reverse-holo-english-151-mew-near.webp",
+    "26": "img/pok-mon-tcg-growlithe-058-165-reverse-holo-english-151-mew-n.webp",
+    "27": "img/pok-mon-tcg-mankey-056-165-reverse-holo-english-151-mew-near.webp",
+    "28": "img/pok-mon-tcg-meowth-052-165-reverse-holo-english-151-mew-near.webp",
+    "29": "img/pok-mon-tcg-oddish-043-165-reverse-holo-english-151-mew-near.webp",
+    "30": "img/pok-mon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near.webp",
+    "31": "img/pok-mon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-.webp",
+    "32": "img/pok-mon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-sh.webp",
+    "33": "img/pok-mon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ru.webp",
+    "34": "img/pok-mon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-.webp",
+    "35": "img/pok-mon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-15.webp",
+    "36": "img/pok-mon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-1.webp",
+    "37": "img/pok-mon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-15.webp",
+    "38": "img/abyss-eye.webp",
+    "39": "img/pitch-black-case.webp",
+    "40": "img/pok-mon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ru.webp",
+    "41": "img/pok-mon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-nea.webp",
+    "42": "img/destined-rivals-case.webp",
+    "43": "img/pitch-black-booster-box.webp",
+    "44": "img/chaos-rising-etb.webp",
+    "45": "img/ascended-heroes-pc-etb.webp",
+    "46": "img/chaos-rising-pc-etb.webp",
+    "47": "img/pitch-black-pc-etb.webp",
+    "48": "img/pitch-black-etb.webp",
+    "49": "img/japanese-ex-cards-bundle-100-pok-mon.webp",
+    "50": "img/japanese-ex-cards-bundle-50-pok-mon.webp",
+    "51": "img/japanese-ex-cards-bundle-25-pok-mon-mystery-pull.webp",
+    "52": "img/destined-rival-booster-pack-10-cards-sealed-must-have.webp",
+    "53": "img/random-japanese-psa-slab-graded-pok-mon-card.webp",
+    "54": "img/ninja-spinner-booster-pack-5-cards-sealed-flash-sale.webp",
+    "55": "img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp",
+    "56": "img/holo-mystery-pack-25-holo-cards-no-duplicates-display-ready.webp",
+    "57": "img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp",
+    "58": "img/pok-mon-mystery-pack-50-cards-40-common-10-holo-bestseller.webp"
   };
+  var SLUG = ["ascended-heroes-booster-bundle-6-pack","storm-emerald-japanese-booster-box","pokemon-tcg-mega-symphonia-japanese-booster-box","pokemon-tcg-30th-celebration-japanese-booster-box","pokemon-tcg-30th-anniversary-english-booster-pack-bundle-5-packs","pokemon-chaos-rising-booster-pack-english","pokemon-perfect-order-booster-pack-english","mint-keeper-standard-soft-card-sleeves-pack-of-100","pokemon-tcg-eiscue-044-172-english-brilliant-stars-near-mint","pokemon-tcg-snorunt-034-172-english-brilliant-stars-near-mint","pokemon-tcg-crawdaunt-033-172-english-brilliant-stars-near-mint","pokemon-tcg-corphish-032-172-english-brilliant-stars-near-mint","pokemon-tcg-exeggcute-001-172-english-brilliant-stars-near-mint","pokemon-tcg-moltres-146-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-kabutops-141-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-omastar-139-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-gyarados-130-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-mr-mime-122-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-lickitung-108-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-marowak-105-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-krabby-098-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-grimer-088-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-magneton-082-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-graveler-075-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-machoke-067-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-machop-066-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-growlithe-058-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-mankey-056-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-meowth-052-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-oddish-043-165-reverse-holo-english-151-mew-near-mint","pokemon-tcg-nidoqueen-031-165-holo-rare-english-151-mew-near-mint","pokemon-tcg-wigglytuff-ex-141-190-double-rare-japanese-sv4a-shiny-treasure-ex-near-mint","pokemon-tcg-alakazam-ex-075-190-double-rare-japanese-sv4a-shiny-treasure-ex-near-mint","pokemon-tcg-revavroom-ex-085-108-double-rare-japanese-sv3-ruler-of-the-black-flame-near-mi","pokemon-tcg-kangaskhan-ex-115-165-double-rare-japanese-sv2a-151-near-mint","pokemon-tcg-alakazam-ex-065-165-double-rare-japanese-sv2a-151-near-mint","pokemon-tcg-ninetales-ex-038-165-double-rare-japanese-sv2a-151-near-mint","pokemon-tcg-venusaur-ex-003-165-double-rare-japanese-sv2a-151-near-mint","pokemon-tcg-abyss-eye-m5-japanese-booster-box-30-packs-mega-darkrai-ex","pokemon-tcg-mega-evolution-pitch-black-sealed-case-6-booster-boxes-216-packs","pokemon-tcg-charizard-ex-066-108-double-rare-japanese-sv3-ruler-of-the-black-flame-near-mi","pokemon-tcg-mew-ex-151-165-double-rare-japanese-sv2a-151-near-mint","pre-order-pokemon-tcg-scarlet-and-violet-destined-rivals-elite-trainer-box-sealed-case-10","pokemon-tcg-mega-evolution-pitch-black-booster-box-36-packs","chaos-rising-pokemon-etb","pokemon-center-ascended-heroes-etb","pokemon-center-chaos-rising-etb","pokemon-center-pitch-black-etb","pitch-black-pokemon-etb","japanese-ex-cards-bundle-100-pokemon","japanese-ex-cards-bundle-50-pokemon","japanese-ex-cards-bundle-25-pokemon-mystery-pull","destined-rival-booster-pack-10-cards-sealed-must-have","random-japanese-psa-slab-graded-pokemon-card","ninja-spinner-booster-pack-5-cards-sealed-flash-sale","mini-tin-bundle-50-cards-collectible-tin-gift-ready","holo-mystery-pack-25-holo-cards-no-duplicates-display-ready","mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated","pokemon-mystery-pack-50-cards-40-common-10-holo-bestseller"];
+  function purl(i) { return SLUG[i] ? '/products/' + SLUG[i] : null; }
   /* collections: [name, description, (unused), filter code, photo] */
   var C = [
     ["Sealed Boxes & ETBs", "Factory-sealed booster boxes, Elite Trainer Boxes and cases, sourced direct and never repackaged.", 0, "s", "img/pitch-black-booster-box.webp"],
@@ -1256,6 +1264,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   });
   /* restore cart if the customer came back from checkout without paying */
   try { var saved = JSON.parse(localStorage.getItem('intcg_cart') || 'null'); if (saved) { P.forEach(function (sp, si) { if (sp[2] && saved[sp[0]] > 0) cart[si] = saved[sp[0]]; }); } } catch (e) {}
+  if (/[?&]cart=1/.test(location.search)) { setTimeout(function () { openCart(true); }, 300); }
   if (/[?&]cancelled=1/.test(location.search)) { setTimeout(function () { openCart(true); $('cnote').textContent = 'Checkout cancelled. Your cart is still here.'; }, 300); }
   $('lines').addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
@@ -1297,7 +1306,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   }
   function cardHTML(i) {
     var p = P[i];
-    return '<article class="card"><div class="viz"><div class="tilt">' + art(p, i) + '</div></div><div class="meta"><div class="tags">' + tagsFor(p) + '</div><h3>' + esc(p[0]) + '</h3><div class="row"><span class="price">' + money(p[1]) + '</span><button class="add" type="button" data-i="' + i + '"' + (p[2] ? '' : ' disabled') + '>' + (p[2] ? 'Add' : 'Sold out') + '</button></div></div></article>';
+    return '<article class="card"><div class="viz"><div class="tilt">' + art(p, i) + '</div></div><div class="meta"><div class="tags">' + tagsFor(p) + '</div><h3>' + (purl(i) ? '<a class="plink" href="' + purl(i) + '">' + esc(p[0]) + '</a>' : esc(p[0])) + '</h3><div class="row"><span class="price">' + money(p[1]) + '</span><button class="add" type="button" data-i="' + i + '"' + (p[2] ? '' : ' disabled') + '>' + (p[2] ? 'Add' : 'Sold out') + '</button></div></div></article>';
   }
   var CH = [['all', 'All'], ['s', 'Sealed'], ['p', 'Booster packs'], ['c', 'Singles'], ['j', 'Japanese'], ['b', 'Bundles & tins'], ['m', 'Mystery'], ['g', 'Graded'], ['a', 'Accessories']];
   var st = { f: 'all', q: '', s: 'f', stock: false, n: 24 };
@@ -1498,7 +1507,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       ranked.forEach(function (i) { var key = series(P[i][0]); if (top3.length < 3 && !seenI[key]) { seenI[key] = 1; top3.push(i); } });
       vg.innerHTML = top3.map(function (i, k) {
         var p = P[i], s = imgSrc(i);
-        return '<article class="vi" data-i="' + i + '"><div class="vnum">' + NUM[k] + '</div><div class="vimg">' + (s ? '<img src="' + s + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy">' : art(p, i)) + '</div><h3>' + esc(p[0]) + '</h3><div class="vprice">' + money(p[1]) + '</div><div class="vbtns"><button class="btn ghost vview" type="button" data-i="' + i + '">View</button><button class="btn fill vadd" type="button" data-i="' + i + '">Add to cart</button></div></article>';
+        return '<article class="vi" data-i="' + i + '"><div class="vnum">' + NUM[k] + '</div><div class="vimg">' + (s ? '<img src="' + s + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy">' : art(p, i)) + '</div><h3>' + (purl(i) ? '<a class="plink" href="' + purl(i) + '">' + esc(p[0]) + '</a>' : esc(p[0])) + '</h3><div class="vprice">' + money(p[1]) + '</div><div class="vbtns"><button class="btn ghost vview" type="button" data-i="' + i + '">View</button><button class="btn fill vadd" type="button" data-i="' + i + '">Add to cart</button></div></article>';
       }).join('');
       vg.addEventListener('click', function (e) {
         var a = e.target.closest('.vadd'); if (a) { addToCart(parseInt(a.getAttribute('data-i'), 10), a); return; }
@@ -1530,7 +1539,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     }
     /* quick view */
     var qv = document.createElement('div'); qv.className = 'qv'; qv.setAttribute('role', 'dialog'); qv.setAttribute('aria-modal', 'true'); qv.setAttribute('aria-label', 'Product view');
-    qv.innerHTML = '<div class="qbox"><button class="qx" type="button">Close</button><div class="qst"><button class="qa qp2" type="button" aria-label="Previous product">&larr;</button><button class="qa qn2" type="button" aria-label="Next product">&rarr;</button><div id="qimg"></div><div class="qsh"></div><div class="qhint" aria-hidden="true">Click to zoom</div></div><div class="qi"><div class="eyebrow" id="qt"></div><h3 id="qn"></h3><div class="tags" id="qtags" style="display:flex;gap:6px;flex-wrap:wrap"></div><div class="qp" id="qp"></div><button class="btn fill" id="qadd" type="button">Add to cart</button><div class="qn">UK delivery £3.99 · Free over £200<br>Secure checkout with Stripe</div></div></div>';
+    qv.innerHTML = '<div class="qbox"><button class="qx" type="button">Close</button><div class="qst"><button class="qa qp2" type="button" aria-label="Previous product">&larr;</button><button class="qa qn2" type="button" aria-label="Next product">&rarr;</button><div id="qimg"></div><div class="qsh"></div><div class="qhint" aria-hidden="true">Click to zoom</div></div><div class="qi"><div class="eyebrow" id="qt"></div><h3 id="qn"></h3><div class="tags" id="qtags" style="display:flex;gap:6px;flex-wrap:wrap"></div><div class="qp" id="qp"></div><button class="btn fill" id="qadd" type="button">Add to cart</button><a class="qmore" id="qmore" href="/">Full product details &rarr;</a><div class="qn">UK delivery £3.99 · Free over £200<br>Secure checkout with Stripe</div></div></div>';
     document.body.appendChild(qv);
     var qi = -1, qclose, qlist = [];
     function openQV(i, list) {
@@ -1538,6 +1547,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       $('qimg').innerHTML = s ? '<div class="qcard"><img src="' + s + '" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '">' + (p[3] === 'c' || p[3] === 'g' ? '<i class="qfoil"></i><i class="qglare"></i>' : '') + '</div>' : art(p, i);
       var st = qv.querySelector('.qst'); st.classList.remove('zoom'); st.classList.toggle('noimg', !s); st.style.setProperty('--qy', '0deg'); st.style.setProperty('--qx', '0deg');
       $('qt').textContent = TYPE[p[3]] || 'Product'; $('qn').textContent = p[0]; $('qtags').innerHTML = tagsFor(p); $('qp').textContent = money(p[1]);
+      var qm = $('qmore'); if (purl(i)) { qm.href = purl(i); qm.hidden = false; } else qm.hidden = true;
       var b = $('qadd'); b.disabled = !p[2]; b.textContent = p[2] ? 'Add to cart' : 'Sold out';
       lxOpen(); qv.classList.add('show'); void qv.offsetWidth; qv.classList.add('in'); de.style.overflow = 'hidden'; clearTimeout(qclose); requestAnimationFrame(function () { document.dispatchEvent(new Event('lux-reset')); });
     }
@@ -1667,42 +1677,6 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     function prog() { var m = de.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (m > 0 ? Math.min(1, scrollY / m) : 0) + ')'; }
     addEventListener('scroll', prog, { passive: true }); prog();
     if (!fine || reduced) return;
-    /* smooth scroll */
-    (function () {
-      var cur = scrollY, tgt = scrollY, run = false, self = false;
-      function mx() { return de.scrollHeight - innerHeight; }
-      function tick() { cur += (tgt - cur) * .085; if (Math.abs(tgt - cur) < .4) { cur = tgt; run = false; } self = true; window.scrollTo({ top: cur, behavior: 'instant' }); self = false; if (run) requestAnimationFrame(tick); }
-      addEventListener('wheel', function (e) {
-        if (e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-        if (e.target.closest && e.target.closest('#drawer, .qv, textarea, select')) return;
-        e.preventDefault(); var d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaY;
-        tgt = Math.max(0, Math.min(mx(), tgt + d)); if (!run) { cur = scrollY; run = true; requestAnimationFrame(tick); }
-      }, { passive: false });
-      addEventListener('scroll', function () { if (self) return; if (!run) { cur = tgt = scrollY; } else if (Math.abs(scrollY - cur) > 60) { run = false; cur = tgt = scrollY; } }, { passive: true });
-    })();
-    /* custom cursor */
-    de.classList.add('lux-cur');
-    var dot = document.createElement('div'), ring = document.createElement('div'); dot.className = 'cur-dot'; ring.className = 'cur-ring'; ring.innerHTML = '<span>View</span>';
-    document.body.appendChild(ring); document.body.appendChild(dot);
-    var lab = ring.firstChild, mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, shown = false;
-    dot.style.opacity = ring.style.opacity = 0;
-    function curState(t) {
-      if (!t || !t.closest) return;
-      var over = t.closest('a,button,label,input,select,textarea,[role=button],.chip,.cartbtn'), card = t.closest('.card,.vi .vimg,.ccol');
-      if (card) lab.textContent = card.classList.contains('ccol') ? 'Drag' : 'View';
-      ring.classList.toggle('view', !!card && !over); ring.classList.toggle('hov', !!over);
-    }
-    document.addEventListener('pointermove', function (e) {
-      mx = e.clientX; my = e.clientY; if (!shown) { shown = true; rx = mx; ry = my; dot.style.opacity = ring.style.opacity = 1; }
-      curState(e.target);
-    }, { passive: true });
-    document.addEventListener('lux-reset', function () { if (shown) curState(document.elementFromPoint(mx, my)); });
-    var sTick = false;
-    addEventListener('scroll', function () { if (sTick || !shown) return; sTick = true; requestAnimationFrame(function () { sTick = false; curState(document.elementFromPoint(mx, my)); }); }, { passive: true });
-    document.addEventListener('mouseleave', function () { dot.style.opacity = ring.style.opacity = 0; shown = false; });
-    (function loop() { rx += (mx - rx) * .17; ry += (my - ry) * .17; dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)'; ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)'; requestAnimationFrame(loop); })();
-    var gl = document.createElement('div'); gl.className = 'lux-glow'; document.body.appendChild(gl);
-    (function gloop() { gl.style.transform = 'translate(' + (rx - 300) + 'px,' + (ry - 300) + 'px)'; requestAnimationFrame(gloop); })();
     /* ambient gold motes across the whole site */
     (function () {
       var cv = document.createElement('canvas'); cv.className = 'lux-motes'; document.body.appendChild(cv); var cx = cv.getContext('2d'), W, H, dpr = Math.min(2, window.devicePixelRatio || 1), ps = [];
@@ -1714,31 +1688,6 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
         requestAnimationFrame(loop);
       })();
     })();
-    /* gold sparkle trail */
-    (function () {
-      var cv = document.createElement('canvas'); cv.className = 'lux-spark'; document.body.appendChild(cv); var cx = cv.getContext('2d'), W, H, dpr = Math.min(2, window.devicePixelRatio || 1), ps = [], lx = -99, ly = -99;
-      function size() { W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; } size(); addEventListener('resize', size);
-      document.addEventListener('pointermove', function (e) {
-        var dx = e.clientX - lx, dy = e.clientY - ly, dist = Math.sqrt(dx * dx + dy * dy); if (dist < 14) return; lx = e.clientX; ly = e.clientY;
-        if (ps.length > 60) return;
-        ps.push({ x: e.clientX * dpr, y: e.clientY * dpr, vx: (Math.random() - .5) * .6 * dpr, vy: (Math.random() * .5 + .2) * dpr, r: (Math.random() * 1.6 + .6) * dpr, a: .9 });
-      }, { passive: true });
-      (function loop() {
-        cx.clearRect(0, 0, W, H);
-        for (var i = ps.length - 1; i >= 0; i--) {
-          var p = ps[i]; p.x += p.vx; p.y += p.vy; p.a -= .022; if (p.a <= 0) { ps.splice(i, 1); continue; }
-          cx.beginPath(); cx.fillStyle = 'rgba(240,214,150,' + p.a + ')'; cx.shadowColor = '#e3c98f'; cx.shadowBlur = 10 * dpr; cx.arc(p.x, p.y, p.r * p.a + .3, 0, 6.283); cx.fill();
-        }
-        requestAnimationFrame(loop);
-      })();
-    })();
-    /* magnetic buttons */
-    document.addEventListener('pointermove', function (e) {
-      var b = e.target.closest && e.target.closest('.btn,.add,.cartbtn'); 
-      Array.prototype.forEach.call(document.querySelectorAll('.magnetic.on'), function (m) { if (m !== b) { m.style.transform = ''; m.classList.remove('on'); } });
-      if (!b) return; b.classList.add('magnetic', 'on'); var r = b.getBoundingClientRect();
-      b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * .22) + 'px,' + ((e.clientY - r.top - r.height / 2) * .3) + 'px)';
-    }, { passive: true });
   })();
 
 
@@ -1852,6 +1801,9 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   (function () {
     var pm = $('pm'), seen = false;
     try { seen = sessionStorage.getItem('intcg-trailer') === '1'; } catch (e) {}
+    /* never show it to visitors arriving from an ad, a search or a shared link */
+    var rp = false; try { rp = sessionStorage.getItem('intcg-replay') === '1'; sessionStorage.removeItem('intcg-replay'); } catch (e) {}
+    if (!rp && (/[?&](gclid|gbraid|wbraid|utm_[a-z]+|cart)=/.test(location.search) || /^#./.test(location.hash) || (document.referrer && document.referrer.indexOf(location.host) < 0))) seen = true;
     if (reduced || seen || !pm) { if (pm) pm.remove(); return; }
     pm.hidden = false; document.documentElement.style.overflow = 'hidden';
     var stage = $('pm-stage'), timers = [], raf = 0, raf2 = 0, ps = [], ended = false, started = false, AC = null, master = null, muted = false, droned = false, ctxBurst = null;
@@ -1924,34 +1876,24 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     function im(a) { return a.map(function (s) { return '<div class="pm-it"><img src="' + s + '" alt=""></div>'; }).join(''); }
     function fan(a) { return a.map(function (s, k) { return '<img src="' + s + '" alt="" style="--k:' + (k - (a.length - 1) / 2) + ';--i:' + k + '">'; }).join(''); }
     function play() {
-      var t0 = performance.now(), TOTAL = 16200;
+      var t0 = performance.now(), TOTAL = 4200;
       dust(); startAudio();
       (function bar() { if (ended) return; $('pm-progi').style.width = Math.min(100, (performance.now() - t0) / TOTAL * 100) + '%'; raf = requestAnimationFrame(bar); })();
       stage.innerHTML = '<div class="pm-rays"></div><div class="pm-flare"></div><div class="pm-col pm-c-a"><div class="pm-ln"></div><div class="pm-ti">' + 'iNT TCG'.split('').map(function (ch, i) { return '<span style="--i:' + i + '">' + (ch === ' ' ? '\u00A0' : ch) + '</span>'; }).join('') + '</div><div class="pm-sm pm-su">International TCG · Pokémon specialists · United Kingdom</div><div class="pm-ln"></div></div>';
-      T(function () { cut(); whoosh(); stage.innerHTML = '<div class="pm-c-b"><div class="pm-rays"></div><div class="pm-spot"></div><div class="pm-stack"><div class="pm-parade">' + im(boxes) + '</div><div class="pm-cap">Sealed<em>.</em></div><div class="pm-lt3">Booster boxes · ETBs · Packs</div></div></div>'; }, 3000);
-      T(function () { cut(); whoosh(); stage.innerHTML = '<div class="pm-c-c"><div class="pm-rays"></div><div class="pm-spot"></div><div class="pm-stack"><div class="pm-fan5">' + fan(cards) + '</div><div class="pm-cap">Rare<em>.</em></div><div class="pm-lt3">English singles &amp; Japanese imports</div></div></div>'; }, 6500);
-      T(function () { cut(); thud(); stage.innerHTML = '<div class="pm-rays"></div><div class="pm-stack"><div class="pm-dp" id="pm-dp"><img src="' + pack + '" alt=""></div><div class="pm-note">Opening night</div></div>'; }, 9800);
-      T(function () { var d = $('pm-dp'); if (d) d.classList.add('pm-shake'); thud(); }, 10900);
       T(function () {
         var f = $('pm-flash'); f.classList.remove('soft', 'go'); void f.offsetWidth; f.classList.add('go'); $('pm-ring').classList.add('go'); $('pm-lens').classList.add('go'); stage.classList.add('pm-quake'); boom(); if (ctxBurst) ctxBurst();
         stage.innerHTML = '<div class="pm-stack pm-c-d"><div class="pm-holo pm-slam" id="pm-hl"><img src="' + pull + '" alt=""></div><div class="pm-fin" style="animation-delay:.5s">Welcome to <em>International TCG.</em></div></div>';
         var h = $('pm-hl'), a = 0; h.style.setProperty('--mx', '50%');
         (function sh() { a += 0.03; if (ended || !$('pm-hl')) return; h.style.setProperty('--mx', (50 + Math.sin(a * 6) * 50) + '%'); h.style.setProperty('--ry', (Math.sin(a * 4) * 10) + 'deg'); requestAnimationFrame(sh); })();
-      }, 11250);
-      T(function () {
-        whoosh();
-        var fl = document.createElement('div'); fl.className = 'pm-fly'; fl.innerHTML = '<div class="pm-plane"><i class="pm-trail"></i><svg viewBox="-14 -14 28 28" width="56" height="56" aria-hidden="true"><path transform="rotate(90)" d="M0 -11 L2.4 -3 L12 3 L12 5.5 L2.4 2.5 L1.6 8.5 L5.5 11 L5.5 12.8 L0 11.5 L-5.5 12.8 L-5.5 11 L-1.6 8.5 L-2.4 2.5 L-12 5.5 L-12 3 L-2.4 -3 Z" fill="#fff0c4" stroke="#7a5a1c" stroke-width=".7"/></svg></div><div class="pm-parcel"><svg viewBox="-14 -26 28 38" width="84" height="114" aria-hidden="true"><path d="M-12 -14 Q0 -30 12 -14 Q0 -17 -12 -14Z" fill="#c9a45c"/><path d="M-11 -14 L-3 -1 M11 -14 L3 -1 M0 -18 L0 -1" stroke="#fff0c4" stroke-width=".8" fill="none"/><rect x="-5" y="-1" width="10" height="8" fill="#fff0c4" stroke="#7a5a1c" stroke-width=".8"/><path d="M-5 2.6 H5" stroke="#7a5a1c" stroke-width=".8"/></svg></div>';
-        stage.appendChild(fl);
-      }, 12600);
-      T(function () { if (ctxBurst) ctxBurst(); thud(); }, 14200);
-      T(function () { end(false); }, 15600);
+      }, 2000);
+      T(function () { end(false); }, 4200);
     }
     $('pm-skip').addEventListener('click', function () { end(true); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') end(true); });
-    var srcs = boxes.concat(cards, [pack, pull]), left = srcs.length;
+    var srcs = [pull].filter(Boolean), left = srcs.length;
     function go() { if (!started) { started = true; play(); } }
     srcs.forEach(function (s) { var i = new Image(); i.onload = i.onerror = function () { if (--left <= 0) go(); }; i.src = s; });
-    if (left <= 0) go(); setTimeout(go, 2500);
+    if (left <= 0) go(); setTimeout(go, 1200);
   })();
 
   /* delivery scene: truck loads at the warehouse, drives to the house */
@@ -1994,7 +1936,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       }
     }
     reg(track, pin, fn);
-    $('replay').addEventListener('click', function (e) { e.preventDefault(); try { sessionStorage.removeItem('intcg-trailer'); } catch (x) {} location.reload(); });
+    $('replay').addEventListener('click', function (e) { e.preventDefault(); try { sessionStorage.removeItem('intcg-trailer'); sessionStorage.setItem('intcg-replay', '1'); } catch (x) {} location.href = '/'; });
   })();
 
   /* prisms: rotating step faces */

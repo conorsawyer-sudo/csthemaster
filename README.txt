@@ -8,7 +8,10 @@ Files
   sell.html                           sell-to-us page with request form (photos allowed)
   terms.html, privacy.html, delivery-returns.html   legal pages (pages.css styles them)
   netlify/functions/create-checkout.js  creates the Stripe payment page from the cart
-  scripts/sync-products.js            on each deploy, copies data/products.json into index.html and the checkout
+  scripts/sync-products.js            on each deploy, copies data/products.json into index.html and the checkout,
+                                      builds a page per product at int-tcg.com/products/<name>, and rebuilds
+                                      sitemap.xml and the Google Shopping feed at int-tcg.com/feed.xml
+  products/, feed.xml                 made automatically on each deploy (not stored in GitHub)
   netlify.toml                        tells Netlify how to build
 
 Netlify environment variables (Project configuration > Environment variables)
@@ -25,3 +28,8 @@ Forms (contact, newsletter, sell request) go to Netlify Forms: Netlify > Forms.
 Turn on email alerts there (Forms > Form notifications) so each one lands in your inbox.
 Business address for the legal pages: edit "Kent, United Kingdom" in terms.html and privacy.html.
 If you change delivery prices, also update the wording in delivery-returns.html and the cart note in index.html.
+
+Google Ads / Google Shopping
+  Every product has its own page, e.g. int-tcg.com/products/ascended-heroes-booster-bundle-6-pack
+  The address comes from the product name, so renaming a product changes its address (update any ads that use it).
+  Merchant Center: add a scheduled feed with the URL https://int-tcg.com/feed.xml (pre-orders are left out).
