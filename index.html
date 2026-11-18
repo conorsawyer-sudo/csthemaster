@@ -796,7 +796,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       <div class="landed" id="landed"></div>
       <div class="perks">
         <div><b>UK delivery £3.99</b><span>Free over £200.</span></div>
-        <div><b>Dispatched fast</b><span>Held in UK stock and shipped within 24 hours.</span></div>
+        <div><b>Dispatched fast</b><span>Order before 2pm for same-day dispatch. Orders placed after 2pm are shipped the next working day.</span></div>
         <div><b>Secure checkout</b><span>Pay by card through Stripe.</span></div>
         <div><b>Always genuine</b><span>Sealed product sourced from UK distributors.</span></div>
       </div>
@@ -820,7 +820,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     <div class="wrap">
       <div class="head"><div><div class="eyebrow">How we handle it</div><h2>Genuine, sealed, shipped from the UK</h2></div></div>
       <div class="std">
-        <div><h3>UK stock</h3><p>Held in the UK and shipped within 24 hours.</p></div>
+        <div><h3>UK stock</h3><p>Order before 2pm for same-day dispatch. Orders placed after 2pm are shipped the next working day.</p></div>
         <div><h3>Verified authentic</h3><p>Booster packs are unweighed and come from UK distributors.</p></div>
         <div><h3>Never repackaged</h3><p>Sealed boxes and ETBs are sourced direct and left factory sealed.</p></div>
         <div><h3>Packed in Kent</h3><p>Mystery packs are hand-sorted: no duplicates, guaranteed holos.</p></div>
@@ -1054,7 +1054,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
       <a href="#preorders">Pre-orders</a>
       <a href="#sell">Sell to us</a>
       <a href="mailto:int.tcg@gmail.com">int.tcg@gmail.com</a>
-      <a href="/delivery-returns.html">Delivery &amp; returns</a>
+      <a href="/delivery-returns.html">Delivery information</a>
       <a href="/terms.html">Terms of sale</a>
       <a href="/privacy.html">Privacy policy</a>
       <a href="#contact">Contact</a>
@@ -1254,7 +1254,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     ["Bundles & Tins", "Booster pack bundles, Japanese EX card bundles and mini tin bundles.", 0, "b", "img/mini-tin-bundle-50-cards-collectible-tin-gift-ready.webp"],
     ["Mystery Packs", "Hand-sorted Captain Cards mystery packs with guaranteed holos, packed in Kent.", 0, "m", "img/mega-holo-mystery-pack-40-holo-cards-rare-ex-v-top-rated.webp"],
     ["Graded", "Random Japanese PSA-graded slabs.", 0, "g", "img/random-japanese-psa-slab-graded-pok-mon-card.webp"],
-    ["Accessories", "Card sleeves and protection. UK stock shipped within 24 hours.", 0, "a", "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp"]
+    ["Accessories", "Card sleeves and protection, held in UK stock.", 0, "a", "img/mint-keeper-standard-soft-card-sleeves-pack-of-100.webp"]
   ];
 
   /* ---- cart ---- */
@@ -1393,7 +1393,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     var inN = P.filter(function (p) { return p[2]; }).length;
     $('livestat').textContent = inN + ' in stock now · ' + (P.length - inN) + ' sold out';
     var items = fresh.slice(0, 14).map(function (i) { return '<span><i>New in</i>' + esc(P[i][0].replace(/^Pok.mon TCG:? ?/, '')) + '<b>' + money(P[i][1]) + '</b></span>'; }).join('');
-    var lead = '<span><i>Live</i>' + inN + ' in stock now</span><span class="sep">&bull;</span><span>UK delivery &pound;3.99 <b>free over &pound;200</b></span><span class="sep">&bull;</span><span>Dispatched within 24 hours</span><span class="sep">&bull;</span>';
+    var lead = '<span><i>Live</i>' + inN + ' in stock now</span><span class="sep">&bull;</span><span>UK delivery &pound;3.99 <b>free over &pound;200</b></span><span class="sep">&bull;</span><span>Same-day dispatch before 2pm</span><span class="sep">&bull;</span>';
     items = lead + items;
     $('tk').innerHTML = items + items;
   })();
@@ -1932,7 +1932,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
     var truck = $('truck'), wbox = $('wbox'), pbox = $('pbox'), wdoor = $('wdoor'), w1 = $('w1'), w2 = $('w2');
     var steps = Array.prototype.slice.call($('shipsteps').children), cur = -1;
     var heads = ['Your order comes in.', 'Picked and packed.', 'Out for delivery.', 'At your door.'];
-    var notes = ['Held in UK stock, shipped within 24 hours', 'We pick it, pack it and seal it', 'UK delivery £3.99 · free over £200', 'Delivered. Enjoy the pull.'];
+    var notes = ['Order before 2pm for same-day dispatch', 'We pick it, pack it and seal it', 'UK delivery £3.99 · free over £200', 'Delivered. Enjoy the pull.'];
     function ease(p, a, b) { var x = (p - a) / (b - a); x = x < 0 ? 0 : x > 1 ? 1 : x; return x * x * (3 - 2 * x); }
     function lerp(a, b, t) { return a + (b - a) * t; }
     function arc(x0, y0, x1, y1, t, h) { return [lerp(x0, x1, t), lerp(y0, y1, t) - 4 * h * t * (1 - t)]; }
