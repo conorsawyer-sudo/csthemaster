@@ -31,6 +31,7 @@ exports.handler = async (event) => {
     const q = Math.floor(Number(it && it.q));
     if (!p || !(q >= 1 && q <= 20)) return json(400, { error: 'Something in your cart is no longer available.' });
     if (!p.inStock) return json(409, { error: p.title + ' is sold out.' });
+    if (typeof p.stock === 'number' && q > p.stock) return json(409, { error: 'Sorry, we only have ' + p.stock + ' of ' + p.title + ' left.' });
     lines.push({ p, q });
     subtotal += p.price * q;
   }
@@ -68,6 +69,8 @@ exports.handler = async (event) => {
     }
   });
   f.append('metadata[source]', 'int-tcg.com');
+  // what was bought, so the stock webhook can count it down (one key per line, title|qty)
+  lines.slice(0, 40).forEach(({ p, q }, n) => f.append(`metadata[l${n}]`, (p.title.slice(0, 480) + '|' + q)));
 
   try {
     const r = await fetch('https://api.stripe.com/v1/checkout/sessions', {
