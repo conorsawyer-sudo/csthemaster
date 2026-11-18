@@ -1384,6 +1384,12 @@ html { scrollbar-width: thin; scrollbar-color: #6b5628 #0b0a0d; }
   pregrid.addEventListener('click', onAdd);
   var pre = []; P.forEach(function (p, i) { if (p[5]) pre.push(i); });
   pregrid.innerHTML = pre.map(cardHTML).join(''); reveal(pregrid);
+  /* live stock (only when Stock counting is on in /admin) */
+  fetch('/.netlify/functions/stock').then(function (r) { return r.json(); }).then(function (d) {
+    if (!d.tracking) return; var ch = false;
+    P.forEach(function (p) { var n = d.left[p[0]]; if (typeof n !== 'number') return; p[6] = Math.max(1, Math.min(20, n)); if (n <= 0 && p[2]) { p[2] = 0; ch = true; } });
+    if (ch) { renderChips(); renderGrid(); pregrid.innerHTML = pre.map(cardHTML).join(''); }
+  }).catch(function () {});
     /* live homepage band: built from the same product data */
   (function () {
     var fresh = []; P.forEach(function (p, i) { if (p[2] && !p[5]) fresh.push(i); });

@@ -31,6 +31,7 @@ a { color: var(--fg); }
   <p>Questions about your order? Email <a href="mailto:int.tcg@gmail.com">int.tcg@gmail.com</a>.</p>
   <a class="btn" href="/">Back to the shop</a>
 </main>
-<script>try { localStorage.removeItem('intcg_cart'); } catch (e) {}</script>
+<script>try { localStorage.removeItem('intcg_cart'); } catch (e) {}
+(function () { var m = /[?&]session_id=(cs_[A-Za-z0-9_]+)/.exec(location.search); if (m) fetch('/.netlify/functions/confirm-order?session_id=' + m[1]).catch(function () {}); })();</script>
 </body>
 </html>

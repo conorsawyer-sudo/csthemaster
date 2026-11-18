@@ -36,12 +36,10 @@ Google Ads / Google Shopping
 
 Live orders and stock
   int-tcg.com/admin/orders.html (or the "Live orders" button in /admin) lists paid Stripe orders, refreshing every 30 seconds.
-    Needs ADMIN_KEY in Netlify environment variables (any password, 8+ characters). You type it once on the orders page.
+    It uses the same GitHub login as /admin: log in to /admin first in the same browser. No extra password.
   Stock counting: /admin > Shop > Settings > Stock counting (on/off). Off by default.
-    When on, each product's "Stock count" is used: sells out at 0, customers can't buy more than you have,
-    and the count goes down automatically when an order is paid. Products with a blank count are not counted.
-    Automatic count-down needs (one-off setup):
-      GITHUB_TOKEN           GitHub fine-grained token, this repo only, Contents: Read and write
-      STRIPE_WEBHOOK_SECRET  Stripe > Developers > Webhooks > Add endpoint
-                             URL https://int-tcg.com/.netlify/functions/stripe-webhook
-                             events checkout.session.completed and checkout.session.async_payment_succeeded
+    When on, each product's "Stock count" is the starting number: products sell out at 0, customers can't buy
+    more than you have, and paid orders count the number down automatically. Typing a new number in /admin
+    restarts counting from that number. Products with a blank count are not counted.
+    Live counts are kept in Netlify Blobs (built into Netlify, nothing to set up). Orders are counted when the
+    customer reaches the thank-you page, and any missed ones are caught the next time the orders page is opened.
