@@ -1,6 +1,94 @@
 {
   "products": [
     {
+      "title": "Pokémon TCG Mega Dream ex Japanese Booster Box (High Class, 10 Packs)",
+      "price": 77.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG Inferno X Japanese Booster Box (30 Packs)",
+      "price": 111.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Futuristic Box – Japanese Pokémon Center Exclusive",
+      "price": 487.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Japanese Card Set – Complete 9-Type Set",
+      "price": 163.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Japanese Premium Deck Set – Espeon & Umbreon",
+      "price": 136.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG Japanese Starter Set ex Bundle – Eevee ex, Zoroark ex & Meowscarada ex (3 Sets)",
+      "price": 53.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG Japanese Starter Set MEGA – Mega Gengar ex",
+      "price": 22.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon TCG Japanese Start Deck 100 Battle Collection (1 Deck)",
+      "price": 15.99,
+      "in_stock": true,
+      "category": "b",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon Center Tohoku Special Box – Japanese",
+      "price": 118.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon Center Hiroshima Special Box – Japanese",
+      "price": 131.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false
+    },
+    {
+      "title": "Pokémon Center Fukuoka Special Box – Japanese",
+      "price": 116.99,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false
+    },
+    {
       "in_stock": true,
       "category": "s",
       "japanese": true,
