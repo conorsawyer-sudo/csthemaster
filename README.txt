@@ -33,3 +33,15 @@ Google Ads / Google Shopping
   Every product has its own page, e.g. int-tcg.com/products/ascended-heroes-booster-bundle-6-pack
   The address comes from the product name, so renaming a product changes its address (update any ads that use it).
   Merchant Center: add a scheduled feed with the URL https://int-tcg.com/feed.xml (pre-orders are left out).
+
+Live orders and stock
+  int-tcg.com/admin/orders.html (or the "Live orders" button in /admin) lists paid Stripe orders, refreshing every 30 seconds.
+    Needs ADMIN_KEY in Netlify environment variables (any password, 8+ characters). You type it once on the orders page.
+  Stock counting: /admin > Shop > Settings > Stock counting (on/off). Off by default.
+    When on, each product's "Stock count" is used: sells out at 0, customers can't buy more than you have,
+    and the count goes down automatically when an order is paid. Products with a blank count are not counted.
+    Automatic count-down needs (one-off setup):
+      GITHUB_TOKEN           GitHub fine-grained token, this repo only, Contents: Read and write
+      STRIPE_WEBHOOK_SECRET  Stripe > Developers > Webhooks > Add endpoint
+                             URL https://int-tcg.com/.netlify/functions/stripe-webhook
+                             events checkout.session.completed and checkout.session.async_payment_succeeded
