@@ -6,7 +6,9 @@
       "in_stock": true,
       "category": "s",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-mega-dream-ex.webp"
     },
     {
       "title": "Pokémon TCG Inferno X Japanese Booster Box (30 Packs)",
@@ -14,7 +16,9 @@
       "in_stock": true,
       "category": "s",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-inferno-x.webp"
     },
     {
       "title": "Pokémon TCG 30th Celebration Futuristic Box – Japanese Pokémon Center Exclusive",
@@ -22,7 +26,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-30th-futuristic-box.webp"
     },
     {
       "title": "Pokémon TCG 30th Celebration Japanese Card Set – Complete 9-Type Set",
@@ -30,7 +36,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-30th-card-set-9-type.webp"
     },
     {
       "title": "Pokémon TCG 30th Celebration Japanese Premium Deck Set – Espeon & Umbreon",
@@ -38,7 +46,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-30th-premium-deck-espeon-umbreon.webp"
     },
     {
       "title": "Pokémon TCG Japanese Starter Set ex Bundle – Eevee ex, Zoroark ex & Meowscarada ex (3 Sets)",
@@ -46,7 +56,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-starter-set-ex-bundle.webp"
     },
     {
       "title": "Pokémon TCG Japanese Starter Set MEGA – Mega Gengar ex",
@@ -54,7 +66,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-starter-set-mega-gengar.webp"
     },
     {
       "title": "Pokémon TCG Japanese Start Deck 100 Battle Collection (1 Deck)",
@@ -62,7 +76,9 @@
       "in_stock": true,
       "category": "b",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-start-deck-100.webp"
     },
     {
       "title": "Pokémon Center Tohoku Special Box – Japanese",
@@ -70,7 +86,9 @@
       "in_stock": true,
       "category": "s",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-pc-tohoku-special-box.webp"
     },
     {
       "title": "Pokémon Center Hiroshima Special Box – Japanese",
@@ -78,7 +96,9 @@
       "in_stock": true,
       "category": "s",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-pc-hiroshima-special-box.webp"
     },
     {
       "title": "Pokémon Center Fukuoka Special Box – Japanese",
@@ -86,7 +106,9 @@
       "in_stock": true,
       "category": "s",
       "japanese": true,
-      "preorder": false
+      "preorder": false,
+      "dispatch": "sourced",
+      "image": "/img/jp-pc-fukuoka-special-box.webp"
     },
     {
       "in_stock": true,
