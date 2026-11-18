@@ -244,6 +244,12 @@ ${rel ? `<section class="rel"><h2>You might also like</h2><div class="rgrid">${r
   function cart() { try { return JSON.parse(localStorage.getItem('intcg_cart') || '{}') || {}; } catch (e) { return {}; } }
   function count() { var c = cart(), n = 0; for (var k in c) n += c[k]; document.getElementById('cartlink').textContent = n ? 'Cart (' + n + ')' : 'Cart'; }
   count();
+  if (${TRACK && COUNT[i] !== null}) fetch('/.netlify/functions/stock').then(function (r) { return r.json(); }).then(function (d) {
+    var n = d.left && d.left[T]; if (!d.tracking || typeof n !== 'number') return;
+    MAX = Math.max(1, Math.min(MAX, n)); var s = document.querySelector('.stock');
+    if (n <= 0) { s.className = 'stock'; s.innerHTML = '<b>Sold out</b>'; var b = document.querySelector('.buy'); if (b) b.innerHTML = '<a class="btn ghost" href="/#contact">Sold out – ask about restocks</a>'; }
+    else if (n <= 5) s.innerHTML = s.innerHTML.replace(/ · only \\d+ left$/, '') + ' · only ' + n + ' left';
+  }).catch(function () {});
   var q = document.getElementById('q'); if (!q) return;
   function qty() { var v = Math.max(1, Math.min(MAX, parseInt(q.value, 10) || 1)); q.value = v; return v; }
   document.getElementById('up').onclick = function () { q.value = qty() + 1; qty(); };
