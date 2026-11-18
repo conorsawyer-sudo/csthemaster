@@ -49,6 +49,14 @@ collections:
                   - { label: "Bundle / tin", value: b }
                   - { label: "Mystery pack", value: m }
                   - { label: "Accessory", value: a }
+              - name: dispatch
+                label: Dispatch time
+                widget: select
+                required: false
+                default: fast
+                options:
+                  - { label: "Ships within 24 hours (held in our stock)", value: fast }
+                  - { label: "3–5 day processing, delivered within 7 days (sourced)", value: sourced }
               - { name: japanese, label: Japanese product, widget: boolean, default: false }
               - { name: preorder, label: Pre-order, widget: boolean, default: false, hint: "Shows it in the Pre-order section. Customers pay now; you ship when stock arrives." }
               - { name: description, label: Description (optional), widget: text, required: false, hint: "Shown on the product's own page and sent to Google Shopping. Leave blank to use an automatic description." }
