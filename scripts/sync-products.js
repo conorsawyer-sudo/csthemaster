@@ -15,6 +15,10 @@ const SHIP = process.env.SHIPPING_GBP !== undefined ? Number(process.env.SHIPPIN
 const FREE = process.env.FREE_SHIPPING_OVER !== undefined ? Number(process.env.FREE_SHIPPING_OVER) : 200;
 
 const data = JSON.parse(fs.readFileSync(path.join(root, 'data', 'products.json'), 'utf8'));
+// Stock counting: switched on/off in /admin (Shop > Settings). Off = stock numbers are ignored.
+let settings = {};
+try { settings = JSON.parse(fs.readFileSync(path.join(root, 'data', 'settings.json'), 'utf8')); } catch (e) {}
+const TRACK = settings.stock_tracking === true;
 const list = (data.products || []).filter(p => p && p.title);
 list.forEach((p) => {
   if (!(Number(p.price) > 0)) throw new Error('Product "' + p.title + '" needs a price above 0');
@@ -23,7 +27,9 @@ list.forEach((p) => {
 
 // sourced-to-order lines: 3-5 working days to process, delivered within 7 days of purchase
 const SLOW = list.map(p => p.dispatch === 'sourced');
-const P = list.map(p => [String(p.title).trim(), Math.round(Number(p.price) * 100) / 100, p.in_stock === false ? 0 : 1, p.category, p.japanese ? 1 : 0, p.preorder ? 1 : 0]);
+// counted stock: a whole number when counting is on and the product has a count, otherwise null
+const COUNT = list.map(p => TRACK && p.stock !== undefined && p.stock !== null && p.stock !== '' && !isNaN(Number(p.stock)) ? Math.max(0, Math.floor(Number(p.stock))) : null);
+const P = list.map((p, i) => [String(p.title).trim(), Math.round(Number(p.price) * 100) / 100, p.in_stock === false || COUNT[i] === 0 ? 0 : 1, p.category, p.japanese ? 1 : 0, p.preorder ? 1 : 0, COUNT[i] === null ? 20 : Math.min(20, COUNT[i])]);
 const IMG = {};
 list.forEach((p, i) => { if (p.image) IMG[i] = String(p.image).replace(/^\//, ''); });
 
@@ -48,7 +54,7 @@ html = html.replace(sRe, () => 'var SLUG = ' + JSON.stringify(SLUG) + ';');
 fs.writeFileSync(file, html);
 
 // ---- 2) checkout price list ----
-const out = P.map((p, i) => ({ i, title: p[0], price: p[1], inStock: !!p[2], preorder: !!p[5], image: IMG[i] || null }));
+const out = P.map((p, i) => ({ i, title: p[0], price: p[1], inStock: !!p[2], preorder: !!p[5], image: IMG[i] || null, stock: COUNT[i] }));
 fs.writeFileSync(path.join(root, 'netlify', 'functions', 'products.json'), JSON.stringify(out, null, 1));
 
 // ---- 3) product pages ----
@@ -82,7 +88,8 @@ function stockLine(i) {
   const p = P[i];
   if (!p[2]) return '<b>Sold out</b>';
   if (p[5]) return '<b>Pre-order</b> · ships as soon as stock arrives';
-  return SLOW[i] ? '<b>In stock</b> · delivered within 7 days' : '<b>In stock</b> · dispatched within 24 hours';
+  const few = COUNT[i] !== null && COUNT[i] <= 5 ? ` · only ${COUNT[i]} left` : '';
+  return (SLOW[i] ? '<b>In stock</b> · delivered within 7 days' : '<b>In stock</b> · dispatched within 24 hours') + few;
 }
 function specs(i) {
   const p = P[i], src = list[i], rows = [];
@@ -182,7 +189,7 @@ function page(i) {
     : `<span class="none">${esc(CAT_NAME[p[3]])}</span>`;
   const rel = related(i).map(k => `<a href="/products/${SLUG[k]}"><span class="ri">${IMG[k] ? `<img src="${cdn(k, 360)}" onerror="if(this.src.indexOf('/.netlify/images')>-1)this.src='/${esc(IMG[k])}'" alt="" loading="lazy">` : ''}</span><span class="t">${esc(P[k][0])}</span><b>${money(P[k][1])}</b></a>`).join('');
   const buy = p[2]
-    ? `<div class="buy"><div class="qty"><button type="button" id="dn" aria-label="One less">−</button><input id="q" type="number" min="1" max="20" value="1" aria-label="Quantity"><button type="button" id="up" aria-label="One more">+</button></div>
+    ? `<div class="buy"><div class="qty"><button type="button" id="dn" aria-label="One less">−</button><input id="q" type="number" min="1" max="${p[6]}" value="1" aria-label="Quantity"><button type="button" id="up" aria-label="One more">+</button></div>
 <button class="btn" id="add" type="button">Add to cart</button><button class="btn ghost" id="now" type="button">${p[5] ? 'Pre-order now' : 'Buy now'}</button></div><p class="ok" id="note" role="status"></p>`
     : `<div class="buy"><a class="btn ghost" href="/#contact">Sold out – ask about restocks</a></div>`;
   return `<!doctype html>
@@ -232,18 +239,18 @@ ${rel ? `<section class="rel"><h2>You might also like</h2><div class="rgrid">${r
 <footer><div class="wrap"><a href="/">Shop</a><a href="/sell">Sell to us</a><a href="/delivery-returns">Delivery &amp; returns</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><span>int.tcg@gmail.com</span></div></footer>
 <script>
 (function () {
-  var T = ${JSON.stringify(p[0])}, I = ${i};
+  var T = ${JSON.stringify(p[0])}, I = ${i}, MAX = ${p[6]};
   try { sessionStorage.setItem('intcg-trailer', '1'); } catch (e) {}
   function cart() { try { return JSON.parse(localStorage.getItem('intcg_cart') || '{}') || {}; } catch (e) { return {}; } }
   function count() { var c = cart(), n = 0; for (var k in c) n += c[k]; document.getElementById('cartlink').textContent = n ? 'Cart (' + n + ')' : 'Cart'; }
   count();
   var q = document.getElementById('q'); if (!q) return;
-  function qty() { var v = Math.max(1, Math.min(20, parseInt(q.value, 10) || 1)); q.value = v; return v; }
+  function qty() { var v = Math.max(1, Math.min(MAX, parseInt(q.value, 10) || 1)); q.value = v; return v; }
   document.getElementById('up').onclick = function () { q.value = qty() + 1; qty(); };
   document.getElementById('dn').onclick = function () { q.value = qty() - 1; qty(); };
   q.onchange = qty;
   document.getElementById('add').onclick = function () {
-    var c = cart(); c[T] = Math.min(20, (c[T] || 0) + qty());
+    var c = cart(); c[T] = Math.min(MAX, (c[T] || 0) + qty());
     try { localStorage.setItem('intcg_cart', JSON.stringify(c)); } catch (e) {}
     location.href = '/?cart=1#shop';
   };
@@ -306,4 +313,4 @@ ${items.join('\n')}
 </rss>
 `);
 
-console.log('Built ' + P.length + ' products (' + Object.keys(IMG).length + ' with photos), ' + P.length + ' product pages, ' + items.length + ' feed items');
+console.log('Stock counting ' + (TRACK ? 'ON' : 'off') + '. Built ' + P.length + ' products (' + Object.keys(IMG).length + ' with photos), ' + P.length + ' product pages, ' + items.length + ' feed items');
