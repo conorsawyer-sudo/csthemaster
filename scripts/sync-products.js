@@ -21,6 +21,8 @@ list.forEach((p) => {
   if (CATS.indexOf(p.category) < 0) throw new Error('Product "' + p.title + '" has an unknown category: ' + p.category);
 });
 
+// sourced-to-order lines: 3-5 working days to process, delivered within 7 days of purchase
+const SLOW = list.map(p => p.dispatch === 'sourced');
 const P = list.map(p => [String(p.title).trim(), Math.round(Number(p.price) * 100) / 100, p.in_stock === false ? 0 : 1, p.category, p.japanese ? 1 : 0, p.preorder ? 1 : 0]);
 const IMG = {};
 list.forEach((p, i) => { if (p.image) IMG[i] = String(p.image).replace(/^\//, ''); });
@@ -65,6 +67,7 @@ function describe(i) {
   else if (p[3] === 'a') bits.push(`${p[0]}. Keep your Pokémon cards protected.`);
   else bits.push(`${p[0]}. Genuine${l ? ' ' + l : ''} Pokémon TCG product, ${p[3] === 'm' ? 'packed by us' : 'factory sealed'} and stored in our UK stock.`);
   if (p[5]) bits.push('Pre-order: pay now and we ship as soon as stock reaches us.');
+  else if (SLOW[i]) bits.push('In stock with our supplier: allow 3–5 working days for processing, with delivery within 7 days of purchase. Sent tracked across the UK.');
   else bits.push('Dispatched within 24 hours on business days and sent tracked across the UK.');
   bits.push(`UK delivery ${money(SHIP)}${FREE > 0 ? `, free on orders over ${money(FREE)}` : ''}. 14-day returns.`);
   return bits.join(' ');
@@ -132,7 +135,7 @@ function page(i) {
       shippingDetails: {
         '@type': 'OfferShippingDetails', shippingRate: { '@type': 'MonetaryAmount', value: (FREE > 0 && p[1] >= FREE ? 0 : SHIP).toFixed(2), currency: 'GBP' },
         shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'GB' },
-        deliveryTime: { '@type': 'ShippingDeliveryTime', handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' }, transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' } }
+        deliveryTime: { '@type': 'ShippingDeliveryTime', handlingTime: { '@type': 'QuantitativeValue', minValue: SLOW[i] ? 3 : 0, maxValue: SLOW[i] ? 5 : 1, unitCode: 'DAY' }, transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: SLOW[i] ? 2 : 3, unitCode: 'DAY' } }
       },
       hasMerchantReturnPolicy: { '@type': 'MerchantReturnPolicy', applicableCountry: 'GB', returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow', merchantReturnDays: 14, returnMethod: 'https://schema.org/ReturnByMail', returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility' }
     }
@@ -186,7 +189,7 @@ function page(i) {
 <h1>${esc(p[0])}</h1>
 <div class="tags">${tags(p)}</div>
 <div class="price">${money(p[1])}</div>
-<div class="stock${p[2] ? ' in' : ''}">${!p[2] ? 'Sold out' : p[5] ? 'Available to pre-order' : 'In stock, ships within 24 hours'}</div>
+<div class="stock${p[2] ? ' in' : ''}">${!p[2] ? 'Sold out' : p[5] ? 'Available to pre-order' : SLOW[i] ? 'In stock · 3–5 day processing · delivered within 7 days' : 'In stock, ships within 24 hours'}</div>
 ${buy}
 <p class="desc">${esc(desc)}</p>
 <ul class="perks"><li>100% genuine Pokémon TCG product</li><li>Tracked UK delivery ${money(SHIP)}${FREE > 0 ? `, free over ${money(FREE)}` : ''}</li><li>14-day returns. See <a href="/delivery-returns">delivery &amp; returns</a></li><li>Secure checkout by Stripe</li></ul>
@@ -255,6 +258,8 @@ const items = P.map((p, i) => i).filter(i => !P[i][5] && IMG[i]).map(i => {
 <g:brand>Pokémon</g:brand>
 <g:identifier_exists>no</g:identifier_exists>
 <g:product_type>${x(CAT_PLURAL[p[3]])}</g:product_type>
+<g:min_handling_time>${SLOW[i] ? 3 : 0}</g:min_handling_time>
+<g:max_handling_time>${SLOW[i] ? 5 : 1}</g:max_handling_time>
 <g:shipping><g:country>GB</g:country><g:price>${(FREE > 0 && p[1] >= FREE ? 0 : SHIP).toFixed(2)} GBP</g:price></g:shipping>
 </item>`;
 });
