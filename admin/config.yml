@@ -36,7 +36,7 @@ collections:
             fields:
               - { name: title, label: Product name, widget: string, hint: "e.g. Pokémon TCG Surging Sparks Booster Box. Include 'Japanese' or 'English' and 'Near Mint' to show those tags." }
               - { name: price, label: Price (£), widget: number, value_type: float, min: 0.01, step: 0.01 }
-              - { name: stock, label: Stock count, widget: number, value_type: int, min: 0, required: false, hint: "Only used when Stock counting is switched on in Shop > Settings. Goes down automatically when an order is paid. 0 = sold out. Leave blank to not count this product." }
+              - { name: stock, label: Stock count, widget: number, value_type: int, min: 0, required: false, hint: "Only used when Stock counting is switched on in Shop > Settings. Goes down automatically as orders are paid; type a new number here any time to restock (counting restarts from it). 0 = sold out. Leave blank to not count this product." }
               - { name: in_stock, label: In stock, widget: boolean, default: true, hint: "Turn off to show it as Sold out." }
               - name: category
                 label: Category
