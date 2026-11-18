@@ -1,5 +1,7 @@
 // Live orders for int-tcg.com/admin/orders: paid Stripe checkouts, newest first.
-// Protected by ADMIN_KEY (Netlify environment variable). Reads from Stripe, never changes anything.
+// Only for people logged in to /admin with a GitHub account that can edit the shop.
+const stock = require('../../lib/stock.js');
+const REPO = process.env.GITHUB_REPO || 'conorsawyer-sudo/csthemaster';
 const json = (status, body) => ({ statusCode: status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }, body: JSON.stringify(body) });
 
 async function stripe(path) {
@@ -10,10 +12,12 @@ async function stripe(path) {
 }
 
 exports.handler = async (event) => {
-  const key = process.env.ADMIN_KEY;
-  if (!key || key.length < 8) return json(500, { error: 'Set ADMIN_KEY (8+ characters) in Netlify > Environment variables first.' });
-  const given = event.headers['x-admin-key'] || event.headers['X-Admin-Key'] || '';
-  if (given !== key) return json(401, { error: 'Wrong admin key.' });
+  // Only people who can edit the shop on GitHub (the same login as /admin) can see orders.
+  const token = (event.headers['x-github-token'] || event.headers['X-Github-Token'] || '').trim();
+  if (!token) return json(401, { error: 'Log in to /admin first.' });
+  const gh = await fetch('https://api.github.com/repos/' + REPO, { headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json', 'User-Agent': 'int-tcg-orders' } });
+  const repo = gh.ok ? await gh.json() : null;
+  if (!repo || !repo.permissions || !repo.permissions.push) return json(401, { error: 'Your GitHub login does not have access to the shop. Log in to /admin again.' });
   if (!process.env.STRIPE_SECRET_KEY) return json(500, { error: 'STRIPE_SECRET_KEY is not set.' });
 
   try {
@@ -21,6 +25,10 @@ exports.handler = async (event) => {
     const sessions = list.data.filter(s => s.payment_status === 'paid' || s.payment_status === 'no_payment_required');
     // fall back to fetching line items one by one if Stripe didn't include them
     await Promise.all(sessions.filter(s => !s.line_items).map(async s => { s.line_items = await stripe('/checkout/sessions/' + s.id + '/line_items?limit=50'); }));
+    // count stock for any paid order the thank-you page didn't (customer closed the tab early)
+    if (stock.tracking()) {
+      try { const { store, st } = await stock.load(event); let ch = false; sessions.slice().reverse().forEach(x => { if (stock.apply(st, x)) ch = true; }); if (ch) await store.setJSON('state', st); } catch (e) { console.error('stock', e); }
+    }
     const orders = sessions.map(s => {
       const ship = (s.collected_information && s.collected_information.shipping_details) || s.shipping_details || null;
       const cust = s.customer_details || {};

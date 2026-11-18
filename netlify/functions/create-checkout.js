@@ -5,6 +5,7 @@
 //   SHIPPING_GBP        optional  UK delivery charge, default 3.99
 //   FREE_SHIPPING_OVER  optional  basket total for free delivery, default 200 (set 0 to turn off)
 const products = require('./products.json');
+const stock = require('../../lib/stock.js');
 
 const json = (status, body) => ({
   statusCode: status,
@@ -31,9 +32,20 @@ exports.handler = async (event) => {
     const q = Math.floor(Number(it && it.q));
     if (!p || !(q >= 1 && q <= 20)) return json(400, { error: 'Something in your cart is no longer available.' });
     if (!p.inStock) return json(409, { error: p.title + ' is sold out.' });
-    if (typeof p.stock === 'number' && q > p.stock) return json(409, { error: 'Sorry, we only have ' + p.stock + ' of ' + p.title + ' left.' });
     lines.push({ p, q });
     subtotal += p.price * q;
+  }
+
+  // stock counting (only when switched on in /admin): never sell more than we have
+  if (stock.tracking()) {
+    try {
+      const { st } = await stock.load(event), left = stock.leftMap(st);
+      for (const { p, q } of lines) {
+        if (typeof left[p.title] !== 'number') continue;
+        if (left[p.title] <= 0) return json(409, { error: p.title + ' has just sold out.' });
+        if (q > left[p.title]) return json(409, { error: 'Sorry, we only have ' + left[p.title] + ' of ' + p.title + ' left.' });
+      }
+    } catch (e) { console.error('stock check', e); }
   }
 
   const site = process.env.URL || 'https://int-tcg.com';
