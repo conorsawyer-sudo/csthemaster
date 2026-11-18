@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Live orders · INT TCG</title>
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+:root { --bg: #0b0a0d; --raise: #15131a; --line: #2a2530; --fg: #efe8da; --dim: #9a9285; --gold: #c9a45c; --ok: #5fbf74; --font: "Hanken Grotesk", Arial, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--fg); }
+header { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(11,10,13,.95); backdrop-filter: blur(10px); z-index: 2; }
+header img { height: 34px; display: block; }
+header h1 { font-size: 17px; font-weight: 600; margin: 0; }
+header nav { margin-left: auto; display: flex; gap: 8px; }
+.pill { font: 500 14px var(--font); color: var(--fg); text-decoration: none; border: 1px solid var(--line); background: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+.pill:hover { border-color: var(--dim); }
+main { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
+.login { max-width: 380px; margin: 12vh auto 0; background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
+.login h2 { margin: 0 0 6px; font-size: 20px; } .login p { color: var(--dim); margin: 0 0 18px; font-size: 14px; }
+input { width: 100%; font: 400 16px var(--font); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+.go { width: 100%; margin-top: 12px; font: 600 15px var(--font); background: var(--gold); color: #17120a; border: 0; border-radius: 6px; padding: 13px; cursor: pointer; }
+.err { color: #e58a8a; font-size: 14px; min-height: 1.4em; margin-top: 10px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 22px; }
+.stat { background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat span { display: block; color: var(--dim); font-size: 13px; } .stat b { font-size: 24px; font-weight: 600; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: var(--dim); font-size: 13px; }
+.live::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 8px; animation: blink 2s infinite; }
+@keyframes blink { 50% { opacity: .3; } }
+.order { background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; display: grid; grid-template-columns: 1.1fr 1.4fr auto; gap: 18px; }
+.order.new { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.order h3 { margin: 0 0 2px; font-size: 16px; font-weight: 600; }
+.muted { color: var(--dim); font-size: 13px; }
+.items { margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.items li { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
+.items li span:first-child { min-width: 0; }
+.right { text-align: right; white-space: nowrap; }
+.right b { font-size: 18px; display: block; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #3a2f17; color: var(--gold); margin-left: 6px; vertical-align: 2px; }
+.empty { text-align: center; color: var(--dim); padding: 60px 0; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .order { grid-template-columns: 1fr; gap: 10px; } .right { text-align: left; } header h1 { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="/"><img src="/img/logo.svg" alt="INT TCG"></a>
+  <h1>Live orders</h1>
+  <nav><a class="pill" href="/admin/">Products &amp; stock</a><button class="pill" id="out" type="button" hidden>Log out</button></nav>
+</header>
+<main id="app"></main>
+<script>
+(function () {
+  var app = document.getElementById('app'), KEY = 'intcg_admin_key', key = '', seen = null, timer = 0;
+  try { key = localStorage.getItem(KEY) || ''; } catch (e) {}
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function gbp(n) { return '£' + Number(n).toFixed(2); }
+  function when(t) { var d = new Date(t * 1000); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ', ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); }
+  function login(msg) {
+    clearTimeout(timer); document.getElementById('out').hidden = true;
+    app.innerHTML = '<form class="login" id="f"><h2>Live orders</h2><p>Enter the admin key you set in Netlify (ADMIN_KEY).</p><input id="k" type="password" autocomplete="current-password" placeholder="Admin key" required><button class="go" type="submit">Show orders</button><div class="err">' + esc(msg || '') + '</div></form>';
+    document.getElementById('f').onsubmit = function (e) { e.preventDefault(); key = document.getElementById('k').value.trim(); try { localStorage.setItem(KEY, key); } catch (x) {} load(); };
+  }
+  function render(d) {
+    var o = d.orders, now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 1000, week = now.getTime() / 1000 - 7 * 86400;
+    var t = o.filter(function (x) { return x.created >= today; }), w = o.filter(function (x) { return x.created >= week; });
+    var sum = function (a) { return a.reduce(function (s, x) { return s + x.total; }, 0); };
+    var fresh = {}; if (seen) o.forEach(function (x) { if (!seen[x.id]) fresh[x.id] = 1; });
+    seen = {}; o.forEach(function (x) { seen[x.id] = 1; });
+    if (Object.keys(fresh).length) { document.title = '(' + Object.keys(fresh).length + ') New order · INT TCG'; }
+    var test = o.length && !o[0].live ? ' <span class="tag">Test mode</span>' : '';
+    app.innerHTML =
+      '<div class="stats"><div class="stat"><span>Orders today</span><b>' + t.length + '</b></div><div class="stat"><span>Sales today</span><b>' + gbp(sum(t)) + '</b></div><div class="stat"><span>Orders, last 7 days</span><b>' + w.length + '</b></div><div class="stat"><span>Sales, last 7 days</span><b>' + gbp(sum(w)) + '</b></div></div>' +
+      '<div class="bar"><span class="live">Live · refreshes every 30 seconds · updated ' + new Date(d.at).toLocaleTimeString('en-GB') + test + '</span><span>Last ' + o.length + ' paid orders</span></div>' +
+      (o.length ? o.map(function (x) {
+        return '<article class="order' + (fresh[x.id] ? ' new' : '') + '"><div><h3>' + esc(x.name || 'Customer') + (fresh[x.id] ? '<span class="tag">New</span>' : '') + '</h3><div class="muted">' + when(x.created) + ' · #' + esc(x.ref) + '</div><div class="muted" style="margin-top:8px">' + x.address.map(esc).join('<br>') + '</div><div class="muted" style="margin-top:6px">' + (x.email ? '<a href="mailto:' + esc(x.email) + '">' + esc(x.email) + '</a>' : '') + (x.phone ? '<br>' + esc(x.phone) : '') + '</div></div>' +
+          '<ul class="items">' + x.items.map(function (i) { return '<li><span>' + i.qty + ' × ' + esc(i.name) + '</span><span>' + gbp(i.amount) + '</span></li>'; }).join('') + '<li class="muted"><span>Delivery</span><span>' + (x.shipping ? gbp(x.shipping) : 'Free') + '</span></li></ul>' +
+          '<div class="right"><b>' + gbp(x.total) + '</b><a class="muted" href="' + esc(x.stripe) + '" target="_blank" rel="noopener">Open in Stripe</a></div></article>';
+      }).join('') : '<div class="empty">No paid orders yet.</div>');
+  }
+  function load() {
+    clearTimeout(timer);
+    if (!key) return login();
+    fetch('/.netlify/functions/orders', { headers: { 'x-admin-key': key }, cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, s: r.status, d: d }; }); })
+      .then(function (res) {
+        if (res.s === 401) { try { localStorage.removeItem(KEY); } catch (e) {} key = ''; return login(res.d.error); }
+        if (!res.ok) throw new Error(res.d.error || 'Could not load orders');
+        document.getElementById('out').hidden = false; render(res.d); timer = setTimeout(load, 30000);
+      })
+      .catch(function (e) { if (!seen) app.innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; timer = setTimeout(load, 30000); });
+  }
+  document.getElementById('out').onclick = function () { try { localStorage.removeItem(KEY); } catch (e) {} key = ''; seen = null; login(); };
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { document.title = 'Live orders · INT TCG'; } });
+  load();
+})();
+</script>
+</body>
+</html>
