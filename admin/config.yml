@@ -59,5 +59,6 @@ collections:
                   - { label: "3–5 day processing, delivered within 7 days (sourced)", value: sourced }
               - { name: japanese, label: Japanese product, widget: boolean, default: false }
               - { name: preorder, label: Pre-order, widget: boolean, default: false, hint: "Shows it in the Pre-order section. Customers pay now; you ship when stock arrives." }
+              - { name: contents, label: Contents (optional), widget: string, required: false, hint: "e.g. 30 packs × 5 cards. Shown in the product details table." }
               - { name: description, label: Description (optional), widget: text, required: false, hint: "Shown on the product's own page and sent to Google Shopping. Leave blank to use an automatic description." }
               - { name: image, label: Photo, widget: image, required: false, choose_url: false, hint: "Square or portrait photo on a plain background works best. Under 8MB." }
