@@ -75,21 +75,21 @@ function describe(i) {
   else bits.push(`${p[0]}. Genuine${l ? ' ' + l : ''} Pokémon TCG product, ${p[3] === 'm' ? 'packed by us' : 'factory sealed'}${SLOW[i] ? '.' : ' and stored in our UK stock.'}`);
   if (p[5]) bits.push('Pre-order: pay now and we ship as soon as stock reaches us.');
   else if (SLOW[i]) bits.push('Allow 3–5 working days for processing, with delivery within 7 days of purchase. Sent tracked across the UK.');
-  else bits.push('Dispatched within 24 hours on business days and sent tracked across the UK.');
-  bits.push(`UK delivery ${money(SHIP)}${FREE > 0 ? `, free on orders over ${money(FREE)}` : ''}. 14-day returns.`);
+  else bits.push('Order before 2pm for same-day dispatch; orders after 2pm are shipped the next working day. Sent tracked across the UK.');
+  bits.push(`UK delivery ${money(SHIP)}${FREE > 0 ? `, free on orders over ${money(FREE)}` : ''}.`);
   return bits.join(' ');
 }
 function dispatchText(i) {
   const p = P[i];
   if (p[5]) return 'Ships as soon as stock arrives';
-  return SLOW[i] ? 'Processed in 3–5 working days, delivered within 7 days of purchase' : 'Dispatched within 24 hours (Mon–Fri)';
+  return SLOW[i] ? 'Processed in 3–5 working days, delivered within 7 days of purchase' : 'Order before 2pm for same-day dispatch. Orders placed after 2pm are shipped the next working day.';
 }
 function stockLine(i) {
   const p = P[i];
   if (!p[2]) return '<b>Sold out</b>';
   if (p[5]) return '<b>Pre-order</b> · ships as soon as stock arrives';
   const few = COUNT[i] !== null && COUNT[i] <= 5 ? ` · only ${COUNT[i]} left` : '';
-  return (SLOW[i] ? '<b>In stock</b> · delivered within 7 days' : '<b>In stock</b> · dispatched within 24 hours') + few;
+  return (SLOW[i] ? '<b>In stock</b> · delivered within 7 days' : '<b>In stock</b> · order before 2pm for same-day dispatch') + few;
 }
 function specs(i) {
   const p = P[i], src = list[i], rows = [];
@@ -231,12 +231,12 @@ ${tags(p) ? `<div class="tags">${tags(p)}</div>` : ''}
 ${buy}
 <dl class="specs">${specs(i)}</dl>
 ${list[i].description ? `<p class="desc">${esc(list[i].description)}</p>` : ''}
-<p class="trust">Genuine product · Secure checkout by Stripe · <a href="/delivery-returns">14-day returns</a></p>
+<p class="trust">Genuine product · Secure checkout by Stripe</p>
 </div>
 </div>
 ${rel ? `<section class="rel"><h2>You might also like</h2><div class="rgrid">${rel}</div></section>` : ''}
 </div></main>
-<footer><div class="wrap"><a href="/">Shop</a><a href="/sell">Sell to us</a><a href="/delivery-returns">Delivery &amp; returns</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><span>int.tcg@gmail.com</span></div></footer>
+<footer><div class="wrap"><a href="/">Shop</a><a href="/sell">Sell to us</a><a href="/delivery-returns">Delivery information</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><span>int.tcg@gmail.com</span></div></footer>
 <script>
 (function () {
   var T = ${JSON.stringify(p[0])}, I = ${i}, MAX = ${p[6]};
