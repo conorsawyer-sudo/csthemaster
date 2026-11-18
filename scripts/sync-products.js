@@ -65,9 +65,9 @@ function describe(i) {
   const bits = [];
   if (p[3] === 'c' || p[3] === 'g') bits.push(`${p[0]}. A genuine${l ? ' ' + l : ''} Pokémon TCG ${what}${/Near Mint/i.test(p[0]) ? ' in near mint condition' : ''}, checked by hand, sleeved and toploaded for posting.`);
   else if (p[3] === 'a') bits.push(`${p[0]}. Keep your Pokémon cards protected.`);
-  else bits.push(`${p[0]}. Genuine${l ? ' ' + l : ''} Pokémon TCG product, ${p[3] === 'm' ? 'packed by us' : 'factory sealed'} and stored in our UK stock.`);
+  else bits.push(`${p[0]}. Genuine${l ? ' ' + l : ''} Pokémon TCG product, ${p[3] === 'm' ? 'packed by us' : 'factory sealed'}${SLOW[i] ? '.' : ' and stored in our UK stock.'}`);
   if (p[5]) bits.push('Pre-order: pay now and we ship as soon as stock reaches us.');
-  else if (SLOW[i]) bits.push('In stock with our supplier: allow 3–5 working days for processing, with delivery within 7 days of purchase. Sent tracked across the UK.');
+  else if (SLOW[i]) bits.push('Allow 3–5 working days for processing, with delivery within 7 days of purchase. Sent tracked across the UK.');
   else bits.push('Dispatched within 24 hours on business days and sent tracked across the UK.');
   bits.push(`UK delivery ${money(SHIP)}${FREE > 0 ? `, free on orders over ${money(FREE)}` : ''}. 14-day returns.`);
   return bits.join(' ');
