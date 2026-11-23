@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "title": "Pokémon TCG 30th Celebration Ultra-Premium Collection – Day (English)",
+      "price": 319.99,
+      "stock": 10,
+      "in_stock": true,
+      "category": "s",
+      "dispatch": "fast",
+      "japanese": false,
+      "preorder": false,
+      "contents": "Ultra-Premium Collection box (Day edition)",
+      "image": "/img/pc-30th-upc-day.webp"
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Ultra-Premium Collection – Night (English)",
+      "price": 329.99,
+      "stock": 10,
+      "in_stock": true,
+      "category": "s",
+      "dispatch": "fast",
+      "japanese": false,
+      "preorder": false,
+      "contents": "Ultra-Premium Collection box (Night edition)"
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Elite Trainer Box – Sealed (English)",
+      "price": 119.99,
+      "stock": 10,
+      "in_stock": true,
+      "category": "s",
+      "dispatch": "fast",
+      "japanese": false,
+      "preorder": false,
+      "contents": "1 sealed Elite Trainer Box",
+      "image": "/img/pc-30th-etb.webp"
+    },
+    {
       "title": "Pokémon TCG Mega Dream ex Japanese Booster Box (High Class, 10 Packs)",
       "price": 77.99,
       "in_stock": true,
