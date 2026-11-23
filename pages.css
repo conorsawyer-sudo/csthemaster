@@ -1,4 +1,4 @@
-:root { --bg: #0c0c0c; --bg-raise: #141414; --line: #2b2b2b; --fg: #f4efe6; --fg-dim: #9b9b9b; --gold: #e8202e; --gold-soft: #18d4ff;
+:root { --bg: #0c0c0c; --bg-raise: #141414; --line: #2b2b2b; --fg: #f4efe6; --fg-dim: #9b9b9b; --gold: #e8202e; --gold-soft: #ee293a;
   --display: "Saira", "Arial Narrow", Arial, sans-serif; --body: "Saira", Arial, sans-serif; --mono: "Saira", Arial, sans-serif; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.7 var(--body); -webkit-font-smoothing: antialiased; }
