@@ -8,13 +8,13 @@
 <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700;1,800&display=swap">
 <style>
-:root { --bg: #0b0a0d; --raise: #15131a; --line: #2a2530; --fg: #efe8da; --dim: #9a9285; --gold: #c9a45c; --ok: #5fbf74; --font: "Hanken Grotesk", Arial, sans-serif; color-scheme: dark; }
+:root { --bg: #0c0c0c; --raise: #161616; --line: #2b2b2b; --fg: #f4efe6; --dim: #9b9b9b; --gold: #e8202e; --ok: #5fbf74; --font: "Saira", Arial, sans-serif; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
 a { color: var(--fg); }
-header { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(11,10,13,.95); backdrop-filter: blur(10px); z-index: 2; }
+header { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(12,12,12,.95); backdrop-filter: blur(10px); z-index: 2; }
 header img { height: 34px; display: block; }
 header h1 { font-size: 17px; font-weight: 600; margin: 0; }
 header nav { margin-left: auto; display: flex; gap: 8px; }
@@ -24,7 +24,7 @@ main { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
 .login { max-width: 380px; margin: 12vh auto 0; background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
 .login h2 { margin: 0 0 6px; font-size: 20px; } .login p { color: var(--dim); margin: 0 0 18px; font-size: 14px; }
 input { width: 100%; font: 400 16px var(--font); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
-.go { width: 100%; margin-top: 12px; font: 600 15px var(--font); background: var(--gold); color: #17120a; border: 0; border-radius: 6px; padding: 13px; cursor: pointer; }
+.go { width: 100%; margin-top: 12px; font: 600 15px var(--font); background: var(--gold); color: #ffffff; border: 0; border-radius: 6px; padding: 13px; cursor: pointer; }
 .err { color: #e58a8a; font-size: 14px; min-height: 1.4em; margin-top: 10px; }
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 22px; }
 .stat { background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
@@ -41,7 +41,7 @@ input { width: 100%; font: 400 16px var(--font); color: var(--fg); background: v
 .items li span:first-child { min-width: 0; }
 .right { text-align: right; white-space: nowrap; }
 .right b { font-size: 18px; display: block; }
-.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #3a2f17; color: var(--gold); margin-left: 6px; vertical-align: 2px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #3b1619; color: var(--gold); margin-left: 6px; vertical-align: 2px; }
 .empty { text-align: center; color: var(--dim); padding: 60px 0; }
 @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .order { grid-template-columns: 1fr; gap: 10px; } .right { text-align: left; } header h1 { display: none; } }
 </style>
