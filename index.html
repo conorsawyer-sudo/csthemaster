@@ -664,6 +664,14 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
 @media (max-width: 760px) { main section .head::before { display: none; } }
 
 
+/* hit cards: swap to the chase cards on hover (tap the button on touch screens) */
+.card .viz .photo { transition: opacity .35s ease, transform .35s ease; }
+.card .viz .photo.hov { position: absolute; inset: 0; margin: auto; opacity: 0; transform: scale(.96); pointer-events: none; }
+.hitbtn { position: absolute; left: 10px; bottom: 10px; z-index: 3; font: 600 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); background: rgba(12,12,12,.8); border: 1px solid var(--gold); padding: 7px 9px; cursor: pointer; }
+.hitbtn::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--gold); margin-right: 7px; transform: rotate(45deg) translateY(-1px); }
+@media (hover: hover) { .card:hover .viz .photo.hov { opacity: 1; transform: none; } .card:hover .viz .photo:not(.hov) { opacity: 0; } .hitbtn { pointer-events: none; } .card:hover .hitbtn { opacity: 0; } }
+.viz.hits .photo.hov { opacity: 1; transform: none; } .viz.hits .photo:not(.hov) { opacity: 0; }
+
 /* ===== video hero ===== */
 .hero-track { height: auto !important; }
 #hero.gh { position: relative !important; top: 0 !important; height: max(600px, calc(100vh - var(--nav-h) - 44px)); height: max(600px, calc(100svh - var(--nav-h) - 44px)); overflow: hidden; background: radial-gradient(60% 70% at 72% 50%, rgba(238,41,58,.13), transparent 70%), radial-gradient(50% 50% at 8% 0%, rgba(100,100,100,.2), transparent 70%), var(--bg); }
@@ -1126,6 +1134,7 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
     ["Pokémon Mystery Pack – 50 Cards (40 Common, 10 Holo) – BESTSELLER",7.49,1,"m",0,0,20]
   ];
   /* photos supplied for these product indexes */
+  var HOV = {};
   var IMG = {
     "0": "img/jp-mega-dream-ex-hd.webp",
     "1": "img/jp-inferno-x-hd.webp",
@@ -1271,7 +1280,12 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
   function art(p, i) {
     if (IMG[i]) {
       var src = '/' + IMG[i].replace(/^\//, ''), cdn = location.hostname === 'localhost' ? src : '/.netlify/images?url=' + encodeURIComponent(src) + '&w=640&fm=webp';
-      return '<img class="photo" src="' + cdn + '" onerror="if(this.src.indexOf(\'/.netlify/images\')>-1)this.src=\'' + src + '\'" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy" decoding="async">';
+      var main = '<img class="photo" src="' + cdn + '" onerror="if(this.src.indexOf(\'/.netlify/images\')>-1)this.src=\'' + src + '\'" alt="' + esc(p[0]).replace(/"/g, '&quot;') + '" loading="lazy" decoding="async">';
+      if (HOV[i]) {
+        var hs = '/' + HOV[i].replace(/^\//, ''), hc = location.hostname === 'localhost' ? hs : '/.netlify/images?url=' + encodeURIComponent(hs) + '&w=640&fm=webp';
+        main += '<img class="photo hov" src="' + hc + '" onerror="if(this.src.indexOf(\'/.netlify/images\')>-1)this.src=\'' + hs + '\'" alt="The hit cards inside" loading="lazy" decoding="async"><button type="button" class="hitbtn" aria-pressed="false">See the hits</button>';
+      }
+      return main;
     }
     var h = hue(p[0]), t = p[3];
     if (t === 's') return '<div class="box wide"><b>' + (/Case/.test(p[0]) ? 'Case' : /ETB/.test(p[0]) ? 'ETB' : 'Box') + '</b></div>';
@@ -1290,6 +1304,12 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
     if (/Near Mint/.test(p[0])) t.push('<span class="tag">Near mint</span>');
     return t.join('');
   }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.hitbtn'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    var v = b.closest('.viz'), on = !v.classList.contains('hits'); v.classList.toggle('hits', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? 'See the box' : 'See the hits';
+  }, true);
   function cardHTML(i) {
     var p = P[i];
     return '<article class="card"><div class="viz"><div class="tilt">' + art(p, i) + '</div></div><div class="meta"><div class="tags">' + tagsFor(p) + '</div><h3>' + (purl(i) ? '<a class="plink" href="' + purl(i) + '">' + esc(p[0]) + '</a>' : esc(p[0])) + '</h3><div class="row"><span class="price">' + money(p[1]) + '</span><button class="add" type="button" data-i="' + i + '"' + (p[2] ? '' : ' disabled') + '>' + (p[2] ? 'Add' : 'Sold out') + '</button></div></div></article>';
