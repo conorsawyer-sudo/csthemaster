@@ -18,7 +18,7 @@ const data = JSON.parse(fs.readFileSync(path.join(root, 'data', 'products.json')
 // Stock counting: switched on/off in /admin (Shop > Settings). Off = stock numbers are ignored.
 let settings = {};
 try { settings = JSON.parse(fs.readFileSync(path.join(root, 'data', 'settings.json'), 'utf8')); } catch (e) {}
-const TRACK = settings.stock_tracking === true;
+// stock is counted per product: switch 'Count stock' on for that product in /admin
 const list = (data.products || []).filter(p => p && p.title);
 list.forEach((p) => {
   if (!(Number(p.price) > 0)) throw new Error('Product "' + p.title + '" needs a price above 0');
@@ -28,7 +28,7 @@ list.forEach((p) => {
 // sourced-to-order lines: 3-5 working days to process, delivered within 7 days of purchase
 const SLOW = list.map(p => p.dispatch === 'sourced');
 // counted stock: a whole number when counting is on and the product has a count, otherwise null
-const COUNT = list.map(p => TRACK && p.stock !== undefined && p.stock !== null && p.stock !== '' && !isNaN(Number(p.stock)) ? Math.max(0, Math.floor(Number(p.stock))) : null);
+const COUNT = list.map(p => p.track_stock === true && p.stock !== undefined && p.stock !== null && p.stock !== '' && !isNaN(Number(p.stock)) ? Math.max(0, Math.floor(Number(p.stock))) : null);
 const P = list.map((p, i) => [String(p.title).trim(), Math.round(Number(p.price) * 100) / 100, p.in_stock === false || COUNT[i] === 0 ? 0 : 1, p.category, p.japanese ? 1 : 0, p.preorder ? 1 : 0, COUNT[i] === null ? 20 : Math.min(20, COUNT[i])]);
 const IMG = {};
 list.forEach((p, i) => { if (p.image) IMG[i] = String(p.image).replace(/^\//, ''); });
@@ -244,7 +244,7 @@ ${rel ? `<section class="rel"><h2>You might also like</h2><div class="rgrid">${r
   function cart() { try { return JSON.parse(localStorage.getItem('intcg_cart') || '{}') || {}; } catch (e) { return {}; } }
   function count() { var c = cart(), n = 0; for (var k in c) n += c[k]; document.getElementById('cartlink').textContent = n ? 'Cart (' + n + ')' : 'Cart'; }
   count();
-  if (${TRACK && COUNT[i] !== null}) fetch('/.netlify/functions/stock').then(function (r) { return r.json(); }).then(function (d) {
+  if (${COUNT[i] !== null}) fetch('/.netlify/functions/stock').then(function (r) { return r.json(); }).then(function (d) {
     var n = d.left && d.left[T]; if (!d.tracking || typeof n !== 'number') return;
     MAX = Math.max(1, Math.min(MAX, n)); var s = document.querySelector('.stock');
     if (n <= 0) { s.className = 'stock'; s.innerHTML = '<b>Sold out</b>'; var b = document.querySelector('.buy'); if (b) b.innerHTML = '<a class="btn ghost" href="/#contact">Sold out – ask about restocks</a>'; }
@@ -319,4 +319,4 @@ ${items.join('\n')}
 </rss>
 `);
 
-console.log('Stock counting ' + (TRACK ? 'ON' : 'off') + '. Built ' + P.length + ' products (' + Object.keys(IMG).length + ' with photos), ' + P.length + ' product pages, ' + items.length + ' feed items');
+console.log('Stock counted on ' + COUNT.filter(c => c !== null).length + ' products. Built ' + P.length + ' products (' + Object.keys(IMG).length + ' with photos), ' + P.length + ' product pages, ' + items.length + ' feed items');
