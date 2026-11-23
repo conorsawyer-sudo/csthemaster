@@ -36,7 +36,8 @@ collections:
             fields:
               - { name: title, label: Product name, widget: string, hint: "e.g. Pokémon TCG Surging Sparks Booster Box. Include 'Japanese' or 'English' and 'Near Mint' to show those tags." }
               - { name: price, label: Price (£), widget: number, value_type: float, min: 0.01, step: 0.01 }
-              - { name: stock, label: Stock count, widget: number, value_type: int, min: 0, required: false, hint: "Only used when Stock counting is switched on in Shop > Settings. Goes down automatically as orders are paid; type a new number here any time to restock (counting restarts from it). 0 = sold out. Leave blank to not count this product." }
+              - { name: track_stock, label: Count stock, widget: boolean, default: false, required: false, hint: "On: this product's Stock count is used. It sells out at 0, customers can't buy more than you have, and paid orders count it down automatically. Off: only the In stock switch is used." }
+              - { name: stock, label: Stock count, widget: number, value_type: int, min: 0, required: false, hint: "Only used when Count stock is on for this product. Goes down automatically as orders are paid; type a new number here any time to restock (counting restarts from it). 0 = sold out." }
               - { name: in_stock, label: In stock, widget: boolean, default: true, hint: "Turn off to show it as Sold out." }
               - name: category
                 label: Category
@@ -63,9 +64,3 @@ collections:
               - { name: contents, label: Contents (optional), widget: string, required: false, hint: "e.g. 30 packs × 5 cards. Shown in the product details table." }
               - { name: description, label: Description (optional), widget: text, required: false, hint: "Shown on the product's own page and sent to Google Shopping. Leave blank to use an automatic description." }
               - { name: image, label: Photo, widget: image, required: false, choose_url: false, hint: "Square or portrait photo on a plain background works best. Under 8MB." }
-      - name: settings
-        label: Settings
-        file: data/settings.json
-        format: json
-        fields:
-          - { name: stock_tracking, label: Stock counting, widget: boolean, default: false, hint: "On: each product's Stock count is used. Products sell out at 0, customers can't buy more than you have, and counts go down when orders are paid. Off: stock counts are ignored and only the In stock switch is used." }
