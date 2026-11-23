@@ -730,9 +730,9 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
   <div class="hero-track" id="track">
     <div class="pin gh" id="hero">
       <canvas id="scene" aria-hidden="true" style="display:none"></canvas>
-      <video class="gh-bg" src="/video/hero.mp4" poster="/video/hero-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      <video class="gh-bg" src="/video/hero.mp4" poster="/video/hero-poster.jpg" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true"></video>
       <div class="gh-shade" aria-hidden="true"></div>
-      <div class="gh-vid"><video src="/video/hero.mp4" poster="/video/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Inside the INT TCG stockroom: boxes of sealed 30th Celebration Pokémon stock under our neon sign"></video></div>
+      <div class="gh-vid"><video src="/video/hero.mp4" poster="/video/hero-poster.jpg" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-label="Inside the INT TCG stockroom: boxes of sealed 30th Celebration Pokémon stock under our neon sign"></video></div>
       <div class="gh-copy">
         <div class="wrap">
           <div class="in">
@@ -2239,4 +2239,24 @@ html { scrollbar-width: thin; scrollbar-color: #6b282e #0c0c0c; }
 </script>
 
    
+<script>
+/* hero video: make sure it plays (iPhone Safari, Low Power Mode, intro overlay) */
+(function () {
+  var vs = [].slice.call(document.querySelectorAll('#hero video')); if (!vs.length) return;
+  function shown(v) { return !!(v.offsetWidth || v.offsetHeight); }
+  function go() {
+    vs.forEach(function (v) {
+      if (!shown(v) || !v.paused) return;
+      v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.playsInline = true;
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+    });
+  }
+  go();
+  window.addEventListener('load', go); window.addEventListener('pageshow', go);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) go(); });
+  ['touchstart', 'pointerdown', 'click', 'scroll', 'keydown'].forEach(function (e) { window.addEventListener(e, go, { passive: true }); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) go(); }); }).observe(document.getElementById('hero'));
+  var n = 0, t = setInterval(function () { go(); if (++n > 12) clearInterval(t); }, 1000);
+})();
+</script>
 </html>
