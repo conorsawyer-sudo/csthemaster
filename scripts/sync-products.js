@@ -32,6 +32,8 @@ const COUNT = list.map(p => p.track_stock === true && p.stock !== undefined && p
 const P = list.map((p, i) => [String(p.title).trim(), Math.round(Number(p.price) * 100) / 100, p.in_stock === false || COUNT[i] === 0 ? 0 : 1, p.category, p.japanese ? 1 : 0, p.preorder ? 1 : 0, COUNT[i] === null ? 20 : Math.min(20, COUNT[i])]);
 const IMG = {};
 list.forEach((p, i) => { if (p.image) IMG[i] = String(p.image).replace(/^\//, ''); });
+const HOV = {};
+list.forEach((p, i) => { if (p.hover_image) HOV[i] = String(p.hover_image).replace(/^\//, ''); });
 
 // URL names: lower case, accents removed, words joined by dashes. Stays the same as long as the title does.
 function slugify(t) {
@@ -51,6 +53,7 @@ if (!pRe.test(html) || !iRe.test(html) || !sRe.test(html)) throw new Error('Coul
 html = html.replace(pRe, () => 'var P = [\n' + P.map(r => '    ' + JSON.stringify(r)).join(',\n') + '\n  ];');
 html = html.replace(iRe, () => 'var IMG = ' + JSON.stringify(IMG, null, 4).replace(/\n}/, '\n  }') + ';');
 html = html.replace(sRe, () => 'var SLUG = ' + JSON.stringify(SLUG) + ';');
+html = html.replace(/var HOV = \{[^;]*\};/, () => 'var HOV = ' + JSON.stringify(HOV) + ';');
 fs.writeFileSync(file, html);
 
 // ---- 2) checkout price list ----
