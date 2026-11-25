@@ -16,7 +16,7 @@
     },
     {
       "track_stock": true,
-      "price": 319.99,
+      "price": 314.99,
       "preorder": false,
       "japanese": false,
       "stock": 10,
@@ -29,7 +29,7 @@
     },
     {
       "track_stock": true,
-      "price": 329.99,
+      "price": 324.99,
       "preorder": false,
       "japanese": false,
       "stock": 10,
@@ -52,6 +52,60 @@
       "image": "/img/pc-30th-etb.webp",
       "in_stock": true,
       "category": "s"
+    },
+    {
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "title": " Ninja Spinner Japanese Booster box - 30 packs ",
+      "price": 47.99,
+      "image": "/img/whatsapp-image-2026-11-16-at-15.40.16.jpeg"
+    },
+    {
+      "in_stock": true,
+      "category": "s",
+      "japanese": false,
+      "preorder": false,
+      "title": "Ascended Heroes Booster Bundle (6 pack)",
+      "price": 59.99,
+      "image": "/img/screenshot-2026-11-16-at-16.52.13.png"
+    },
+    {
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": true,
+      "title": "Storm Emerald Japanese Booster Box",
+      "price": 55,
+      "image": "/img/whatsapp-image-2026-11-16-at-17.07.38.jpeg"
+    },
+    {
+      "title": "Pokémon TCG Mega Symphonia Japanese Booster Box",
+      "price": 45.68,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/screenshot-2026-11-16-at-16.53.04.png"
+    },
+    {
+      "title": "Pokémon TCG 30th Celebration Japanese Booster Box",
+      "price": 129.96,
+      "in_stock": true,
+      "category": "s",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/screenshot-2026-11-16-at-16.53.57.png"
+    },
+    {
+      "title": "Random Japanese PSA Slab – Graded Pokémon Card",
+      "price": 33,
+      "in_stock": true,
+      "category": "g",
+      "japanese": true,
+      "preorder": false,
+      "image": "/img/random-japanese-psa-slab-graded-pok-mon-card.webp"
     },
     {
       "price": 77.99,
@@ -170,51 +224,6 @@
       "preorder": false,
       "dispatch": "sourced",
       "image": "/img/jp-pc-fukuoka-special-box-hd.webp"
-    },
-    {
-      "in_stock": true,
-      "category": "s",
-      "japanese": true,
-      "preorder": false,
-      "title": " Ninja Spinner Japanese Booster box - 30 packs ",
-      "price": 47.99,
-      "image": "/img/whatsapp-image-2026-11-16-at-15.40.16.jpeg"
-    },
-    {
-      "in_stock": true,
-      "category": "s",
-      "japanese": false,
-      "preorder": false,
-      "title": "Ascended Heroes Booster Bundle (6 pack)",
-      "price": 59.99,
-      "image": "/img/screenshot-2026-11-16-at-16.52.13.png"
-    },
-    {
-      "in_stock": true,
-      "category": "s",
-      "japanese": true,
-      "preorder": true,
-      "title": "Storm Emerald Japanese Booster Box",
-      "price": 55,
-      "image": "/img/whatsapp-image-2026-11-16-at-17.07.38.jpeg"
-    },
-    {
-      "title": "Pokémon TCG Mega Symphonia Japanese Booster Box",
-      "price": 45.68,
-      "in_stock": true,
-      "category": "s",
-      "japanese": true,
-      "preorder": false,
-      "image": "/img/screenshot-2026-11-16-at-16.53.04.png"
-    },
-    {
-      "title": "Pokémon TCG 30th Celebration Japanese Booster Box",
-      "price": 129.96,
-      "in_stock": true,
-      "category": "s",
-      "japanese": true,
-      "preorder": false,
-      "image": "/img/screenshot-2026-11-16-at-16.53.57.png"
     },
     {
       "title": "Pokémon TCG 30th Anniversary English Booster Pack Bundle (5 Packs)",
@@ -656,15 +665,6 @@
       "japanese": false,
       "preorder": false,
       "image": "/img/destined-rival-booster-pack-10-cards-sealed-must-have.webp"
-    },
-    {
-      "title": "Random Japanese PSA Slab – Graded Pokémon Card",
-      "price": 33,
-      "in_stock": true,
-      "category": "g",
-      "japanese": true,
-      "preorder": false,
-      "image": "/img/random-japanese-psa-slab-graded-pok-mon-card.webp"
     },
     {
       "title": "Ninja Spinner Booster Pack – 5 Cards (Sealed) – FLASH SALE",
